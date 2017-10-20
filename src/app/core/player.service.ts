@@ -15,7 +15,6 @@ export class PlayerService {
 
   constructor(private afs: AngularFirestore) { 
     this.playersCol = afs.collection('players');
-    //this.players = this.playersCol.valueChanges();
     this.players = this.playersCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
