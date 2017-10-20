@@ -1,0 +1,19 @@
+<div class="page">
+  <div class="login">
+    <div class="login-form">
+      <div class="email-login">
+        <input [(ngModel)]="email" type="text" placeholder="Email...">
+        <input [(ngModel)]="pwd" type="text" placeholder="Password...">
+        <button (click)="loginEmail()">Sign in</button>
+      </div>
+      <div class="email-login">
+        <input [(ngModel)]="emailNew" type="text" placeholder="Email...">
+        <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
+        <button (click)="signupEmail()">Sign up</button>
+      </div>
+      <div class="google-login">
+        <button (click)="loginGoogle()"><i class="fa fa-google"></i>Sign in with Google</button>
+      </div>
+    </div>
+  </div>
+</div>

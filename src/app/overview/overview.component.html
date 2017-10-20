@@ -1,0 +1,18 @@
+<button (click)="logout()">Logout</button>
+<div>
+  <h1>{{(player | async)?.name }}</h1>
+  <h1>{{(player | async)?.class }}</h1>
+</div>
+
+
+<div>
+  <h3>Howdy, {{ email }}, please select a name for your hero:</h3>
+  <input [(ngModel)]="heroName" type="text">
+  <h3>Hello {{ heroName }}, my hero. What class are you?</h3>
+  <input [(ngModel)]="heroClass" type="text">
+  <button (click)="add()">send</button>
+</div>
+
+<!--ul *ngFor="let player of players | async">
+  <li>{{player.data.name}}</li>
+</ul-->
