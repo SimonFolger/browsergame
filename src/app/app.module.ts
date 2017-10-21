@@ -13,12 +13,17 @@ import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AuthService } from './core/auth.service';
 import { PlayerService } from './core/player.service';
+import { PvpComponent } from './pvp/pvp.component';
+import { MissionComponent } from './mission/mission.component';
 
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login',  component: LoginComponent },
-    { path: 'overview',  component: OverviewComponent }
+    { path: 'overview',  component: OverviewComponent },
+    { path: 'mission',  component: MissionComponent },
+    { path: 'pvp',  component: PvpComponent }
+
 ];
 
 
@@ -26,7 +31,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    OverviewComponent
+    OverviewComponent,
+    PvpComponent,
+    MissionComponent
   ],
   imports: [
       BrowserModule,

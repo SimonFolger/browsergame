@@ -1,7 +1,25 @@
 <button (click)="logout()">Logout</button>
+
+  <div class="header">
+    <ul>
+      <li routerLink="/overview">Overview</li>
+      <li routerLink="/mission">Missionen</li>
+      <li routerLink="/pvp">PvP</li>
+    </ul>
+  </div>
+
 <div>
   <h1>{{(player | async)?.name }}</h1>
   <h1>{{(player | async)?.class }}</h1>
+  <h1>Your Gold: {{(player | async)?.gold }}</h1>
+  <h1>Your Silver: {{(player | async)?.silver }}</h1>
+</div>
+
+
+<div class="mission">
+  <h1>Missionen:</h1>
+  <button >Hexenjagd / 30 Sekunden</button>
+  <button >Bürgern helfen / 60 Sekunden</button>
 </div>
 
 

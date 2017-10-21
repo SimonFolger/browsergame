@@ -47,8 +47,12 @@ export class OverviewComponent implements OnInit {
     })
   }
 
+  date = new Date().getTime();
+
+
   add() {
-    this.playerService.add(this.email, this.heroName, this.heroClass);
+    console.log(this.date);
+    this.playerService.add(this.email, this.heroName, this.heroClass, this.date);
   }
 
   logout() {
