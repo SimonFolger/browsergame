@@ -4,22 +4,26 @@
     <h1>{{(player | async)?.class }}</h1>
     <h1>Your Gold: {{(player | async)?.gold }}</h1>
     <h1>Your Silver: {{(player | async)?.silver }}</h1>
+
   </div>
   
-  
+  <!--
   <div class="missions">
     <h1>Missionen:</h1>
-    <button (click)="ticks()">12<!--{{(missions | AGiftForALord)?.nameq }}, Dauer: {{(missions | AGiftForALord)?.timeq }} Sekunden--></button>
-    <button (click)="ticks2()">11<!--{{(missions | AStrongDefense)?.nameq }}, Dauer: {{(missions | AStrongDefense)?.timeq }} Sekunden--></button>
+    <button (click)="ticks()">12{{(missions | AGiftForALord)?.nameq }}, Dauer: {{(missions | AGiftForALord)?.timeq }} Sekunden</button>
+    <button (click)="ticks2()">11{{(missions | AStrongDefense)?.nameq }}, Dauer: {{(missions | AStrongDefense)?.timeq }} Sekunden</button>
     <h1>{{tick}}</h1>
   </div>
+-->
 
-  <p *ngIf="gewinn">Du bekommst {{(missions | async)?.goldq }} Gold unnd {{(missions | async)?.silverq }} Silber</p>
+  
   
 <div>
   <h1>Missionen</h1>
   <div *ngFor="let id of missionIds">
-    <p>{{id}}</p>
-    <p>{{allMissions[id].data.nameq}}</p>
+    <!--<p>{{id}}</p>-->
+    <button (click)="ticks(id)">{{allMissions[id].nameq}}</button>
+    <h1>{{tick}}</h1>
+    <p *ngIf="gewinn">Du bekommst {{allMissions[id].goldq}} Gold und {{allMissions[id].silverq}} Silber</p>
   </div>
 </div>

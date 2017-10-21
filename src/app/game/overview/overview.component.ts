@@ -52,7 +52,7 @@ export class OverviewComponent implements OnInit {
 
   add() {
     console.log(this.date);
-    this.playerService.add(this.email, this.heroName, this.heroClass, this.date);
+    this.playerService.add(this.email, this.heroName, this.heroClass, this.date,);
   }
 
   logout() {
