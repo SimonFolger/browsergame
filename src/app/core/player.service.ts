@@ -27,7 +27,20 @@ export class PlayerService {
 
   getPlayer(email: string) {
     this.playerDoc = this.afs.doc('players/'+email);
-    return this.playerDoc.valueChanges();
+    this.player = this.playerDoc.valueChanges();
+    /**this.player.subscribe(val => {
+      //val is null if empty
+      console.log(val);
+      if (val != null) {
+        console.log(val.class);
+        console.log(val.id);
+        console.log(val.name);
+        console.log(val.email);
+      } else if ( val == null) {
+        this.add(email, "", "");
+      }
+    })**/
+    return this.player;
   }
 
   add(email: string, heroName: string, heroClass: string) {

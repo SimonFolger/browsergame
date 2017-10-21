@@ -16,14 +16,15 @@ export class OverviewComponent implements OnInit {
   players: Observable<Player[]>;
 
   email: string;
-  heroName: string;
-  heroClass: string;
+  heroName: string = "";
+  heroClass: string = "";
+  created: boolean = true;
 
 
   constructor(private authService: AuthService, private playerService: PlayerService) { }
 
   ngOnInit() {
-    this.players = this.playerService.players;
+    //this.players = this.playerService.players;
     if(this.authService.authState) {
       this.email = this.authService.currentUser['email'];
       this.getPlayer();
@@ -33,7 +34,17 @@ export class OverviewComponent implements OnInit {
   }
 
   getPlayer() {
-      this.player = this.playerService.getPlayer(this.email);
+    this.player = this.playerService.getPlayer(this.email);
+    this.player.subscribe(val => {
+      //val is null if empty
+      console.log(val);
+      if (val != null) {
+        this.created = true;
+        console.log(this.created);
+      } else if ( val == null) {
+        this.created = false;
+      }
+    })
   }
 
   add() {
