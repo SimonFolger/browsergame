@@ -10,22 +10,26 @@ import {environment} from "./../environments/environment";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { OverviewComponent } from './overview/overview.component';
+import { OverviewComponent } from './game/overview/overview.component';
 import { AuthService } from './core/auth.service';
 import { PlayerService } from './core/player.service';
-import { PvpComponent } from './pvp/pvp.component';
-import { MissionComponent } from './mission/mission.component';
-import { MissionService } from './mission/mission.service'
+import { PvpComponent } from './game/pvp/pvp.component';
+import { MissionComponent } from './game/mission/mission.component';
+import { MissionService } from './core/mission.service';
+import { GameComponent } from './game/game.component'
 
 
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login',  component: LoginComponent },
-    { path: 'overview',  component: OverviewComponent },
-    { path: 'mission',  component: MissionComponent },
-    { path: 'pvp',  component: PvpComponent }
-
+    { path: 'game',  component: GameComponent,  
+      children: [
+        { path: '', redirectTo: 'overview', pathMatch: 'full' },
+        { path: 'overview',  component: OverviewComponent },
+        { path: 'mission',  component: MissionComponent },
+        { path: 'pvp',  component: PvpComponent }
+      ] }
 ];
 
 
@@ -35,7 +39,8 @@ const routes: Routes = [
     LoginComponent,
     OverviewComponent,
     PvpComponent,
-    MissionComponent
+    MissionComponent,
+    GameComponent
   ],
   imports: [
       BrowserModule,

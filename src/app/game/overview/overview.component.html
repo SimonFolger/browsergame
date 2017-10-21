@@ -1,13 +1,5 @@
 <button (click)="logout()">Logout</button>
 
-  <div class="header">
-    <ul>
-      <li routerLink="/overview">Overview</li>
-      <li routerLink="/mission">Missionen</li>
-      <li routerLink="/pvp">PvP</li>
-    </ul>
-  </div>
-
 <div>
   <h1>{{(player | async)?.name }}</h1>
   <h1>{{(player | async)?.class }}</h1>

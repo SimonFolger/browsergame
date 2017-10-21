@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../core/auth.service';
+import { AuthService, User } from './../../core/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { PlayerService } from './../core/player.service';
-import { Player } from './../core/player';
+import { PlayerService } from './../../core/player.service';
+import { Player } from './../../core/player';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
-import { Mission } from './mission';
+import { Mission } from './../../core/mission';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map';
-import { MissionService } from './mission.service'
-
-
-
+import { MissionService } from './../../core/mission.service'
 
 
 @Component({
@@ -35,38 +32,44 @@ export class MissionComponent implements OnInit {
     timer = 0;
     private tick: any;
     private subscription: any;
-    gold:number;
-    silver:number;
-    goldq:number;
-    silverq:number;
-    gewinn:boolean=false;
+    gold: number;
+    silver: number;
+    goldq: number;
+    silverq: number;
+    gewinn: boolean = false;
     missions: Observable<Mission[]>;
 
-    allmissions:Mission[];
-
+    allMissions: Mission[];
+    missionIds: number[] = [];
     
-    constructor(private authService: AuthService, private playerService: PlayerService, private missionService: MissionService,) { }
-
-    
+    constructor(
+      private authService: AuthService, 
+      private playerService: PlayerService, 
+      private missionService: MissionService
+    ) { } 
   
     ngOnInit() {
-      //this.players = this.playerService.players;
       if(this.authService.authState) {
         this.email = this.authService.currentUser['email'];
         this.getPlayer();
         this.getMissions();
         
         this.missions.subscribe(val => {
-        this.allmissions=val;
-        console.log(this.allmissions.id);      
-      })
-
-      
-  } else {
+          this.allMissions = val;
+          //console.log(this.allmissions.find(x => x.id === "1"));
+          while(this.missionIds.length < 3) {
+            let missionLength = this.allMissions.length;
+            let random = Math.floor(Math.random() * missionLength);
+            if (!this.missionIds.includes(random)) {
+              this.missionIds.push(random);
+            }
+          }
+          console.log(this.missionIds.includes(2));
+          
+        })
+      } else {
         this.logout();
       }
-
-
     }
    
     getPlayer() {

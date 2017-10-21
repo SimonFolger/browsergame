@@ -1,3 +1,4 @@
+
 <div>
     <h1>{{(player | async)?.name }}</h1>
     <h1>{{(player | async)?.class }}</h1>
@@ -15,3 +16,10 @@
 
   <p *ngIf="gewinn">Du bekommst {{(missions | async)?.goldq }} Gold unnd {{(missions | async)?.silverq }} Silber</p>
   
+<div>
+  <h1>Missionen</h1>
+  <div *ngFor="let id of missionIds">
+    <p>{{id}}</p>
+    <p>{{allMissions[id].data.nameq}}</p>
+  </div>
+</div>
