@@ -15,14 +15,6 @@
   <h1>Your Silver: {{(player | async)?.silver }}</h1>
 </div>
 
-
-<div class="mission">
-  <h1>Missionen:</h1>
-  <button >Hexenjagd / 30 Sekunden</button>
-  <button >Bürgern helfen / 60 Sekunden</button>
-</div>
-
-
 <!--div *ngIf="(player | async)?.name == null"-->
 <div *ngIf="created == false">
   <h3>Howdy, {{ email }}, please select a name for your hero:</h3>
