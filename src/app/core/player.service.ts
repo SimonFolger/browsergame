@@ -49,4 +49,7 @@ export class PlayerService {
     this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': 100, 'silver': 50, 'last': date});
   }
 
+  update(email: string, heroName: string, heroClass: string, date: number, gold: number, silver: number,) {
+    this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': gold, 'silver': silver, 'last': date});
+  }
 }
