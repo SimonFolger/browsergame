@@ -2,28 +2,21 @@
 <div>
     <h1>{{(player | async)?.name }}</h1>
     <h1>{{(player | async)?.class }}</h1>
-    <h1>Your Gold: {{(player | async)?.gold }}</h1>
-    <h1>Your Silver: {{(player | async)?.silver }}</h1>
+    <h1>Du hast {{(player | async)?.gold }} Gold und {{(player | async)?.silver }} Silber</h1>
 
   </div>
-  
-  <!--
-  <div class="missions">
-    <h1>Missionen:</h1>
-    <button (click)="ticks()">12{{(missions | AGiftForALord)?.nameq }}, Dauer: {{(missions | AGiftForALord)?.timeq }} Sekunden</button>
-    <button (click)="ticks2()">11{{(missions | AStrongDefense)?.nameq }}, Dauer: {{(missions | AStrongDefense)?.timeq }} Sekunden</button>
-    <h1>{{tick}}</h1>
-  </div>
--->
 
   
   
 <div>
   <h1>Missionen</h1>
   <div *ngFor="let id of missionIds">
-    <!--<p>{{id}}</p>-->
     <button (click)="ticks(id)">{{allMissions[id].nameq}}</button>
-    <h1>{{tick}}</h1>
-    <p *ngIf="gewinn">Du bekommst {{allMissions[id].goldq}} Gold und {{allMissions[id].silverq}} Silber</p>
+    
+    <p *ngIf="textq"> {{allMissions[id].textq}}</p>
+    
   </div>
+  <!--<p *ngIf="gewinn">Du bekommst {{ticks(id).goldq}} Gold und {{allMissions[id].silverq}} Silber</p>-->
+  <h1 *ngIf="questreward">Danke für deine Hilfe! Deine Behlohnung ist: {{questgold}} Gold und {{questsilver}} Silber.</h1>
+  <h1>{{tick}}</h1>
 </div>

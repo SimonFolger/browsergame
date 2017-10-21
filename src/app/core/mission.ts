@@ -4,4 +4,5 @@ export class Mission {
     goldq:number;
     expq:number;
     data:any;
+    textq:string;
 }

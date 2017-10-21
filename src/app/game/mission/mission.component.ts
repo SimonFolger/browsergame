@@ -34,9 +34,11 @@ export class MissionComponent implements OnInit {
     subscription: any;
     gold: number;
     silver: number;
-    gewinn: boolean = false;
+    questreward: boolean = false;
     missions: Observable<Mission[]>;
-    
+    textq: boolean = true;
+    questgold:number;
+    questsilver:number;
 
     allMissions: Mission[];
     missionIds: number[] = [];
@@ -110,7 +112,7 @@ export class MissionComponent implements OnInit {
   
 
 ticks (id:number) {
- 
+  
   let mission = this.allMissions[id];
   let timer = TimerObservable.create(100, 50); // 2000, 1000
   this.subscription = timer.subscribe(t => {
@@ -119,8 +121,10 @@ ticks (id:number) {
       console.log(mission.timeq)
       this.subscription.unsubscribe();
       this.gold = this.gold + mission.goldq;
+      this.questgold = mission.goldq;
       this.silver = this.silver + mission.silverq;
-      this.gewinn = true;
+      this.questsilver = mission.silverq;
+      this.questreward = true;
       this.update();       
      }
   });
