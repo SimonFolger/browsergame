@@ -14,7 +14,7 @@ export class PlayerService {
   
 
   constructor(private afs: AngularFirestore) { 
-    this.playersCol = afs.collection('players');
+    /*this.playersCol = afs.collection('players');
     this.players = this.playersCol.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
@@ -22,7 +22,7 @@ export class PlayerService {
           const id = a.payload.doc.id;
           return { id, data };
         })
-      });
+      });*/
   }
 
   getPlayer(email: string) {
@@ -43,7 +43,18 @@ export class PlayerService {
     return this.player;
   }
 
-
+  getPlayers() {
+    this.playersCol = this.afs.collection('players');
+    this.players = this.playersCol.snapshotChanges()
+    .map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Player;
+        const id = a.payload.doc.id;
+        return { id, data };
+      })
+    });
+    return this.players;
+  }
 
   add(email: string, heroName: string, heroClass: string, date: number,) {
     this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': 100, 'silver': 50, 'last': date});

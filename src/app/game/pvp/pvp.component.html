@@ -1,3 +1,5 @@
-<p>
-  pvp works!
-</p>
+<ul>
+  <li *ngFor="let player of players | async">
+    <span>{{player.data.name}}</span><button>Fight</button>
+  </li>
+</ul>

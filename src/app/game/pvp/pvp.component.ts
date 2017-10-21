@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerService } from './../../core/player.service'
+import { Player } from './../../core/player'
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-pvp',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PvpComponent implements OnInit {
 
-  constructor() { }
+  players: Observable<Player[]>;
+
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
+    this.players = this.playerService.getPlayers();
+  }
+
+  fight(name: string) {
+
   }
 
 }
