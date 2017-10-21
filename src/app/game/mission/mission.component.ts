@@ -43,6 +43,8 @@ export class MissionComponent implements OnInit {
     questsilver:number;
     offlinereward: Observable<Reward[]>;
 
+
+
     allMissions: Mission[];
     missionIds: number[] = [];
     
@@ -106,17 +108,60 @@ export class MissionComponent implements OnInit {
   
   
     add() {
-      console.log(this.date);
-      this.playerService.add(this.email, this.heroName, this.heroClass, this.date,);
+      let playerObject:Player = {
+        name:this.heroName, 
+        email:this.email,
+        class:this.heroClass,
+        last:this.date,
+        gold:null,
+        silver:null,
+        offlinedata:null
+      }
+
+      this.playerService.add(playerObject);
     }
 
     update() {
-      this.playerService.update(this.email, this.heroName, this.heroClass, this.date, this.gold, this.silver);
+      let playerObject:Player = {
+        name:this.heroName, 
+        email:this.email,
+        class:this.heroClass,
+        last:this.date,
+        gold:this.gold,
+        silver:this.silver,
+        offlinedata:null
+      }
+      this.playerService.update(playerObject);
     }
   
     logout() {
       this.authService.signOut();
     }
+
+    queststart(finishedquest:number) {
+      let playerObject:Player = {
+        name:this.heroName, 
+        email:this.email,
+        class:this.heroClass,
+        last:this.date,
+        gold:this.gold,
+        silver:this.silver,
+        offlinedata:{
+          questrewardgold:this.questgold,
+          questrewardsilver:this.questsilver,
+          finishedquest:finishedquest
+        }
+      }
+      this.playerService.offlinereward(playerObject);
+      console.log(finishedquest);
+      console.log(this.questgold);
+
+    }
+
+    getCurrentTime() {
+      return new Date().getTime();
+    }
+
 
 
 
@@ -130,9 +175,12 @@ ticks (id:number) {
       this.subscription.unsubscribe();
       this.gold = this.gold + mission.goldq;
       this.questgold = mission.goldq;
+      
       this.silver = this.silver + mission.silverq;
       this.questsilver = mission.silverq;
       this.questreward = true;
+      let currentTime = this.getCurrentTime();
+      this.queststart(currentTime + mission.timeq * 1000);
       this.update();       
      }
   });

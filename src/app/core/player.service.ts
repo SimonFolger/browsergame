@@ -56,15 +56,28 @@ export class PlayerService {
     return this.players;
   }
 
-  add(email: string, heroName: string, heroClass: string, date: number,) {
-    this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': 100, 'silver': 50, 'last': date});
+  add(playerObject:Player) {
+    this.afs.collection('players').doc(playerObject.email).set({'name': playerObject.name, 'class': playerObject.class, 'gold': 100, 'silver': 50, 'last': playerObject.last});
   }
 
-  update(email: string, heroName: string, heroClass: string, date: number, gold: number, silver: number,) {
-    this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': gold, 'silver': silver, 'last': date});
+  update(playerObject:Player) {
+    this.afs.collection('players').doc(playerObject.email).set({'name': playerObject.name, 'class': playerObject.class, 'gold': playerObject.gold, 'silver': playerObject.silver, 'last': playerObject.last});
   }
 
-  offlinereward(email:string, startedquest: number,questrewardgold: number,questrewardsilver: number,finishedquest: number,) {
-    this.afs.collection('player').doc(email).set({'finishedquest': finishedquest, 'questrewardgold': questrewardgold, 'startedquest': startedquest, 'questrewarsilver': questrewardsilver  })
-  }
+  offlinereward(playerObject:Player) {
+    this.afs.collection('players').doc(playerObject.email).set( 
+      { 
+      'name': playerObject.name, 
+      'class': playerObject.class, 
+      'gold': playerObject.gold, 
+      'silver': playerObject.silver, 
+      'last': playerObject.last, 
+      'offlinedata': {
+       'finishedquest': playerObject.offlinedata.finishedquest,
+       'questrewardgold':playerObject.offlinedata.questrewardgold,
+       'questrewarsilver': playerObject.offlinedata.questrewardsilver
+      }
+     }
+   )}
+
 }
