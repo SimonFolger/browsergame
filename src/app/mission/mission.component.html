@@ -8,10 +8,10 @@
   
   <div class="missions">
     <h1>Missionen:</h1>
-    <button (click)="ticks()">Hexenjagd / 30 Sekunden</button>
-    <button (click)="ticks2()">Bürgern helfen / 60 Sekunden</button>
+    <button (click)="ticks()">12<!--{{(missions | AGiftForALord)?.nameq }}, Dauer: {{(missions | AGiftForALord)?.timeq }} Sekunden--></button>
+    <button (click)="ticks2()">11<!--{{(missions | AStrongDefense)?.nameq }}, Dauer: {{(missions | AStrongDefense)?.timeq }} Sekunden--></button>
     <h1>{{tick}}</h1>
   </div>
 
-  <p *ngIf="gewinn">Du bekommst</p>
+  <p *ngIf="gewinn">Du bekommst {{(missions | async)?.goldq }} Gold unnd {{(missions | async)?.silverq }} Silber</p>
   

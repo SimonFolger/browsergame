@@ -15,6 +15,8 @@ import { AuthService } from './core/auth.service';
 import { PlayerService } from './core/player.service';
 import { PvpComponent } from './pvp/pvp.component';
 import { MissionComponent } from './mission/mission.component';
+import { MissionService } from './mission/mission.service'
+
 
 
 const routes: Routes = [
@@ -43,7 +45,7 @@ const routes: Routes = [
       AngularFireAuthModule,
       FormsModule
   ],
-  providers: [AuthService, PlayerService],
+  providers: [AuthService, PlayerService, MissionService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
