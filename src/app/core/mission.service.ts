@@ -21,14 +21,15 @@ export class MissionService {
 
   getMissions() {
     this.missionsCol = this.afs.collection('missions');
-    this.missions = this.missionsCol.snapshotChanges()
+   /* this.missions = this.missionsCol.snapshotChanges()
     .map(actions => {
         return actions.map(a => {
             const data = a.payload.doc.data() as Mission;
             const id = a.payload.doc.id;
             return { id, data};
         })
-    })
+    })*/
+    this.missions = this.missionsCol.valueChanges();
 
     return this.missions;
   }

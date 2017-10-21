@@ -30,14 +30,13 @@ export class MissionComponent implements OnInit {
     heroClass: string = "";
     created: boolean = true;
     timer = 0;
-    private tick: any;
-    private subscription: any;
+    tick: number;
+    subscription: any;
     gold: number;
     silver: number;
-    goldq: number;
-    silverq: number;
     gewinn: boolean = false;
     missions: Observable<Mission[]>;
+    
 
     allMissions: Mission[];
     missionIds: number[] = [];
@@ -98,7 +97,7 @@ export class MissionComponent implements OnInit {
   
     add() {
       console.log(this.date);
-      this.playerService.add(this.email, this.heroName, this.heroClass, this.date);
+      this.playerService.add(this.email, this.heroName, this.heroClass, this.date,);
     }
 
     update() {
@@ -110,34 +109,22 @@ export class MissionComponent implements OnInit {
     }
   
 
-
-// Funktionen QUESTS
-
-ticks () {
-  let timer = TimerObservable.create(2000, 1000);
+ticks (id:number) {
+ 
+  let mission = this.allMissions[id];
+  let timer = TimerObservable.create(100, 50); // 2000, 1000
   this.subscription = timer.subscribe(t => {
     this.tick = t;
-    if (this.tick == 30) {
+    if (this.tick == mission.timeq) {
+      console.log(mission.timeq)
       this.subscription.unsubscribe();
-      this.gold = this.gold + this.goldq;
-      this.silver = this.silver + this.silverq;
+      this.gold = this.gold + mission.goldq;
+      this.silver = this.silver + mission.silverq;
+      this.gewinn = true;
       this.update();       
      }
   });
 }
 
-ticks2 () {
-  let timer = TimerObservable.create(2000, 1000);
-  this.subscription = timer.subscribe(t => {
-    this.tick = t;
-    if (this.tick == 60) {
-      this.subscription.unsubscribe();
-      this.gold = this.gold + this.goldq;
-      this.silver = this.silver + this.silverq;
-      this.update();  
-      this.gewinn = true;   
-     }
-  });
-}
 
 }
