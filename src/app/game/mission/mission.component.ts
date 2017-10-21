@@ -9,6 +9,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map';
 import { MissionService } from './../../core/mission.service'
+import { RewardService } from './../../core/reward.service'
+import { Reward } from './../../core/reward'
 
 
 @Component({
@@ -39,6 +41,7 @@ export class MissionComponent implements OnInit {
     textq: boolean = true;
     questgold:number;
     questsilver:number;
+    offlinereward: Observable<Reward[]>;
 
     allMissions: Mission[];
     missionIds: number[] = [];
@@ -46,7 +49,8 @@ export class MissionComponent implements OnInit {
     constructor(
       private authService: AuthService, 
       private playerService: PlayerService, 
-      private missionService: MissionService
+      private missionService: MissionService,
+      private rewardService: RewardService,
     ) { } 
   
     ngOnInit() {
@@ -54,6 +58,7 @@ export class MissionComponent implements OnInit {
         this.email = this.authService.currentUser['email'];
         this.getPlayer();
         this.getMissions();
+        this.getofflinereward();
         
         this.missions.subscribe(val => {
           this.allMissions = val;
@@ -93,6 +98,9 @@ export class MissionComponent implements OnInit {
       this.missions = this.missionService.getMissions();
     }
 
+    getofflinereward() {
+      this.offlinereward = this.rewardService.getReward();
+    }
   
     date = new Date().getTime();
   
@@ -109,10 +117,10 @@ export class MissionComponent implements OnInit {
     logout() {
       this.authService.signOut();
     }
-  
+
+
 
 ticks (id:number) {
-  
   let mission = this.allMissions[id];
   let timer = TimerObservable.create(100, 50); // 2000, 1000
   this.subscription = timer.subscribe(t => {

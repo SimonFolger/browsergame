@@ -63,4 +63,8 @@ export class PlayerService {
   update(email: string, heroName: string, heroClass: string, date: number, gold: number, silver: number,) {
     this.afs.collection('players').doc(email).set({'name': heroName, 'class': heroClass, 'gold': gold, 'silver': silver, 'last': date});
   }
+
+  offlinereward(email:string, startedquest: number,questrewardgold: number,questrewardsilver: number,finishedquest: number,) {
+    this.afs.collection('player').doc(email).set({'finishedquest': finishedquest, 'questrewardgold': questrewardgold, 'startedquest': startedquest, 'questrewarsilver': questrewardsilver  })
+  }
 }
