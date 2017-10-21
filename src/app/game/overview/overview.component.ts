@@ -3,6 +3,7 @@ import { AuthService, User } from './../../core/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { PlayerService } from './../../core/player.service';
 import { Player } from './../../core/player';
+import { GameComponent } from './../game.component'
 
 @Component({
   selector: 'app-overview',
@@ -20,43 +21,31 @@ export class OverviewComponent implements OnInit {
   heroClass: string = "";
   created: boolean = true;
 
+  date = new Date().getTime();
 
-  constructor(private authService: AuthService, private playerService: PlayerService) { }
+  constructor(
+    private authService: AuthService, 
+    private playerService: PlayerService,
+    private game: GameComponent
+  ) { }
 
   ngOnInit() {
-    //this.players = this.playerService.players;
-    if(this.authService.authState) {
-      this.email = this.authService.currentUser['email'];
-      this.getPlayer();
-    } else {
-      this.logout();
-    }
+    this.getPlayer();
   }
 
   getPlayer() {
-    this.player = this.playerService.getPlayer(this.email);
+    this.player = this.game.player;
     this.player.subscribe(val => {
-      //val is null if empty
-      console.log(val);
       if (val != null) {
         this.created = true;
-        console.log(this.created);
       } else if ( val == null) {
         this.created = false;
       }
     })
   }
 
-  date = new Date().getTime();
-
-
   add() {
-    console.log(this.date);
-   // this.playerService.add(this.email, this.heroName, this.heroClass, this.date,);
-  }
-
-  logout() {
-    this.authService.signOut();
+    this.playerService.add(this.email, this.heroName, this.heroClass, this.date);
   }
 
 }
