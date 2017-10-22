@@ -44,8 +44,8 @@ export class OverviewComponent implements OnInit {
     })
   }
 
-  add() {
-    this.playerService.add(this.email, this.heroName, this.heroClass, this.date);
+  add(playerObject:Player) {
+    this.playerService.add(playerObject);
   }
 
 }

@@ -65,7 +65,7 @@ export class PlayerService {
   }
 
   offlinereward(playerObject:Player) {
-    this.afs.collection('players').doc(playerObject.email).set( 
+    this.afs.collection('offlineplayer').doc(playerObject.email).set( 
       { 
       'name': playerObject.name, 
       'class': playerObject.class, 

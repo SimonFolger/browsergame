@@ -42,6 +42,9 @@ export class MissionComponent implements OnInit {
     questgold:number;
     questsilver:number;
     offlinereward: Observable<Reward[]>;
+    finishedquest:number;
+    currentTime:number;
+    goldq:number;
 
 
 
@@ -61,6 +64,7 @@ export class MissionComponent implements OnInit {
         this.getPlayer();
         this.getMissions();
         this.getofflinereward();
+        this.refresh();
         
         this.missions.subscribe(val => {
           this.allMissions = val;
@@ -78,6 +82,7 @@ export class MissionComponent implements OnInit {
       } else {
         this.logout();
       }
+
     }
    
     getPlayer() {
@@ -163,28 +168,54 @@ export class MissionComponent implements OnInit {
     }
 
 
+    //FUNKTION NICHT FERTIG
+    refresh() {
+      if (this.currentTime >= this.finishedquest)   {
+        console.log(this.finishedquest);
+        console.log(this.currentTime);
+        this.update() 
+          let playerObject:Player = {
+            name:this.heroName, 
+            email:this.email,
+            class:this.heroClass,
+            last:this.date,
+            gold:this.gold + this.questsilver,
+            silver:this.silver + this.questsilver,
+            offlinedata:{
+              questrewardgold:this.questgold,
+              questrewardsilver:this.questsilver,
+              finishedquest:this.finishedquest
+            }
+            }
+          this.playerService.update(playerObject)
+          };
+      }
 
 
+//Fehler -> Beim zusammenrechnen des Goldes wird aus number string -> nur gold nicht silber ==> Problem gefixt!!!
+//FEHLER-> ER SCHREIBT DIE OFFLINEDATEN ERST REIN WENN DAS UPDATE ABGESCHLOSSEN IST?? -> MUSS SOFORT BEIM ANKLICKEN REINSCHREIBEN!-> Daher geht es nur bei
+//Seitenwechsel und nicht beim schließen des Browsers! Funktion fertig machen 171.. ->198 ändern da erst Zeit abläuft und dann schreibt er in DB ->Button in HTML ändern
 ticks (id:number) {
   let mission = this.allMissions[id];
-  let timer = TimerObservable.create(100, 50); // 2000, 1000
+  let timer = TimerObservable.create(2000, 1000); // 2000, 1000
   this.subscription = timer.subscribe(t => {
     this.tick = t;
     if (this.tick == mission.timeq) {
-      console.log(mission.timeq)
       this.subscription.unsubscribe();
+      
       this.gold = this.gold + mission.goldq;
       this.questgold = mission.goldq;
-      
+ 
       this.silver = this.silver + mission.silverq;
       this.questsilver = mission.silverq;
+
       this.questreward = true;
       let currentTime = this.getCurrentTime();
       this.queststart(currentTime + mission.timeq * 1000);
-      this.update();       
+      this.refresh();
+      this.update();
+      //this.update(); -> Brauch ich nicht da er über die DB aktualliesieren soll nach refresh      
      }
   });
 }
-
-
 }
