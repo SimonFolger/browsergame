@@ -22,13 +22,17 @@ body * {
     margin: 5px;
 }
 
+.button:disabled {
+    cursor: not-allowed;
+}
+
 .button-primary {
     background-color: $color_white; 
     color: $color_primary_dark; 
     border: 2px solid $color_primary;
 }
 
-.button-primary:hover {
+.button-primary:hover:not(:disabled) {
     background-color: $color_primary;
     color: $color_white;
 }
@@ -39,14 +43,15 @@ body * {
     border: 2px solid $color_secondary;
 }
 
-.button-secondary:hover {
+.button-secondary:hover:not(:disabled) {
     background-color: $color_secondary;
     color: $color_white;
 }
 
 input {
     border: 2px solid $color_primary;
-    padding: 5px 10px;
+    font-size: 15px;
+    padding: 6px 18px;
     border-radius: 30px;
     color: $color_primary_dark;
 }

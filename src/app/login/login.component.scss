@@ -1,16 +1,13 @@
 @import './../../styles/variables';
 
 .login-page {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     border: 2px solid $color_primary;
     border-radius: 30px;
     padding: 10px;
     background-color: $color_white;
     max-width: 500px;
     margin: 0 auto;
+    margin-top: 75px;
     text-align: center;
     .login-header {
         text-align: center;
@@ -40,14 +37,22 @@
         }
     }
     .login, .register {
-        margin-top: 30px;
+        margin-top: 10px;
         margin-bottom: 30px;
-        input{
+        input {
             width: 80%;
             box-sizing: border-box;
             -moz-box-sizing: border-box;
             -webkit-box-sizing: border-box;
-            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        .alert {
+            display: block;
+            color: $color_red;
+            padding: 5px;
+        }
+        .email-login, .email-register {
+            margin-top: 20px;
         }
         .google-login {
             margin-top: 30px;
@@ -56,9 +61,6 @@
 }
 @media screen and (max-width: 699px) {
     .login-page {
-        position: relative;
-        transform: none;
-        left: unset;
-        top: unset;
+        margin-top: 0;
     }
 }

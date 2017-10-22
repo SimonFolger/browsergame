@@ -24,7 +24,11 @@ export class AuthService {
 
   user: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private afs: AngularFirestore, 
+    private router: Router
+  ) {
     this.user = this.afAuth.authState
         .switchMap(user => {
           if(user) {
@@ -39,10 +43,11 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
 }
 
-  emailSignup(email: string, password: string) {
+  emailSignup(email: string, password: string, heroName: string, heroClass: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
+        console.log(heroClass, heroName)
       })
     .catch(error => console.log(error));
   }
