@@ -1,0 +1,64 @@
+@import './../../styles/variables';
+
+.login-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid $color_primary;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: $color_white;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    .login-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .login-mode {
+        width: 80%;
+        margin: auto;
+        text-align: center;
+        text-transform: uppercase;
+        .mode-container-left {
+            padding: 10px 0;
+            cursor: pointer;
+            float: left;
+            width: 50%;
+        }
+        .mode-container-right {
+            padding: 10px 0;
+            cursor: pointer;
+            overflow: hidden;
+            width: 50%;
+        }
+        .mode-container-active {
+            border-radius: 20px;
+            background-color: $color_primary;
+            color: $color_white;
+        }
+    }
+    .login, .register {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        input{
+            width: 80%;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .google-login {
+            margin-top: 30px;
+        }
+    }
+}
+@media screen and (max-width: 699px) {
+    .login-page {
+        position: relative;
+        transform: none;
+        left: unset;
+        top: unset;
+    }
+}

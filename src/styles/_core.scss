@@ -1,4 +1,52 @@
-button {
-    color: green;
-    background-color: yellow;
+@import './variables';
+
+body {
+    //background-color: $color_primary_light;
+}
+
+body * {
+    font-family: $font !important;
+}
+
+.button {
+    padding: 5px 10px;
+    border: 2px solid;
+    border-radius: 30px;
+    text-transform: uppercase;
+    min-width: 125px; 
+    color: $color_text;
+    background-color: $color-white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    margin: 5px;
+}
+
+.button-primary {
+    background-color: $color_white; 
+    color: $color_primary_dark; 
+    border: 2px solid $color_primary;
+}
+
+.button-primary:hover {
+    background-color: $color_primary;
+    color: $color_white;
+}
+
+.button-secondary {
+    background-color: $color_white; 
+    color: $color_primary_dark; 
+    border: 2px solid $color_secondary;
+}
+
+.button-secondary:hover {
+    background-color: $color_secondary;
+    color: $color_white;
+}
+
+input {
+    border: 2px solid $color_primary;
+    padding: 5px 10px;
+    border-radius: 30px;
+    color: $color_primary_dark;
 }

@@ -12,13 +12,21 @@ export class LoginComponent implements OnInit {
   pwd: string;
   emailNew: string;
   pwdNew: string;
-
+  loginMode: boolean = true;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     //add this to automatically login
-    this.authService.emailLogin("a@a.de", "123456");
+    //this.authService.emailLogin("a@a.de", "123456");
+  }
+
+  setLoginMode() {
+    this.loginMode = true;
+  }
+
+  setRegisterMode() {
+    this.loginMode = false;
   }
 
   loginEmail() {

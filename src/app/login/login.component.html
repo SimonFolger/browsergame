@@ -1,19 +1,59 @@
-<div class="page">
+<!--div class="page">
   <div class="login">
     <div class="login-form">
       <div class="email-login">
         <input [(ngModel)]="email" type="text" placeholder="Email...">
         <input [(ngModel)]="pwd" type="text" placeholder="Password...">
-        <button (click)="loginEmail()">Sign in</button>
+        <button class="button button-primary" (click)="loginEmail()">Sign in</button>
       </div>
       <div class="email-login">
         <input [(ngModel)]="emailNew" type="text" placeholder="Email...">
         <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
-        <button (click)="signupEmail()">Sign up</button>
+        <button class="button button-primary" (click)="signupEmail()">Sign up</button>
       </div>
-      <!--div class="google-login">
+      <div class="google-login">
         <button (click)="loginGoogle()"><i class="fa fa-google"></i>Sign in with Google</button>
-      </div-->
+      </div>
     </div>
+  </div>
+</div-->
+
+
+<div class="login-page">
+  <div class="login-header">
+    <h1>Welcome Hero!</h1>
+  </div>
+  <div class="login-mode">
+    <div (click)="setLoginMode()" class="mode-container-left" [class.mode-container-active]="loginMode === true">
+      <a>Login</a>
+    </div>
+    <div (click)="setRegisterMode()" class="mode-container-right" [class.mode-container-active]="loginMode === false">
+      <a>Register</a>
+    </div>
+  </div>
+  <div *ngIf="loginMode" class="login">
+      <div class="email-login">
+        <input [(ngModel)]="email" type="text" placeholder="Email...">
+        <input [(ngModel)]="pwd" type="text" placeholder="Password...">
+        <button class="button button-primary" (click)="loginEmail()">Log in</button>
+      </div>
+      <div class="google-login">
+        <button class="button button-primary" (click)="loginGoogle()">Google-Login</button>
+      </div>
+      <div class="fb-login">
+          <button class="button button-primary" (click)="loginGoogle()">Facebook-Login</button>
+      </div>
+      <div class="twitter-login">
+          <button class="button button-primary" (click)="loginGoogle()">Twitter-Login</button>
+      </div>
+  </div>
+  <div *ngIf="!loginMode" class="register">
+      <div>
+        <input [(ngModel)]="emailNew" type="text" placeholder="Email...">
+        <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
+        <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
+        <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
+        <button class="button button-primary" (click)="signupEmail()">Sign up</button>
+      </div>
   </div>
 </div>

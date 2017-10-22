@@ -34,6 +34,7 @@ export class OverviewComponent implements OnInit {
   }
 
   getPlayer() {
+    this.game.getPlayer();
     this.player = this.game.player;
     this.player.subscribe(val => {
       if (val != null) {
@@ -44,7 +45,16 @@ export class OverviewComponent implements OnInit {
     })
   }
 
-  add(playerObject:Player) {
+  add() {
+    let playerObject:Player = {
+      name:this.heroName, 
+      email:this.email,
+      class:this.heroClass,
+      last:this.date,
+      gold:null,
+      silver:null,
+      offlinedata:null
+    }
     this.playerService.add(playerObject);
   }
 

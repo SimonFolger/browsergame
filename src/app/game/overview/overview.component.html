@@ -5,15 +5,10 @@
   <h1>Your Silver: {{(player | async)?.silver }}</h1>
 </div>
 
-<!--div *ngIf="(player | async)?.name == null"-->
 <div *ngIf="created == false">
   <h3>Howdy, {{ email }}, please select a name for your hero:</h3>
   <input [(ngModel)]="heroName" type="text">
   <h3>Hello {{ heroName }}, my hero. What class are you?</h3>
   <input [(ngModel)]="heroClass" type="text">
-  <button (click)="add()">send</button>
+  <button class="button button-primary" (click)="add()">send</button>
 </div>
-
-<!--ul *ngFor="let player of players | async">
-  <li>{{player.data.name}}</li>
-</ul-->
