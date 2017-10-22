@@ -52,6 +52,7 @@ export class OverviewComponent implements OnInit {
       class:this.heroClass,
       last:this.date,
       gold:null,
+      stats: null,
       silver:null,
       offlinedata:null
     }

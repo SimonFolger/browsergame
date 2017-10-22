@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let player of players | async">
-    <span>{{player.data.name}}</span><button>Fight</button>
+    <span>{{player.data.name}}</span><button (click)="fight(player)">Fight</button>
   </li>
 </ul>

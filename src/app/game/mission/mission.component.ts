@@ -118,6 +118,7 @@ export class MissionComponent implements OnInit {
         email:this.email,
         class:this.heroClass,
         last:this.date,
+        stats: null,
         gold:null,
         silver:null,
         offlinedata:null
@@ -134,7 +135,8 @@ export class MissionComponent implements OnInit {
         last:this.date,
         gold:this.gold,
         silver:this.silver,
-        offlinedata:null
+        offlinedata:null,
+        stats: null
       }
       this.playerService.update(playerObject);
     }
@@ -151,6 +153,7 @@ export class MissionComponent implements OnInit {
         last:this.date,
         gold:this.gold,
         silver:this.silver,
+        stats: null,
         offlinedata:{
           questrewardgold:this.questgold,
           questrewardsilver:this.questsilver,
@@ -179,6 +182,7 @@ export class MissionComponent implements OnInit {
             email:this.email,
             class:this.heroClass,
             last:this.date,
+            stats: null,
             gold:this.gold + this.questsilver,
             silver:this.silver + this.questsilver,
             offlinedata:{

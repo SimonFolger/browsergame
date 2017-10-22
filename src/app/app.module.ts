@@ -19,7 +19,7 @@ import { MissionService } from './core/mission.service';
 import { GameComponent } from './game/game.component';
 import { RewardService } from './core/reward.service';
 import { Reward } from './core/reward';
-
+import {PvpService } from './core/pvp.service';
 
 
 const routes: Routes = [
@@ -52,7 +52,7 @@ const routes: Routes = [
       AngularFireAuthModule,
       FormsModule
   ],
-  providers: [AuthService, PlayerService, MissionService, RewardService,],
+  providers: [AuthService, PlayerService, MissionService, RewardService, PvpService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
