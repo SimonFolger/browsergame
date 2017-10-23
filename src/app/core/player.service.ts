@@ -72,10 +72,11 @@ export class PlayerService {
       'gold': playerObject.gold, 
       'silver': playerObject.silver, 
       'last': playerObject.last, 
+      'stats': playerObject.stats,
       'offlinedata': {
        'finishedquest': playerObject.offlinedata.finishedquest,
        'questrewardgold':playerObject.offlinedata.questrewardgold,
-       'questrewarsilver': playerObject.offlinedata.questrewardsilver
+       'questrewardsilver': playerObject.offlinedata.questrewardsilver
       }
      }
    )}

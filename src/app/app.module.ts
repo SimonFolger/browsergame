@@ -17,7 +17,6 @@ import { PvpComponent } from './game/pvp/pvp.component';
 import { MissionComponent } from './game/mission/mission.component';
 import { MissionService } from './core/mission.service';
 import { GameComponent } from './game/game.component';
-import { RewardService } from './core/reward.service';
 import { Reward } from './core/reward';
 import {PvpService } from './core/pvp.service';
 
@@ -53,7 +52,7 @@ const routes: Routes = [
       FormsModule,
       ReactiveFormsModule
   ],
-  providers: [AuthService, PlayerService, MissionService, RewardService, PvpService,],
+  providers: [AuthService, PlayerService, MissionService, PvpService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

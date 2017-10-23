@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    //this.authService.emailLogin("a@a.de", "123456");
+    this.authService.emailLogin("a@a.de", "123456");
   }
 
   setLoginMode() {

@@ -11,7 +11,7 @@
 <div>
   <h1>Missionen</h1>
   <div *ngFor="let id of missionIds">
-    <button class="button button-primary" (click)="ticks(id)">{{allMissions[id].nameq}}</button>
+    <button class="button button-primary" (click)="missionStart(id)">{{allMissions[id].nameq}}</button>
     
     <p *ngIf="textq"> {{allMissions[id].textq}}</p>
     
