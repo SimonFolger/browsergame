@@ -1,7 +1,12 @@
 @import './variables';
 
+html {
+    margin: 0;
+}
+
 body {
     //background-color: $color_primary_light;
+    margin: 0;
 }
 
 body * {
@@ -28,7 +33,7 @@ body * {
 
 .button-primary {
     background-color: $color_white; 
-    color: $color_primary_dark; 
+    color: $color_primary; 
     border: 2px solid $color_primary;
 }
 
@@ -46,6 +51,17 @@ body * {
 .button-secondary:hover:not(:disabled) {
     background-color: $color_secondary;
     color: $color_white;
+}
+
+.button-inverse {
+    background-color: $color_primary; 
+    color: $color_white; 
+    border: 2px solid $color_white;
+}
+
+.button-inverse:hover:not(:disabled) {
+    background-color: $color_white;
+    color: $color_primary;
 }
 
 input {

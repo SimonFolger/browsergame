@@ -57,6 +57,31 @@
         .google-login {
             margin-top: 30px;
         }
+        .class-chooser {
+            padding: 0 40px;
+            .class-container {
+                width: 33.3%;
+                display: inline-block;
+                .class-inner-container {
+                    width: 90%;
+                    margin: 0 auto;
+                    .class-icon {
+                        margin: 2px 0;
+                        border: 3px solid $color_primary;
+                        border-radius: 100px;
+                        width: 70%;
+                        cursor: pointer;
+                    }
+                    .chosen-class {
+                        margin: 0;
+                        border: 5px solid $color_secondary;
+                    }
+                    .chosen-class-name {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
     }
 }
 @media screen and (max-width: 699px) {

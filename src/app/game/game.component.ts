@@ -15,6 +15,7 @@ export class GameComponent implements OnInit {
   player: Observable<Player>;
 
   email: string;
+  classIconPath: string;
 
   constructor(private authService: AuthService, private playerService: PlayerService) { }
 
@@ -30,6 +31,9 @@ export class GameComponent implements OnInit {
 
   getPlayer() {
     this.player = this.playerService.getPlayer(this.email);
+    this.player.subscribe(val => {
+      this.classIconPath = "../../assets/" + val.class + ".svg";
+    })
   }
 
   logout() {

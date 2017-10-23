@@ -38,6 +38,7 @@
         <input [(ngModel)]="pwd" type="password" placeholder="Password..." formControlName="pwd">
         <span class="alert" *ngIf="!rFormLogin.controls['pwd'].valid && rFormLogin.controls['pwd'].touched">{{pwdAlert}}</span>
         <button type="submit" [disabled]="!rFormLogin.valid" class="button button-primary email-login">Log in</button>
+        <span class="alert" *ngIf="loginError != ''">{{loginError}}</span>
       </form>
       <div class="google-login">
         <button disabled class="button button-primary" (click)="loginGoogle()">Google-Login</button>
@@ -51,16 +52,25 @@
   </div>
   <div *ngIf="!loginMode" class="register">
       <form [formGroup]="rFormRegister" (ngSubmit)="signupEmail()">
-        <input [(ngModel)]="emailNew" type="text" placeholder="Email..." formControlName="emailNew">
+        <input [(ngModel)]="newPlayer.email" type="text" placeholder="Email..." formControlName="emailNew">
         <span class="alert" *ngIf="!rFormRegister.controls['emailNew'].valid && rFormRegister.controls['emailNew'].touched">{{emailAlert}}</span>
         <input [(ngModel)]="pwdNew" type="password" placeholder="Password..."  formControlName="pwdNew">
         <span class="alert" *ngIf="!rFormRegister.controls['pwdNew'].valid && rFormRegister.controls['pwdNew'].touched">{{pwdAlert}}</span>
         <input [(ngModel)]="pwdNewConfirm" type="password" placeholder="Confirm Password..." formControlName="pwdNewConfirm">
         <span class="alert" *ngIf="pwdNew !== pwdNewConfirm && rFormRegister.controls['pwdNewConfirm'].touched">{{pwdConfirmAlert}}</span>
-        <input [(ngModel)]="heroName" type="text" placeholder="Hero Name..." formControlName="heroName">
+        <input [(ngModel)]="newPlayer.name" type="text" placeholder="Hero Name..." formControlName="heroName">
         <span class="alert" *ngIf="!rFormRegister.controls['heroName'].valid && rFormRegister.controls['heroName'].touched">{{heroNameAlert}}</span>
-        <input [(ngModel)]="heroClass" [ngModelOptions]="{standalone: true}" type="text" placeholder="Class...">
-        <button type="submit" [disabled]="!rFormRegister.valid" class="button button-primary email-register">Sign up</button>
+        <div class="class-chooser">
+          <p class="class-chooser-header">Choose a class:</p>
+          <div *ngFor="let class of classes | async" class="class-container">
+            <div class="class-inner-container">
+              <img class="class-icon" [src]=getIconPath(class.name) [class.chosen-class]="chosenClass === class.name" (click)="selectClass(class.name)">
+              <span class="class-name" [class.chosen-class-name]="chosenClass === class.name">{{class.name}}</span>
+            </div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="!rFormRegister.valid || pwdNew !== pwdNewConfirm || chosenClass === ''" class="button button-primary email-register">Sign up</button>
+        <span class="alert" *ngIf="signUpError != ''">{{signUpError}}</span>
       </form>
   </div>
 </div>

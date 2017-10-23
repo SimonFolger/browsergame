@@ -1,0 +1,33 @@
+@import './../../styles/variables';
+
+.game-content {
+    .sticky-header {
+        position: fixed;
+        top: 0;
+        height: 50px;
+        width: 100%;
+        background-color: $color-primary;
+        color: $color_white;
+        .button {
+            float: right;
+        }
+        img {
+            padding: 5px;
+            width: 40px;
+        }
+        span {
+        }
+    }
+    .sidebar {
+        position: absolute;
+        height: calc(100% - 50px);
+        width: 270px;
+        top: 50px;
+        left: 0;
+        background-color: $color-primary;
+    }
+    .inner-content {
+        margin: 80px 30px 0 300px;
+
+    }
+}

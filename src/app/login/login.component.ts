@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../core/auth.service';
+import { PvpService } from './../core/pvp.service';
+import { HeroClass } from './../core/hero-class';
+import { Player } from './../core/player';
+import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +12,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  newPlayer: Player = {
+    name: '', 
+    email: '',
+    class: '',
+    last: null,
+    gold: null,
+    silver: null,
+    stats: null,
+    offlinedata: null
+  }
 
   rFormLogin: FormGroup;
   rFormRegister: FormGroup;
@@ -19,13 +34,19 @@ export class LoginComponent implements OnInit {
   heroName: string = "";
   heroClass : string = "";
   loginMode: boolean = true;
+  classes: Observable<HeroClass[]>;
+  chosenClass: string = "";
+
   emailAlert: string = "Email is required and must be valid";
   pwdAlert: string = "Password must be between 6 and 20 letters";
   pwdConfirmAlert: string = "Passwords do not match";
   heroNameAlert: string = "Hero name must be between 3 and 30 letters"
+  signUpError: string = "";
+  loginError: string = "";
 
   constructor(
     private authService: AuthService,
+    private pvpService: PvpService,
     private fb: FormBuilder
   ) { 
     this.rFormLogin = fb.group({
@@ -42,7 +63,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    this.authService.emailLogin("a@a.de", "123456");
+    this.authService.emailLogin("simon@test.de", "123456");
+
+    this.classes = this.pvpService.getClasses();
   }
 
   setLoginMode() {
@@ -54,17 +77,26 @@ export class LoginComponent implements OnInit {
   }
 
   comparePasswords() {
-    console.log(this.pwdNew === this.pwdNewConfirm);
     return this.pwdNew === this.pwdNewConfirm;
   }
 
+  getIconPath(className: string) {
+    return "../../assets/" + className + ".svg";
+  }
+
+  selectClass(className: string) {
+    this.chosenClass = className;
+  }
+
   loginEmail() {
-    this.authService.emailLogin(this.email, this.pwd);
+    this.authService.emailLogin(this.email, this.pwd).then;
+    //this.loginError = this.authService.loginError;
   }
 
   signupEmail() {
-    this.authService.emailSignup(this.emailNew, this.pwdNew, this.heroName, this.heroClass);
-    //Todo: redirect to login and show success/error message
+    this.newPlayer.class = this.chosenClass;
+    this.authService.emailSignup(this.newPlayer, this.pwdNew);
+    //this.signUpError = this.authService.signUpError;
   }
 
   loginGoogle() {

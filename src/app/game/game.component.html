@@ -1,9 +1,31 @@
-<button class="button button-primary" (click)="logout()">Logout</button>
-<div class="header">
-  <ul>
-    <li routerLink="overview">Overview</li>
-    <li routerLink="mission">Missionen</li>
-    <li routerLink="pvp">PvP</li>
-  </ul>
+<div class="game-content">
+  <div class="sticky-header">
+    <span class="game-name">Browsergame</span>
+    <img class="class-icon" src={{classIconPath}}>
+    <span class="player-name">{{(player | async)?.name }}</span>
+    <img class="level-icon" src="../../assets/level.svg">
+    <span class="player-level">Level: 0</span>
+    <img class="diamond-icon" src="../../assets/diamond.svg">
+    <span class="player-diamond">0</span>
+    <img class="gold-icon" src="../../assets/gold.svg">
+    <span class="player-gold">{{(player | async)?.gold }}</span>
+    <img class="silver-icon" src="../../assets/silver.svg">
+    <span class="player-silver">{{(player | async)?.silver }}</span>
+    <button class="button button-inverse" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="sidebar">
+    <ul>
+      <li routerLink="overview">Overview</li>
+      <li routerLink="mission">Missionen</li>
+      <li routerLink="pvp">PvP</li>
+      <li>Rankings</li>
+      <li>Shop</li>
+    </ul>
+  </div>
+
+  <div class="inner-content">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>
-<router-outlet></router-outlet>

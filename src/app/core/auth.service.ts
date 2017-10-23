@@ -19,6 +19,8 @@ export interface User {
 export class AuthService {
 
   authState: any = null;
+  signUpError: string = "";
+  loginError: string = "";
 
   get authenticated(): boolean {
     return this.authState !== null;
@@ -46,24 +48,14 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
 }
 
-  emailSignup(email: string, password: string, heroName: string, heroClass: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  emailSignup(player: Player, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(player.email, password)
       .then((user) => {
         this.authState = user;
-        let player: Player = {
-            name:heroName,
-            email:email,
-            class:heroClass,
-            last:null,
-            stats: null,
-            gold:null,
-            silver:null,
-            offlinedata:null
-        };
         this.playerService.add(player);
         this.router.navigate(['/game']);
       })
-    .catch(error => console.log(error));
+    .catch(error => {this.signUpError = error; console.log(error)});
   }
 
   emailLogin(email: string, password: string) {
@@ -72,7 +64,7 @@ export class AuthService {
         this.authState = user;
         this.router.navigate(['/game']);
       })
-    .catch(error => console.log(error));
+    .catch(error => {this.loginError = error; console.log(error)});
   }
 
 
