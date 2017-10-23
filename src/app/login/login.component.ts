@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   heroName: string = "";
   heroClass : string = "";
   loginMode: boolean = true;
-  emailAlert: string = "Email is required and must be a valid";
+  emailAlert: string = "Email is required and must be valid";
   pwdAlert: string = "Password must be between 6 and 20 letters";
   pwdConfirmAlert: string = "Passwords do not match";
   heroNameAlert: string = "Hero name must be between 3 and 30 letters"
