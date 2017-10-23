@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
     this.rFormLogin = fb.group({
       'email': [null, Validators.compose([Validators.required, Validators.email])],
       'pwd': [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])]
-    })
+    });
     this.rFormRegister = fb.group({
       'emailNew': [null, Validators.compose([Validators.required, Validators.email])],
       'pwdNew': [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(20)])],
       'pwdNewConfirm': [null, Validators.required],
       'heroName': [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])]
-    })
+    });
   }
 
   ngOnInit() {

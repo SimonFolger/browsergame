@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Player } from './player';
+import { PlayerService } from './player.service';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -27,7 +29,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth, 
     private afs: AngularFirestore, 
-    private router: Router
+    private router: Router,
+    private playerService: PlayerService
   ) {
     this.user = this.afAuth.authState
         .switchMap(user => {
@@ -47,7 +50,18 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user;
-        console.log(heroClass, heroName)
+        let player: Player = {
+            name:heroName,
+            email:email,
+            class:heroClass,
+            last:null,
+            stats: null,
+            gold:null,
+            silver:null,
+            offlinedata:null
+        };
+        this.playerService.add(player);
+        this.router.navigate(['/game']);
       })
     .catch(error => console.log(error));
   }
