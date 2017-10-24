@@ -8,19 +8,27 @@
         width: 100%;
         background-color: $color-primary;
         color: $color_white;
+        padding: 5px;
+        font-size: 20px;
         .button {
             float: right;
+            margin: 10px;
         }
         img {
             padding: 5px;
             width: 40px;
+            vertical-align: middle;
         }
-        span {
+        .class-icon {
+            margin-left: 300px;
+        }
+        .diamond-icon {
+            margin-left: 50px;
         }
     }
     .sidebar {
         position: absolute;
-        height: calc(100% - 50px);
+        height: 100%;
         width: 270px;
         top: 50px;
         left: 0;
