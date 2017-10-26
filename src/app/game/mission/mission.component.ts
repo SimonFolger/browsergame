@@ -34,6 +34,7 @@ export class MissionComponent implements OnInit {
   goldReward: number;
   silverReward: number;
   playerData: Player;
+  textq: boolean = true;
  
   constructor(
     private playerService: PlayerService, 

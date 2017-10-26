@@ -1,14 +1,3 @@
-
-<div>
-    <h1>{{(player | async)?.name }}</h1>
-    <h1>{{(player | async)?.class }}</h1>
-    <h1>Du hast {{(player | async)?.gold }} Gold und {{(player | async)?.silver }} Silber</h1>
-
-  </div>
-
-  <p *ngIf="playerData != undefined">not undefined</p>
-  <p *ngIf="playerData == undefined">undefined</p>
-  
 <div>
   <h1>Missionen</h1>
   <div *ngFor="let mission of randomMissions">
@@ -17,7 +6,7 @@
     <p *ngIf="textq"> {{mission.textq}}</p>
     
  
-  <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{mission.goldq}} Gold und {{mission.silverq}} Silber.</h1>
+  <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{mission.goldq}} <img src="../../assets/gold.svg"> und {{mission.silverq}} <img src="../../assets/silver.svg">.</h1>
 </div>
   <h1>{{counter}}</h1>
 </div>
