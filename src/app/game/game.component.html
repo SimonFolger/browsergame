@@ -14,15 +14,16 @@
   </div>
 
   <div class="sidebar">
-    <ul>
-      <li routerLink="overview">Overview</li>
-      <li routerLink="mission">Missionen</li>
-      <li routerLink="plunder">Plündern</li>
-      <li routerLink="dungeon">Dungeons</li>
-      <li routerLink="pvp">PvP</li>
-      <li>Rankings</li>
-      <li>Shop</li>
-    </ul>
+    <div class="nav-menu">
+      <p routerLink="overview" (click)="setSelectedNav('Overview')" [class.nav-active]="selectedNav === 'Overview'">Overview</p>
+      <p (click)="setSelectedNav('Stats')" [class.nav-active]="selectedNav === 'Stats'">Stats</p>
+      <p routerLink="mission" (click)="setSelectedNav('Missions')" [class.nav-active]="selectedNav === 'Missions'">Missions</p>
+      <p routerLink="pvp" (click)="setSelectedNav('Pvp')" [class.nav-active]="selectedNav === 'Pvp'">PvP</p>
+      <p routerLink="plunder" (click)="setSelectedNav('Plunder')" [class.nav-active]="selectedNav === 'Plunder'">Plunder</p>
+      <p routerLink="dungeon" (click)="setSelectedNav('Dungeon')" [class.nav-active]="selectedNav === 'Dungeon'">Dungeon</p>
+      <p (click)="setSelectedNav('Rankings')" [class.nav-active]="selectedNav === 'Rankings'">Rankings</p>
+      <p (click)="setSelectedNav('Shop')" [class.nav-active]="selectedNav === 'Shop'">Shop</p>
+    </div>
   </div>
 
   <div class="inner-content">

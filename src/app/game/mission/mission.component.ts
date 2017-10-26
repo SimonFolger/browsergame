@@ -43,9 +43,9 @@ export class MissionComponent implements OnInit {
 
   //Funktionen die beim Seitenaufruf gestartet werden
   ngOnInit() {
-    this.player = this.playerService.getPlayer(this.gameComponent.email);
+    this.updatePlayer();
     this.getMissions();
-    //this.compareOutstandingMissions();
+    this.compareOutstandingMissions();
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
@@ -57,6 +57,12 @@ export class MissionComponent implements OnInit {
       }    
     })
   } 
+
+  updatePlayer() {
+    this.gameComponent.getPlayer();
+    this.player = this.gameComponent.player;
+    this.player.subscribe(val => this.playerData = val);
+  }
   
   //Lädt alle Missionen aus der Datenbank
   getMissions() {
@@ -69,86 +75,46 @@ export class MissionComponent implements OnInit {
   }
 
   //Wenn Mission gestartet wird <Button> 1. Speichere bei Click Questdaten in DB 2, Führe aus wenn Zähler = Missionszeit
-  missionStart (mission:Mission) {
+  missionStart (mission: Mission) {
     let currentTime = this.getCurrentTime();
-    this.saveQuestData(currentTime + mission.timeq * 1000, mission.goldq, mission.silverq);
+    let newReward: Reward = {
+      finishedquest: currentTime + mission.timeq * 1000,
+      questrewardgold: mission.goldq,
+      questrewardsilver: mission.silverq
+    };
+    this.saveQuestData(newReward);
     let timer = TimerObservable.create(25, 12); // 2000, 1000
     this.countdown = timer.subscribe(t => {
       this.counter = t;
       if (this.counter == mission.timeq) {
-       this.countdown.unsubscribe();
-       //.subscribe(val => player = val); dem Player werden die Daten aus dem PlayerObservable zugewiesen. Somit kann ich nun auf alle Daten die in der PlayerComponent sind zugreifen / abrufen
-       let playerData:Player;
-       this.player.subscribe(val=> playerData = val);
-       console.log(this.player);
-       console.log(this.playerData);
-       
-       this.playerData.gold += mission.goldq;
-       this.playerData.silver += mission.silverq;
-       this.questSuccessful = true;
-       this.update(this.playerData.gold, this.playerData.silver); 
+        this.countdown.unsubscribe();
+        this.playerData.gold += mission.goldq;
+        this.playerData.silver += mission.silverq;
+        this.questSuccessful = true;
+        this.update(); 
       }
     })
   }
 
   //Speichere QuestDaten in Datenbank
-  saveQuestData(finishedQuestTime:number, missionsGold:number, missionsSilver:number) {
-    this.finishTime = finishedQuestTime;
-    this.goldReward = missionsGold;
-    this.silverReward = missionsSilver;
-    let playerObject:Player = {
-      name:this.heroName, 
-      email:this.email,
-      class:this.heroClass,
-      last:this.getCurrentTime(),
-      gold:missionsGold,
-      silver:missionsSilver,
-      stats: null,
-      offlinedata:{
-        questrewardgold:missionsGold,
-        questrewardsilver:missionsSilver,
-        finishedquest:finishedQuestTime
-      }
-    }
-    this.playerService.offlinereward(playerObject);
+  saveQuestData(newReward: Reward) {
+    this.playerData.offlinedata = newReward;
+    this.update();
   }
 
   //Update aktuelle Spielerdaten in Datenbank
-  update(gold:number, silver:number) {
-    let playerObject:Player = {
-      name:this.heroName, 
-      email:this.email,
-      class:this.heroClass,
-      last:this.getCurrentTime(),
-      gold:gold,
-      silver:silver,
-      offlinedata:null,
-      stats: null
-    }
-    this.playerService.update(playerObject);
+  update() {
+    this.playerService.update(this.playerData);
   }
-/*
+
   //Vergleiche in Datenbank ob Missionen während der Offlinezeit abgeschlossen worden sind.
   compareOutstandingMissions() {
     if (this.getCurrentTime() >= this.finishTime)   {
-      let playerObject:Player = {
-        name:this.heroName, 
-        email:this.email,
-        class:this.heroClass,
-        last:this.getCurrentTime(),
-        stats: null,
-        gold:this.gold + this.goldReward,
-        silver:this.silver + this.silverReward,
-        offlinedata:{
-          questrewardgold:this.goldReward,
-          questrewardsilver:this.silverReward,
-          finishedquest:this.finishTime
-        }
-      } 
-      this.playerService.update(playerObject);
+      
+      this.update();
     } 
   }
-*/
+
 }
 
 

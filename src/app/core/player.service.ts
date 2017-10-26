@@ -8,77 +8,50 @@ import 'rxjs/add/operator/map';
 export class PlayerService {
 
   private playersCol : AngularFirestoreCollection<Player>;
-  players: any;
   private playerDoc: AngularFirestoreDocument<Player>;
-  player: Observable<Player>;
   
 
-  constructor(private afs: AngularFirestore) { 
-    /*this.playersCol = afs.collection('players');
-    this.players = this.playersCol.snapshotChanges()
-      .map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Player;
-          const id = a.payload.doc.id;
-          return { id, data };
-        })
-      });*/
-  }
+  constructor(private afs: AngularFirestore) { }
 
   getPlayer(email: string) {
     this.playerDoc = this.afs.doc('players/'+email);
-    this.player = this.playerDoc.valueChanges();
-    /**this.player.subscribe(val => {
-      //val is null if empty
-      console.log(val);
-      if (val != null) {
-        console.log(val.class);
-        console.log(val.id);
-        console.log(val.name);
-        console.log(val.email);
-      } else if ( val == null) {
-        this.add(email, "", "");
-      }
-    })**/
-    return this.player;
+    return this.playerDoc.valueChanges();
   }
 
   getPlayers() {
     this.playersCol = this.afs.collection('players');
-    this.players = this.playersCol.snapshotChanges()
-    .map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Player;
-        const id = a.payload.doc.id;
-        return { id, data };
-      })
-    });
-    return this.players;
+    return this.playersCol.valueChanges();
   }
 
   add(playerObject:Player) {
-    this.afs.collection('players').doc(playerObject.email).set({'name': playerObject.name, 'class': playerObject.class, 'gold': 100, 'silver': 50, 'last': playerObject.last});
+    this.afs.collection('players').doc(playerObject.email).set(
+      {
+        'email': playerObject.email,
+        'name': playerObject.name, 
+        'class': playerObject.class, 
+        'gold': 100, 
+        'silver': 50, 
+        'last': playerObject.last,
+        'oflinedata': {
+          'finishedquest': 0,
+          'questrewardgold': 0,
+          'questrewardsilver': 0
+        }
+      }
+    );
   }
 
   update(playerObject:Player) {
-    this.afs.collection('players').doc(playerObject.email).set({'name': playerObject.name, 'class': playerObject.class, 'gold': playerObject.gold, 'silver': playerObject.silver, 'last': playerObject.last});
-  }
-
-  offlinereward(playerObject:Player) {
-    this.afs.collection('offlineplayer').doc(playerObject.email).set( 
-      { 
-      'name': playerObject.name, 
-      'class': playerObject.class, 
-      'gold': playerObject.gold, 
-      'silver': playerObject.silver, 
-      'last': playerObject.last, 
-      'stats': playerObject.stats,
-      'offlinedata': {
-       'finishedquest': playerObject.offlinedata.finishedquest,
-       'questrewardgold':playerObject.offlinedata.questrewardgold,
-       'questrewardsilver': playerObject.offlinedata.questrewardsilver
+    this.afs.collection('players').doc(playerObject.email).set(
+      {
+        'email': playerObject.email,
+        'name': playerObject.name, 
+        'class': playerObject.class, 
+        'gold': playerObject.gold, 
+        'silver': playerObject.silver, 
+        'last': playerObject.last,
+        'offlinedata': playerObject.offlinedata
       }
-     }
-   )}
-
+    );
+  }
 }

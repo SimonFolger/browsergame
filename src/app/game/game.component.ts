@@ -13,6 +13,7 @@ export class GameComponent implements OnInit {
 
   players: Observable<Player[]>;
   player: Observable<Player>;
+  selectedNav: string = "Overview";
 
   email: string;
   classIconPath: string;
@@ -34,6 +35,10 @@ export class GameComponent implements OnInit {
     this.player.subscribe(val => {
       this.classIconPath = "../../assets/" + val.class + ".svg";
     })
+  }
+  
+  setSelectedNav(clickedNav: string) {
+    this.selectedNav = clickedNav;
   }
 
   logout() {

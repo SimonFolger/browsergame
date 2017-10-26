@@ -5,10 +5,4 @@
   <h1>Your Silver: {{(player | async)?.silver }}</h1>
 </div>
 
-<div *ngIf="created == false">
-  <h3>Howdy, {{ email }}, please select a name for your hero:</h3>
-  <input [(ngModel)]="heroName" type="text">
-  <h3>Hello {{ heroName }}, my hero. What class are you?</h3>
-  <input [(ngModel)]="heroClass" type="text">
-  <button class="button button-primary" (click)="add()">send</button>
-</div>
+<button (click)="click()">asdasd</button>
