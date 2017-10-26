@@ -19,6 +19,8 @@ import { MissionService } from './core/mission.service';
 import { GameComponent } from './game/game.component';
 import { Reward } from './core/reward';
 import {PvpService } from './core/pvp.service';
+import { PlunderComponent } from './game/plunder/plunder.component';
+import { DungeonComponent } from './game/dungeon/dungeon.component';
 
 
 const routes: Routes = [
@@ -29,7 +31,9 @@ const routes: Routes = [
         { path: '', redirectTo: 'overview', pathMatch: 'full' },
         { path: 'overview',  component: OverviewComponent },
         { path: 'mission',  component: MissionComponent },
-        { path: 'pvp',  component: PvpComponent }
+        { path: 'pvp',  component: PvpComponent },
+        { path: 'plunder', component: PlunderComponent },
+        { path: 'dungeon', component: DungeonComponent }
       ] }
 ];
 
@@ -41,7 +45,9 @@ const routes: Routes = [
     OverviewComponent,
     PvpComponent,
     MissionComponent,
-    GameComponent
+    GameComponent,
+    PlunderComponent,
+    DungeonComponent
   ],
   imports: [
       BrowserModule,
