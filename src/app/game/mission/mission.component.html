@@ -10,13 +10,13 @@
   
 <div>
   <h1>Missionen</h1>
-  <div *ngFor="let id of missionIds">
-    <button class="button button-primary" (click)="missionStart(id)">{{allMissions[id].nameq}}</button>
+  <div *ngFor="let mission of randomMissions">
+    <button class="button button-primary" (click)="missionStart(mission)">{{mission.nameq}}</button>
     
-    <p *ngIf="textq"> {{allMissions[id].textq}}</p>
+    <p *ngIf="textq"> {{mission.textq}}</p>
     
-  </div>
-  <!--<p *ngIf="gewinn">Du bekommst {{ticks(id).goldq}} Gold und {{allMissions[id].silverq}} Silber</p>-->
-  <h1 *ngIf="questreward">Danke für deine Hilfe! Deine Behlohnung ist: {{questgold}} Gold und {{questsilver}} Silber.</h1>
-  <h1>{{tick}}</h1>
+ 
+  <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{mission.goldq}} Gold und {{mission.silverq}} Silber.</h1>
+</div>
+  <h1>{{counter}}</h1>
 </div>

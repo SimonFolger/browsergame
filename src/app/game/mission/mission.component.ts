@@ -25,16 +25,15 @@ export class MissionComponent implements OnInit {
   missions: Observable<Mission[]>;
   randomMissions: Mission[] = [];
   countdown: any;
-  zähler: number;
-  gold: number;
-  silver: number;
+  counter: number;
   questSuccessful: boolean = false;
-  email: string;
+  email: string ;
   heroName: string = "";
   heroClass: string = "";
   finishTime: number;
   goldReward: number;
   silverReward: number;
+  playerData: Player;
  
   constructor(
     private playerService: PlayerService, 
@@ -44,9 +43,9 @@ export class MissionComponent implements OnInit {
 
   //Funktionen die beim Seitenaufruf gestartet werden
   ngOnInit() {
-    this.gameComponent.player;
+    this.player = this.playerService.getPlayer(this.gameComponent.email);
     this.getMissions();
-    this.compareOutstandingMissions();
+    //this.compareOutstandingMissions();
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
@@ -70,19 +69,24 @@ export class MissionComponent implements OnInit {
   }
 
   //Wenn Mission gestartet wird <Button> 1. Speichere bei Click Questdaten in DB 2, Führe aus wenn Zähler = Missionszeit
-  missionStart (missionId: number) {
-    let mission = this.randomMissions[missionId];
+  missionStart (mission:Mission) {
     let currentTime = this.getCurrentTime();
     this.saveQuestData(currentTime + mission.timeq * 1000, mission.goldq, mission.silverq);
-    let timer = TimerObservable.create(2000, 1000); // 2000, 1000
+    let timer = TimerObservable.create(25, 12); // 2000, 1000
     this.countdown = timer.subscribe(t => {
-      this.zähler = t;
-      if (this.zähler == mission.timeq) {
+      this.counter = t;
+      if (this.counter == mission.timeq) {
        this.countdown.unsubscribe();
-       this.gold = this.gold + mission.goldq;
-       this.silver = this.silver + mission.silverq;
+       //.subscribe(val => player = val); dem Player werden die Daten aus dem PlayerObservable zugewiesen. Somit kann ich nun auf alle Daten die in der PlayerComponent sind zugreifen / abrufen
+       let playerData:Player;
+       this.player.subscribe(val=> playerData = val);
+       console.log(this.player);
+       console.log(this.playerData);
+       
+       this.playerData.gold += mission.goldq;
+       this.playerData.silver += mission.silverq;
        this.questSuccessful = true;
-       this.update(); 
+       this.update(this.playerData.gold, this.playerData.silver); 
       }
     })
   }
@@ -97,8 +101,8 @@ export class MissionComponent implements OnInit {
       email:this.email,
       class:this.heroClass,
       last:this.getCurrentTime(),
-      gold:this.gold,
-      silver:this.silver,
+      gold:missionsGold,
+      silver:missionsSilver,
       stats: null,
       offlinedata:{
         questrewardgold:missionsGold,
@@ -107,24 +111,23 @@ export class MissionComponent implements OnInit {
       }
     }
     this.playerService.offlinereward(playerObject);
-
   }
 
   //Update aktuelle Spielerdaten in Datenbank
-  update() {
+  update(gold:number, silver:number) {
     let playerObject:Player = {
       name:this.heroName, 
       email:this.email,
       class:this.heroClass,
       last:this.getCurrentTime(),
-      gold:this.gold,
-      silver:this.silver,
+      gold:gold,
+      silver:silver,
       offlinedata:null,
       stats: null
     }
     this.playerService.update(playerObject);
   }
-
+/*
   //Vergleiche in Datenbank ob Missionen während der Offlinezeit abgeschlossen worden sind.
   compareOutstandingMissions() {
     if (this.getCurrentTime() >= this.finishTime)   {
@@ -145,7 +148,7 @@ export class MissionComponent implements OnInit {
       this.playerService.update(playerObject);
     } 
   }
-
+*/
 }
 
 
