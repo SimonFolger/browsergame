@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     last: null,
     gold: null,
     silver: null,
-    stats: null,
     offlinedata: null
   }
 

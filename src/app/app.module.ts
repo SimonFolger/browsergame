@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCheckboxModule } from '@angular/material';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -51,6 +53,8 @@ const routes: Routes = [
   ],
   imports: [
       BrowserModule,
+      BrowserAnimationsModule,
+      MatCheckboxModule,
       RouterModule.forRoot(routes),
       AngularFireModule.initializeApp(environment.firebase),
       AngularFirestoreModule,
