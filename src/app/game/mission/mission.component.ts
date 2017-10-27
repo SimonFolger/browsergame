@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import { MissionService } from './../../core/mission.service';
 import { Reward } from './../../core/reward';
 import { GameComponent } from './../game.component';
+import {MatGridListModule} from '@angular/material';
 
 @Component({
   selector: 'app-mission',
@@ -35,7 +36,11 @@ export class MissionComponent implements OnInit {
   silverReward: number;
   playerData: Player;
   textq: boolean = true;
- 
+  chooseQuestDisplay: boolean = true;
+  choosenQuestDisplay: boolean = false;
+  choosenQuest: Mission;
+  _123: string;
+
   constructor(
     private playerService: PlayerService, 
     private missionService: MissionService,
@@ -50,7 +55,7 @@ export class MissionComponent implements OnInit {
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
-      while(this.randomMissions.length < 3) {
+      while(this.randomMissions.length < 4) {
         let random = Math.floor(Math.random() * missionLength);
         if (!this.randomMissions.includes(allMissions[random])) {
          this.randomMissions.push(allMissions[random]);
@@ -59,10 +64,12 @@ export class MissionComponent implements OnInit {
     })
   } 
 
+
   updatePlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
     this.player.subscribe(val => this.playerData = val);
+    
   }
   
   //Lädt alle Missionen aus der Datenbank
@@ -77,6 +84,10 @@ export class MissionComponent implements OnInit {
 
   //Wenn Mission gestartet wird <Button> 1. Speichere bei Click Questdaten in DB 2, Führe aus wenn Zähler = Missionszeit
   missionStart (mission: Mission) {
+    this.choosenQuest = mission;
+    console.log(this.choosenQuest)
+    this.chooseQuestDisplay = false;
+    this.choosenQuestDisplay = true;
     let currentTime = this.getCurrentTime();
     let newReward: Reward = {
       finishedquest: currentTime + mission.timeq * 1000,
@@ -105,6 +116,12 @@ export class MissionComponent implements OnInit {
 
   //Update aktuelle Spielerdaten in Datenbank
   update() {
+
+   // Problem: Rechnet zahlen falsch zusammen und schreibt niggative Zahlen in DB
+   // if (this.playerData.gold > 100) {
+   //   this.playerData.gold = this.playerData.gold + 1;
+   //   this.playerData.silver = this.playerData.silver - 100;
+   // }
     this.playerService.update(this.playerData);
   }
 
@@ -115,6 +132,7 @@ export class MissionComponent implements OnInit {
       this.update();
     } 
   }
+
 
 }
 

@@ -1,12 +1,18 @@
-<div>
-  <h1>Missionen</h1>
-  <div *ngFor="let mission of randomMissions">
-    <button class="button button-primary" (click)="missionStart(mission)">{{mission.nameq}}</button>
-    
-    <p *ngIf="textq"> {{mission.textq}}</p>
-    
- 
-  <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{mission.goldq}} <img src="../../assets/gold.svg"> und {{mission.silverq}} <img src="../../assets/silver.svg">.</h1>
-</div>
-  <h1>{{counter}}</h1>
+<div class="missionsCollection">
+
+  <mat-grid-list cols="2" rowHeight="2:1" *ngIf="chooseQuestDisplay">
+    <mat-grid-tile  *ngFor="let mission of randomMissions">
+      <button class="button button-primary" (click)="missionStart(mission)">{{mission.nameq}}</button>
+      {{mission.textq}}
+    </mat-grid-tile>    
+  </mat-grid-list>    
+
+  <mat-grid-list cols="1" rowHeight="2:1" *ngIf="choosenQuestDisplay">
+    <mat-grid-tile>
+      <div>  {{ choosenQuest.nameq }}  </div>
+      <div class="counter"><p>{{counter}}</p></div>
+      <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{choosenQuest.goldq}} Gold und {{choosenQuest.silverq}} Silver.</h1>
+    </mat-grid-tile>
+  </mat-grid-list>
+
 </div>

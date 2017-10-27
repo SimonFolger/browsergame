@@ -23,6 +23,7 @@ import { Reward } from './core/reward';
 import {PvpService } from './core/pvp.service';
 import { PlunderComponent } from './game/plunder/plunder.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
+import {MatGridListModule} from '@angular/material';
 
 
 const routes: Routes = [
@@ -60,7 +61,8 @@ const routes: Routes = [
       AngularFirestoreModule,
       AngularFireAuthModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatGridListModule
   ],
   providers: [AuthService, PlayerService, MissionService, PvpService,],
   bootstrap: [AppComponent]
