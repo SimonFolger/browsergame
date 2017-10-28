@@ -1,4 +1,5 @@
 import { Reward } from './reward';
+import { playerDungeon } from './playerDungeon'
 
 export class Player {
     email: string;
@@ -10,4 +11,5 @@ export class Player {
     silver: number;
     last: number;
     offlinedata: Reward;
+    dungeons: playerDungeon;
 }

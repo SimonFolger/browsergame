@@ -130,9 +130,9 @@ export class MissionComponent implements OnInit {
         console.log(typeof this.playerData.exp);
         console.log(mission.expq);
         console.log(typeof mission.expq);*/
-        this.playerData.gold += mission.goldq;
-        this.playerData.silver += mission.silverq;
-        this.playerData.exp += mission.expq;
+        this.playerData.gold += (mission.goldq + ((this.playerData.dungeons.moltenCore * 0.02 ) * mission.expq)) ;
+        this.playerData.silver += (mission.silverq + ((this.playerData.dungeons.moltenCore * 0.05 ) * mission.expq)) ;
+        this.playerData.exp += (mission.expq + ((this.playerData.dungeons.shadowfangKeep * 0.04 ) * mission.expq)) ;
         this.raiseLevel();
         this.questSuccessful = true;
         this.update(); 

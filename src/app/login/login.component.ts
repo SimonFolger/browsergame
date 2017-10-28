@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     last: null,
     gold: null,
     silver: null,
-    offlinedata: null
+    offlinedata: null,
+    dungeons: null
   }
 
   rFormLogin: FormGroup;

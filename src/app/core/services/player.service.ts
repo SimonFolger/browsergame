@@ -34,6 +34,13 @@ export class PlayerService {
         'gold': 100, 
         'silver': 50, 
         'last': playerObject.last,
+        'dungeons': {
+          'moltenCore': 0,
+          'shadowfangKeep': 0,
+          'blackTemple': 0,
+          'trialOfValor': 0,
+          'theEmeraldNightmare': 0
+        },
         'oflinedata': {
           'finishedquest': 0,
           'questrewardgold': 0,
@@ -54,7 +61,8 @@ export class PlayerService {
         'gold': playerObject.gold, 
         'silver': playerObject.silver, 
         'last': playerObject.last,
-        'offlinedata': playerObject.offlinedata
+        'offlinedata': playerObject.offlinedata,
+        'dungeons': playerObject.dungeons
       }
     );
   }
