@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../core/auth.service';
+import { AuthService, User } from './../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { PlayerService } from './../core/player.service';
-import { Player } from './../core/player';
+import { PlayerService } from './../core/services/player.service';
+import { Player } from './../core/classes/player';
 
 @Component({
   selector: 'app-game',

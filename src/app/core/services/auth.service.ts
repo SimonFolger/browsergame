@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Player } from './player';
+import { Player } from './../classes/player';
 import { PlayerService } from './player.service';
 
 import * as firebase from 'firebase/app';

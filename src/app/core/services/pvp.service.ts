@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../core/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { HeroClass } from './hero-class';
+import { HeroClass } from './../classes/hero-class';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 

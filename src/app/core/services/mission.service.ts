@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../core/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { PlayerService } from './../core/player.service';
-import { Player } from './../core/player';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
-import { Mission } from './mission';
+import { Mission } from './../classes/mission';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
 

@@ -1,6 +1,6 @@
 import { HeroClass } from './hero-class'
 
-export class Stats {
+export class Stat {
     attack: number;
     hp: number;
     className: HeroClass; 

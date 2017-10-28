@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DungeonService } from './../../core/dungeon.service'
-import { Dungeon } from './../../core/dungeon'
+import { DungeonService } from './../../core/services/dungeon.service'
+import { Dungeon } from './../../core/classes/dungeon'
 
 
 @Component({

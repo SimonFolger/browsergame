@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../../core/auth.service';
+import { AuthService, User } from './../../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
-import { PlayerService } from './../../core/player.service';
-import { Player } from './../../core/player';
+import { PlayerService } from './../../core/services/player.service';
+import { Player } from './../../core/classes/player';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
-import { Mission } from './../../core/mission';
+import { Mission } from './../../core/classes/mission';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import 'rxjs/add/operator/map';
-import { MissionService } from './../../core/mission.service';
-import { Reward } from './../../core/reward';
+import { MissionService } from './../../core/services/mission.service';
+import { Reward } from './../../core/classes/reward';
 import { GameComponent } from './../game.component';
 import {MatGridListModule} from '@angular/material';
-import { LevelService } from './../../core/level.service';
-import { Level } from './../../core/level';
-import { Dungeon } from './../../core/dungeon';
-import { DungeonService } from './../../core/dungeon.service';
+import { LevelService } from './../../core/services/level.service';
+import { Level } from './../../core/classes/level';
+import { Dungeon } from './../../core/classes/dungeon';
+import { DungeonService } from './../../core/services/dungeon.service';
 
 @Component({
   selector: 'app-mission',

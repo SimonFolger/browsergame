@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../core/auth.service';
-import { PvpService } from './../core/pvp.service';
-import { HeroClass } from './../core/hero-class';
-import { Player } from './../core/player';
+import { AuthService } from './../core/services/auth.service';
+import { PvpService } from './../core/services/pvp.service';
+import { HeroClass } from './../core/classes/hero-class';
+import { Player } from './../core/classes/player';
 import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    //this.authService.emailLogin("simon@test.de", "123456");
+    this.authService.emailLogin("simon@test.de", "123456");
 
     this.classes = this.pvpService.getClasses();
   }

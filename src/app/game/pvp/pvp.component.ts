@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from './../../core/player.service'
-import { Player } from './../../core/player'
+import { PlayerService } from './../../core/services/player.service'
+import { Player } from './../../core/classes/player'
 import { Observable } from 'rxjs/Observable';
 import { GameComponent } from './../game.component';
-import { PvpService } from './../../core/pvp.service';
-import { HeroClass } from './../../core/hero-class';
+import { PvpService } from './../../core/services/pvp.service';
+import { HeroClass } from './../../core/classes/hero-class';
 
 @Component({
   selector: 'app-pvp',
@@ -19,9 +19,11 @@ export class PvpComponent implements OnInit {
   myClass: string;
   enemyClass: any;
 
-  constructor(private playerService: PlayerService,
-              private gameComponent: GameComponent,
-              private pvpService: PvpService) { }
+  constructor(
+    private playerService: PlayerService,
+    private gameComponent: GameComponent,
+    private pvpService: PvpService
+  ) { }
 
   ngOnInit() {
     this.players = this.playerService.getPlayers();
