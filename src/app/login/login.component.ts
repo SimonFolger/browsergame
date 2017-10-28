@@ -32,9 +32,10 @@ export class LoginComponent implements OnInit {
   pwdNewConfirm: string = "";
   heroName: string = "";
   heroClass : string = "";
-  loginMode: boolean = true;
   classes: Observable<HeroClass[]>;
-  chosenClass: string = "";
+  chosenClass: string = "choose a class";
+
+  hideLoginPw: boolean = true;
 
   emailAlert: string = "Email is required and must be valid";
   pwdAlert: string = "Password must be between 6 and 20 letters";
@@ -62,17 +63,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    this.authService.emailLogin("simon@test.de", "123456");
+    //this.authService.emailLogin("simon@test.de", "123456");
 
     this.classes = this.pvpService.getClasses();
-  }
-
-  setLoginMode() {
-    this.loginMode = true;
-  }
-
-  setRegisterMode() {
-    this.loginMode = false;
   }
 
   comparePasswords() {
@@ -84,7 +77,11 @@ export class LoginComponent implements OnInit {
   }
 
   selectClass(className: string) {
-    this.chosenClass = className;
+    if(this.chosenClass == className) {
+      this.chosenClass = "Choose a class:"
+    } else {
+      this.chosenClass = className;
+    }
   }
 
   loginEmail() {
@@ -98,8 +95,8 @@ export class LoginComponent implements OnInit {
     //this.signUpError = this.authService.signUpError;
   }
 
-  loginGoogle() {
+  /*loginGoogle() {
     this.authService.googleLogin();
-  }
+  }*/
 
 }

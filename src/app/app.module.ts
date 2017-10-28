@@ -24,6 +24,12 @@ import {PvpService } from './core/pvp.service';
 import { PlunderComponent } from './game/plunder/plunder.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
 import {MatGridListModule} from '@angular/material';
+import {MatTabsModule} from '@angular/material';
+import {MatCardModule} from '@angular/material';
+import {MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatIconModule} from '@angular/material';
+import {MatButtonModule} from '@angular/material';
+import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
 
 
 const routes: Routes = [
@@ -50,7 +56,8 @@ const routes: Routes = [
     MissionComponent,
     GameComponent,
     PlunderComponent,
-    DungeonComponent
+    DungeonComponent,
+    FirstUpperCasePipe
   ],
   imports: [
       BrowserModule,
@@ -62,7 +69,13 @@ const routes: Routes = [
       AngularFireAuthModule,
       FormsModule,
       ReactiveFormsModule,
-      MatGridListModule
+      MatGridListModule,
+      MatTabsModule,
+      MatCardModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatIconModule,
+      MatButtonModule
   ],
   providers: [AuthService, PlayerService, MissionService, PvpService,],
   bootstrap: [AppComponent]

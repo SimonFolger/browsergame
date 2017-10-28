@@ -1,6 +1,53 @@
 @import './../../styles/variables';
 
 .login-page {
+    mat-card {
+        max-width: 500px;
+        margin: 0 auto;
+        margin-top: 100px;
+        mat-card-header {
+            text-align: center;
+            margin: -24px -24px 0;
+            background-color: $color_primary;
+            color: $color_white;
+            .mat-card-header-text {
+                margin: 0 !important;
+            }
+            .card-heading {
+                width: 100%;
+            }
+        }
+        mat-card-content {
+            text-align: center;
+            .mat-tab-label {
+                width: 50%;
+            }
+            form {
+                margin-top: 30px;
+                mat-form-field {
+                    width: 100%;
+                }
+            }
+            .class-chooser {
+                margin-bottom: 30px;
+                .class-icon {
+                    border: 3px solid $color_primary;
+                    border-radius: 100px;
+                    cursor: pointer;
+                }
+                .chosen-class {
+                    border: 5px solid $color_secondary;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+/**.login-page {
     border: 2px solid $color_primary;
     border-radius: 30px;
     padding: 10px;
@@ -88,4 +135,4 @@
     .login-page {
         margin-top: 0;
     }
-}
+}*/

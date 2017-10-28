@@ -1,25 +1,73 @@
-<!--div class="page">
-  <div class="login">
-    <div class="login-form">
-      <div class="email-login">
-        <input [(ngModel)]="email" type="text" placeholder="Email...">
-        <input [(ngModel)]="pwd" type="text" placeholder="Password...">
-        <button class="button button-primary" (click)="loginEmail()">Sign in</button>
-      </div>
-      <div class="email-login">
-        <input [(ngModel)]="emailNew" type="text" placeholder="Email...">
-        <input [(ngModel)]="pwdNew" type="text" placeholder="Password...">
-        <button class="button button-primary" (click)="signupEmail()">Sign up</button>
-      </div>
-      <div class="google-login">
-        <button (click)="loginGoogle()"><i class="fa fa-google"></i>Sign in with Google</button>
-      </div>
-    </div>
-  </div>
-</div-->
-
-
 <div class="login-page">
+  <mat-card>
+    <mat-card-header>
+      <div class="card-heading">
+        <h1>Welcome Hero!</h1>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group class="demo-tab-group" mat-stretch-tabs>
+        <mat-tab label="Login">
+          <form class="email-login" [formGroup]="rFormLogin" (ngSubmit)="loginEmail()">
+            <mat-form-field>
+              <input matInput [(ngModel)]="email" type="text" placeholder="Email" formControlName="email">
+              <mat-error *ngIf="!rFormLogin.controls['email'].valid && rFormLogin.controls['email'].touched">{{emailAlert}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]="pwd" [type]="hideLoginPw ? 'password' : 'text'" placeholder="Password" formControlName="pwd">
+              <!--mat-icon matSuffix (click)="hideLoginPw = !hideLoginPw">{{hideLoginPw ? 'visibility' : 'visibility_off'}}</mat-icon-->
+              <mat-error *ngIf="!rFormLogin.controls['pwd'].valid && rFormLogin.controls['pwd'].touched">{{pwdAlert}}</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!rFormLogin.valid" class="button button-primary email-login">Log in</button>
+            <span class="alert" *ngIf="loginError != ''">{{loginError}}</span>
+          </form>
+          <div class="google-login">
+            <button mat-raised-button color="primary" class="button button-primary">Google-Login</button>
+          </div>
+          <div class="fb-login">
+              <button mat-raised-button color="primary" class="button button-primary">Facebook-Login</button>
+          </div>
+          <div class="twitter-login">
+              <button mat-raised-button color="primary" class="button button-primary">Twitter-Login</button>
+          </div>
+        </mat-tab>
+        <mat-tab label="Register">
+          <form [formGroup]="rFormRegister" (ngSubmit)="signupEmail()">
+            <mat-form-field>
+              <input matInput [(ngModel)]="newPlayer.email" type="text" placeholder="Email..." formControlName="emailNew">
+              <mat-error class="alert" *ngIf="!rFormRegister.controls['emailNew'].valid && rFormRegister.controls['emailNew'].touched">{{emailAlert}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]="pwdNew" type="password" placeholder="Password..."  formControlName="pwdNew">
+              <mat-error class="alert" *ngIf="!rFormRegister.controls['pwdNew'].valid && rFormRegister.controls['pwdNew'].touched">{{pwdAlert}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]="pwdNewConfirm" type="password" placeholder="Confirm Password..." formControlName="pwdNewConfirm">
+              <mat-error class="alert" *ngIf="pwdNew !== pwdNewConfirm && rFormRegister.controls['pwdNewConfirm'].touched">{{pwdConfirmAlert}}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(ngModel)]="newPlayer.name" type="text" placeholder="Hero Name..." formControlName="heroName">
+              <mat-error class="alert" *ngIf="!rFormRegister.controls['heroName'].valid && rFormRegister.controls['heroName'].touched">{{heroNameAlert}}</mat-error>
+            </mat-form-field>
+            <div class="class-chooser">
+              <p class="class-chooser-header">{{chosenClass | firstUpperCase}}</p>
+              <mat-grid-list cols="3">
+                <mat-grid-tile *ngFor="let class of classes | async" class="class-container">
+                    <img class="class-icon" [src]=getIconPath(class.name) [class.chosen-class]="chosenClass === class.name" (click)="selectClass(class.name)">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!rFormRegister.valid || pwdNew !== pwdNewConfirm || chosenClass === ''" class="button button-primary email-register">Sign up</button>
+            <span class="alert" *ngIf="signUpError != ''">{{signUpError}}</span>
+          </form>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<!--div class="login-page">
   <div class="login-header">
     <h1>Welcome Hero!</h1>
   </div>
@@ -73,4 +121,4 @@
         <span class="alert" *ngIf="signUpError != ''">{{signUpError}}</span>
       </form>
   </div>
-</div>
+</div-->
