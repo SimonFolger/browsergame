@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DungeonService } from './../../core/dungeon.service'
+import { Dungeon } from './../../core/dungeon'
+
 
 @Component({
   selector: 'app-dungeon',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DungeonComponent implements OnInit {
 
-  constructor() { }
+  dungeons:any;
+
+  constructor(
+    private dungeonService: DungeonService,
+  ) { }
 
   ngOnInit() {
+    this.getDungeons();
   }
 
+  getDungeons() {
+    this.dungeons = this.dungeonService.getDungeons();
+  }
 }

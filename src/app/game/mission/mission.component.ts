@@ -14,7 +14,8 @@ import { GameComponent } from './../game.component';
 import {MatGridListModule} from '@angular/material';
 import { LevelService } from './../../core/level.service';
 import { Level } from './../../core/level';
-
+import { Dungeon } from './../../core/dungeon';
+import { DungeonService } from './../../core/dungeon.service';
 
 @Component({
   selector: 'app-mission',
@@ -28,6 +29,7 @@ export class MissionComponent implements OnInit {
   player: Observable<Player>;
   missions: Observable<Mission[]>;
   levels: Observable<Level>;
+  dungeons: any;
   randomMissions: Mission[] = [];
   countdown: any;
   counter: number;
@@ -52,12 +54,14 @@ export class MissionComponent implements OnInit {
     private missionService: MissionService,
     private gameComponent: GameComponent,
     private levelService: LevelService,
+    private dungeonService: DungeonService,
   ) { } 
 
   //Funktionen die beim Seitenaufruf gestartet werden
   ngOnInit() {
     this.updatePlayer();
     this.getMissions();
+    this.getDungeons();
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
@@ -84,9 +88,14 @@ export class MissionComponent implements OnInit {
       
   }
   
+
   //Lädt alle Missionen aus der Datenbank
   getMissions() {
     this.missions = this.missionService.getMissions();
+  }
+
+  getDungeons() {
+    this.dungeons = this.dungeonService.getDungeons();
   }
 
   //Holt sich die aktuelle Uhrzeit in Millisekunden

@@ -33,6 +33,8 @@ import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
 import {MatProgressSpinnerModule} from '@angular/material';
 import { LevelService } from './core/level.service';
 import { Level } from './core/level';
+import { DungeonService } from './core/dungeon.service';
+import { Dungeon } from './core/dungeon';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -80,7 +82,7 @@ const routes: Routes = [
       MatButtonModule,
       MatProgressSpinnerModule
   ],
-  providers: [AuthService, PlayerService, MissionService, PvpService, LevelService],
+  providers: [AuthService, PlayerService, MissionService, PvpService, LevelService, DungeonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
