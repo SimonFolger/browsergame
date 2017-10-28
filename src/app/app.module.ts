@@ -35,6 +35,10 @@ import { LevelService } from './core/level.service';
 import { Level } from './core/level';
 import { DungeonService } from './core/dungeon.service';
 import { Dungeon } from './core/dungeon';
+import {MatSidenavModule} from '@angular/material';
+import {MatListModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material';
+
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -80,7 +84,10 @@ const routes: Routes = [
       MatInputModule,
       MatIconModule,
       MatButtonModule,
-      MatProgressSpinnerModule
+      MatProgressSpinnerModule,
+      MatSidenavModule,
+      MatListModule,
+      MatToolbarModule
   ],
   providers: [AuthService, PlayerService, MissionService, PvpService, LevelService, DungeonService],
   bootstrap: [AppComponent]

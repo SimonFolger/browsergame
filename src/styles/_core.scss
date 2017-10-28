@@ -1,15 +1,17 @@
 @import './variables';
 
-/*html {
+html {
     margin: 0;
+    height: 100%;
 }
 
 body {
     //background-color: $color_primary_light;
     margin: 0;
+    height: 100%;
 }
 
-body * {
+/*body * {
     font-family: $font !important;
 }
 

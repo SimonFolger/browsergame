@@ -1,6 +1,58 @@
 @import './../../styles/variables';
 
-.game-content {
+.mat-sidenav-container {
+    width: 100%;
+    height: 100%;
+    mat-sidenav {
+        width: 250px;
+        display: flex;
+        overflow: visible;
+        .sidenav-content {
+            background-color: $color_primary;
+            width: 100%;
+            .nav-header {
+                padding: 30px;
+            }
+            mat-list-item {
+                color: $color_white;
+                cursor: pointer;
+            }
+            mat-list-item:hover:not(.nav-active) {
+                background-color: $color_primary_light;
+            }
+            .nav-active {
+                background-color: $color_secondary
+            }
+        }
+    }
+    mat-toolbar {
+        img {
+            margin-left: 30px;
+            margin-right: 10px;
+            height: 50px;
+        }
+        img:first-child {
+            margin-left: 0;
+        }
+        .toolbar-space {
+            flex: 1 1 auto;
+        }
+    }
+    .game-content {
+        overflow: auto;
+        height: 100%;
+        padding: 30px;
+      }
+  }
+  
+  .example-fab.mat-mini-fab {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+  }
+
+
+/*.game-content {
     .sticky-header {
         position: fixed;
         top: 0;
@@ -40,4 +92,4 @@
     .inner-content {
         margin: 80px 30px 0 300px;
     }
-}
+}*/

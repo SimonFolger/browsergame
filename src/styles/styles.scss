@@ -4,8 +4,74 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$primary: mat-palette($mat-brown, 800, 700, 900);
-$secondary: mat-palette($mat-deep-orange);
+$game-brown: (
+    50: #e8e1e3,
+    100: #c5b5b9,
+    200: #9e848a,
+    300: #77525b,
+    400: #5a2d37,
+    500: #3d0814,
+    600: #370712,
+    700: #2f060e,
+    800: #27040b,
+    900: #1a0206,
+    A100: #d7ccc8,
+    A200: #bcaaa4,
+    A400: #8d6e63,
+    A700: #5d4037,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: white,
+        400: white,
+        500: $white-87-opacity,
+        600: $white-87-opacity,
+        700: $white-87-opacity,
+        800: $white-87-opacity,
+        900: $white-87-opacity,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: white,
+        A700: $white-87-opacity,
+    )
+);
+
+$game-orange: (
+    50: #f6ece2,
+    100: #e8cfb6,
+    200: #d9af86,
+    300: #ca8f56,
+    400: #be7731,
+    500: #b35f0d,
+    600: #ac570b,
+    700: #a34d09,
+    800: #9a4307,
+    900: #8b3203,
+    A100: #ffcbb7,
+    A200: #ffa684,
+    A400: #ff8251,
+    A700: #ff6f37,
+    contrast: (
+        50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: white,
+        400: white,
+        500: $white-87-opacity,
+        600: $white-87-opacity,
+        700: $white-87-opacity,
+        800: $white-87-opacity,
+        900: $white-87-opacity,
+        A100: $black-87-opacity,
+        A200: $black-87-opacity,
+        A400: white,
+        A700: $white-87-opacity,
+    )
+);
+
+$primary: mat-palette($game-brown);
+$secondary: mat-palette($game-orange);
 $warn: mat-palette($mat-red);
 
 $theme: mat-light-theme(

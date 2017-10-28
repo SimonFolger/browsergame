@@ -18,7 +18,7 @@
               <!--mat-icon matSuffix (click)="hideLoginPw = !hideLoginPw">{{hideLoginPw ? 'visibility' : 'visibility_off'}}</mat-icon-->
               <mat-error *ngIf="!rFormLogin.controls['pwd'].valid && rFormLogin.controls['pwd'].touched">{{pwdAlert}}</mat-error>
             </mat-form-field>
-            <button mat-raised-button color="primary" type="submit" [disabled]="!rFormLogin.valid" class="button button-primary email-login">Log in</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!rFormLogin.valid" class="button button-primary email-login-button">Log in</button>
             <span class="alert" *ngIf="loginError != ''">{{loginError}}</span>
           </form>
           <div class="google-login">

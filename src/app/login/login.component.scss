@@ -28,6 +28,19 @@
                     width: 100%;
                 }
             }
+            .email-login {
+                border-bottom: 1px solid $color_primary;
+            }
+            button {
+                width: 150px;
+                margin: 10px;
+            }
+            .email-login-button {
+                margin-bottom: 40px;
+            }
+            .google-login {
+                margin-top: 20px;
+            }
             .class-chooser {
                 margin-bottom: 30px;
                 .class-icon {
