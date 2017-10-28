@@ -31,7 +31,8 @@ import {MatIconModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
 import {MatProgressSpinnerModule} from '@angular/material';
-
+import { LevelService } from './core/level.service';
+import { Level } from './core/level';
 
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -79,7 +80,7 @@ const routes: Routes = [
       MatButtonModule,
       MatProgressSpinnerModule
   ],
-  providers: [AuthService, PlayerService, MissionService, PvpService,],
+  providers: [AuthService, PlayerService, MissionService, PvpService, LevelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,9 @@ import { MissionService } from './../../core/mission.service';
 import { Reward } from './../../core/reward';
 import { GameComponent } from './../game.component';
 import {MatGridListModule} from '@angular/material';
+import { LevelService } from './../../core/level.service';
+import { Level } from './../../core/level';
+
 
 @Component({
   selector: 'app-mission',
@@ -24,6 +27,7 @@ export class MissionComponent implements OnInit {
 
   player: Observable<Player>;
   missions: Observable<Mission[]>;
+  levels: Observable<Level>;
   randomMissions: Mission[] = [];
   countdown: any;
   counter: number;
@@ -40,11 +44,14 @@ export class MissionComponent implements OnInit {
   choosenQuestDisplay: boolean = false;
   choosenQuest: Mission;
   circleProgress: number;
+  maxExpData:Level;
+
 
   constructor(
     private playerService: PlayerService, 
     private missionService: MissionService,
     private gameComponent: GameComponent,
+    private levelService: LevelService,
   ) { } 
 
   //Funktionen die beim Seitenaufruf gestartet werden
@@ -69,6 +76,10 @@ export class MissionComponent implements OnInit {
     this.player.subscribe(val => {
       this.playerData = val;
       this.compareOutstandingMissions();
+      let maxExp = this.levelService.getLevel(this.playerData.level);
+      maxExp.subscribe( val => {
+        this.maxExpData = val;
+      })
     });
       
   }
@@ -86,7 +97,11 @@ export class MissionComponent implements OnInit {
   //Wenn Mission gestartet wird <Button> 1. Speichere bei Click Questdaten in DB 2, Führe aus wenn Zähler = Missionszeit
   missionStart (mission: Mission) {
     this.choosenQuest = mission;
-    console.log(this.choosenQuest)
+    /*console.log(this.choosenQuest)
+    console.log(this.playerData.exp);
+    console.log(typeof this.playerData.exp);
+    console.log(mission.expq);
+    console.log(typeof mission.expq);*/
     this.chooseQuestDisplay = false;
     this.choosenQuestDisplay = true;
     let currentTime = this.getCurrentTime();
@@ -102,8 +117,14 @@ export class MissionComponent implements OnInit {
       this.progressCircle(mission.timeq);
       if (this.counter == mission.timeq) {
         this.countdown.unsubscribe();
+        /*console.log(this.playerData.exp);
+        console.log(typeof this.playerData.exp);
+        console.log(mission.expq);
+        console.log(typeof mission.expq);*/
         this.playerData.gold += mission.goldq;
         this.playerData.silver += mission.silverq;
+        this.playerData.exp += mission.expq;
+        this.raiseLevel();
         this.questSuccessful = true;
         this.update(); 
       }
@@ -136,6 +157,13 @@ export class MissionComponent implements OnInit {
   progressCircle(circleTime:number) {
     this.circleProgress = (this.counter / circleTime) * 100;
   }
+
+  raiseLevel () {
+    if (this.playerData.exp >= this.maxExpData.exp) {
+      this.playerData.level += 1;
+    }
+   }
+  
 
 
 }

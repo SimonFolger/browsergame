@@ -29,7 +29,7 @@ export class PlayerService {
         'email': playerObject.email,
         'name': playerObject.name, 
         'class': playerObject.class,
-        'level': 0,
+        'level': 1,
         'exp': 0, 
         'gold': 100, 
         'silver': 50, 
