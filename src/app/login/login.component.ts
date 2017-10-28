@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     name: '', 
     email: '',
     class: '',
+    level: 1,
     exp: 0,
     last: null,
     gold: null,
