@@ -10,7 +10,7 @@
   <mat-grid-list cols="1" rowHeight="2:1" *ngIf="choosenQuestDisplay">
     <mat-grid-tile>
       <div>  {{ choosenQuest.nameq }}  </div>
-      <div class="counter"><p>{{counter}}</p></div>
+      <div class="counter"><mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary">{{counter}}</mat-progress-spinner></div>
       <h1 *ngIf="questSuccessful">Danke für deine Hilfe! Deine Behlohnung ist: {{choosenQuest.goldq}} Gold und {{choosenQuest.silverq}} Silver.</h1>
     </mat-grid-tile>
   </mat-grid-list>

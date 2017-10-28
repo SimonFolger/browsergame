@@ -39,7 +39,7 @@ export class MissionComponent implements OnInit {
   chooseQuestDisplay: boolean = true;
   choosenQuestDisplay: boolean = false;
   choosenQuest: Mission;
-  _123: string;
+  circleProgress: number;
 
   constructor(
     private playerService: PlayerService, 
@@ -51,7 +51,6 @@ export class MissionComponent implements OnInit {
   ngOnInit() {
     this.updatePlayer();
     this.getMissions();
-    this.compareOutstandingMissions();
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
@@ -63,13 +62,15 @@ export class MissionComponent implements OnInit {
       }    
     })
   } 
-
-
+  
   updatePlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
-    this.player.subscribe(val => this.playerData = val);
-    
+    this.player.subscribe(val => {
+      this.playerData = val;
+      this.compareOutstandingMissions();
+    });
+      
   }
   
   //Lädt alle Missionen aus der Datenbank
@@ -95,9 +96,10 @@ export class MissionComponent implements OnInit {
       questrewardsilver: mission.silverq
     };
     this.saveQuestData(newReward);
-    let timer = TimerObservable.create(25, 12); // 2000, 1000
+    let timer = TimerObservable.create(2000, 1000); // 2000, 1000
     this.countdown = timer.subscribe(t => {
       this.counter = t;
+      this.progressCircle(mission.timeq);
       if (this.counter == mission.timeq) {
         this.countdown.unsubscribe();
         this.playerData.gold += mission.goldq;
@@ -116,21 +118,23 @@ export class MissionComponent implements OnInit {
 
   //Update aktuelle Spielerdaten in Datenbank
   update() {
-
-   // Problem: Rechnet zahlen falsch zusammen und schreibt niggative Zahlen in DB
-   // if (this.playerData.gold > 100) {
-   //   this.playerData.gold = this.playerData.gold + 1;
-   //   this.playerData.silver = this.playerData.silver - 100;
-   // }
+    if (this.playerData.silver >= 100) {
+      this.playerData.gold = this.playerData.gold + 1;
+      this.playerData.silver = this.playerData.silver - 100;
+    }
     this.playerService.update(this.playerData);
   }
 
   //Vergleiche in Datenbank ob Missionen während der Offlinezeit abgeschlossen worden sind.
-  compareOutstandingMissions() {
-    if (this.getCurrentTime() >= this.finishTime)   {
-      
-      this.update();
-    } 
+  compareOutstandingMissions() {       
+      if (this.getCurrentTime() >= this.playerData.offlinedata.finishedquest && this.playerData.offlinedata.finishedquest != 0)   {
+        this.playerData.offlinedata.finishedquest = 0;
+        this.update();
+      }
+    }
+
+  progressCircle(circleTime:number) {
+    this.circleProgress = (this.counter / circleTime) * 100;
   }
 
 

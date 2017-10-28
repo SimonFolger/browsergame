@@ -30,6 +30,7 @@ import {MatFormFieldModule, MatInputModule } from '@angular/material';
 import {MatIconModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material';
 import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 
 const routes: Routes = [
@@ -75,7 +76,8 @@ const routes: Routes = [
       MatFormFieldModule,
       MatInputModule,
       MatIconModule,
-      MatButtonModule
+      MatButtonModule,
+      MatProgressSpinnerModule
   ],
   providers: [AuthService, PlayerService, MissionService, PvpService,],
   bootstrap: [AppComponent]

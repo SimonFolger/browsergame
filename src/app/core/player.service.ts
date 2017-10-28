@@ -28,7 +28,8 @@ export class PlayerService {
       {
         'email': playerObject.email,
         'name': playerObject.name, 
-        'class': playerObject.class, 
+        'class': playerObject.class,
+        'exp': 0, 
         'gold': 100, 
         'silver': 50, 
         'last': playerObject.last,
@@ -47,6 +48,7 @@ export class PlayerService {
         'email': playerObject.email,
         'name': playerObject.name, 
         'class': playerObject.class, 
+        'exp': playerObject.exp,
         'gold': playerObject.gold, 
         'silver': playerObject.silver, 
         'last': playerObject.last,

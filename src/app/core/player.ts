@@ -4,6 +4,7 @@ export class Player {
     email: string;
     name: string;
     class: string;
+    exp: number;
     gold: number;
     silver: number;
     last: number;

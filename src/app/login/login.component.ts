@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     name: '', 
     email: '',
     class: '',
+    exp: 0,
     last: null,
     gold: null,
     silver: null,
@@ -63,7 +64,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    //this.authService.emailLogin("simon@test.de", "123456");
+    this.authService.emailLogin("simon@test.de", "123456");
 
     this.classes = this.pvpService.getClasses();
   }
