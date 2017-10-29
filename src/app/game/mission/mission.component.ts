@@ -47,6 +47,9 @@ export class MissionComponent implements OnInit {
   choosenQuest: Mission;
   circleProgress: number;
   maxExpData:Level;
+  bonusGold: number;
+  bonusSilver: number;
+  bonusExp: number;
 
 
   constructor(
@@ -61,7 +64,6 @@ export class MissionComponent implements OnInit {
   ngOnInit() {
     this.updatePlayer();
     this.getMissions();
-    this.getDungeons();
     this.missions.subscribe(val => {
       let allMissions = val;
       let missionLength = allMissions.length;
@@ -94,10 +96,6 @@ export class MissionComponent implements OnInit {
     this.missions = this.missionService.getMissions();
   }
 
-  getDungeons() {
-    this.dungeons = this.dungeonService.getDungeons();
-  }
-
   //Holt sich die aktuelle Uhrzeit in Millisekunden
   getCurrentTime() {
     return new Date().getTime();
@@ -106,11 +104,6 @@ export class MissionComponent implements OnInit {
   //Wenn Mission gestartet wird <Button> 1. Speichere bei Click Questdaten in DB 2, Führe aus wenn Zähler = Missionszeit
   missionStart (mission: Mission) {
     this.choosenQuest = mission;
-    /*console.log(this.choosenQuest)
-    console.log(this.playerData.exp);
-    console.log(typeof this.playerData.exp);
-    console.log(mission.expq);
-    console.log(typeof mission.expq);*/
     this.chooseQuestDisplay = false;
     this.choosenQuestDisplay = true;
     let currentTime = this.getCurrentTime();
@@ -126,13 +119,12 @@ export class MissionComponent implements OnInit {
       this.progressCircle(mission.timeq);
       if (this.counter == mission.timeq) {
         this.countdown.unsubscribe();
-        /*console.log(this.playerData.exp);
-        console.log(typeof this.playerData.exp);
-        console.log(mission.expq);
-        console.log(typeof mission.expq);*/
-        this.playerData.gold += (mission.goldq + ((this.playerData.dungeons.moltenCore * 0.02 ) * mission.expq)) ;
-        this.playerData.silver += (mission.silverq + ((this.playerData.dungeons.moltenCore * 0.05 ) * mission.expq)) ;
-        this.playerData.exp += (mission.expq + ((this.playerData.dungeons.shadowfangKeep * 0.04 ) * mission.expq)) ;
+        this.bonusGold = (this.playerData.dungeons.moltenCore * 0.1 ) * mission.goldq;
+        this.playerData.gold += (mission.goldq + this.bonusGold) ;
+        this.bonusSilver = (this.playerData.dungeons.moltenCore * 0.15 ) * mission.silverq;
+        this.playerData.silver += (mission.silverq + this.bonusSilver) ;
+        this.bonusExp = (this.playerData.dungeons.shadowfangKeep * 0.04 ) * mission.expq;
+        this.playerData.exp += (mission.expq + this.bonusExp) ;
         this.raiseLevel();
         this.questSuccessful = true;
         this.update(); 

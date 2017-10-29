@@ -9,7 +9,7 @@ import { Dungeon } from './../classes/dungeon';
 @Injectable()
 export class DungeonService {
 
-  private dungeonsCol : AngularFirestoreCollection<Dungeon[]>;
+  private dungeonsCol : AngularFirestoreCollection<Dungeon>;
   
 
   constructor(private afs: AngularFirestore) {   }

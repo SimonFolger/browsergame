@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DungeonService } from './../../core/services/dungeon.service'
-import { Dungeon } from './../../core/classes/dungeon'
+import { DungeonService } from './../../core/services/dungeon.service';
+import { Dungeon } from './../../core/classes/dungeon';
+import { PlayerService } from './../../core/services/player.service';
+import { Player } from './../../core/classes/player';
+import { GameComponent } from './../game.component';
+import { Observable } from 'rxjs/Observable';
+
 
 
 @Component({
@@ -10,17 +15,35 @@ import { Dungeon } from './../../core/classes/dungeon'
 })
 export class DungeonComponent implements OnInit {
 
-  dungeons:any;
+  dungeons: Observable<Dungeon[]>;
+  player: Observable<Player>;
+  playerData: Player;
+
 
   constructor(
     private dungeonService: DungeonService,
+    private playerService: PlayerService,
+    private gameComponent: GameComponent,
   ) { }
 
   ngOnInit() {
-    this.getDungeons();
+    this.updatePlayer();
+    this.updateDungeons();
   }
 
-  getDungeons() {
+  updatePlayer() {
+    this.gameComponent.getPlayer();
+    this.player = this.gameComponent.player;
+    this.player.subscribe(val => {this.playerData = val; console.log(this.playerData)});
+    
+  }
+
+  updateDungeons() {
     this.dungeons = this.dungeonService.getDungeons();
+    
+  }
+
+  getImagePath(name:string) {
+    return "../../../assets/dungeon/" + name + ".jpg";
   }
 }
