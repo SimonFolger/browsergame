@@ -51,11 +51,7 @@ export class MissionComponent implements OnInit {
   bonusSilver: number;
   bonusExp: number;
   totalLevelXP: number;
-<<<<<<< Updated upstream
   currentLevel: number;
-=======
-
->>>>>>> Stashed changes
 
   constructor(
     private playerService: PlayerService, 
@@ -168,15 +164,10 @@ export class MissionComponent implements OnInit {
   //Berechnet das Level anhand aktueller Erfahrungspunkte
   raiseLevel () {
     this.totalLevelXP = (10*(this.playerData.level^2)+100*this.playerData.level+100)+(20*((this.playerData.level-1)^2)+100*(this.playerData.level-1));
-<<<<<<< Updated upstream
     this.currentLevel = this.playerData.exp - (10*((this.playerData.level-1)^2)+100*(this.playerData.level-1)+100)+(20*((this.playerData.level-2)^2)+100*(this.playerData.level-2));
     console.log(this.totalLevelXP);
     console.log(this.currentLevel);
     if (this.currentLevel >= this.totalLevelXP) {
-=======
-    console.log(this.totalLevelXP);
-    if (this.playerData.exp >= this.totalLevelXP) {
->>>>>>> Stashed changes
       this.playerData.level += 1;
       this.raiseLevel();
     }
@@ -186,15 +177,9 @@ export class MissionComponent implements OnInit {
 /*
 
 =(10*(A4*A4)+100*A4+100)+(20*((A4-1)^2)+100*(A4-1))
-<<<<<<< Updated upstream
 
 Level | XP Total | XP next levelUp
 
-=======
-
-Level | XP Total | XP next levelUp
-
->>>>>>> Stashed changes
 0	0	0
 1	210	210
 2	460	250
