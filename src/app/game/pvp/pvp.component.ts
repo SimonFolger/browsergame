@@ -3,6 +3,8 @@ import { PlayerService } from './../../core/services/player.service';
 import { Player } from './../../core/classes/player';
 import { Observable } from 'rxjs/Observable';
 import { GameComponent } from './../game.component';
+import 'rxjs/add/observable/interval'; 
+import 'rxjs/add/operator/takeWhile'
 
 @Component({
   selector: 'app-pvp',
@@ -15,11 +17,17 @@ export class PvpComponent implements OnInit {
   playerObs: Observable<Player>;
   playerSelf: Player;
   fightMode: boolean = false;
-  combatLog: string[] = [];
+  combatLogSelf: string[] = [];
+  combatLogEnemy: string[] = [];
+  enemyPlayer: Player;
+  enemyHpBar: number = 100;
+  playerHpBar: number = 100;
+  enemyStats: any;
+  playerStats: any;
 
   constructor(
     private playerService: PlayerService,
-    private gameComponent: GameComponent,
+    private gameComponent: GameComponent
   ) { }
 
   ngOnInit() {
@@ -32,21 +40,22 @@ export class PvpComponent implements OnInit {
     this.playerObs = this.gameComponent.player;
     this.playerObs.subscribe(val => {
       this.playerSelf = val;
+      this.playerStats = Object.assign({}, val.stats);
     });
   }
 
-  fight(enemy: Player) {
+  /*fight(enemy: Player) {
     this.fightMode = true;
     let enemyStats = enemy.stats;
     let playerStats = this.playerSelf.stats;
     while (enemyStats.hp > 0 && playerStats.hp > 0) {
       if (enemyStats.hp > 0 && playerStats.hp > 0) {
-        enemyStats.hp -= playerStats.attack;
-        this.combatLog.push("You hit for " + playerStats.attack + ". Enemy has " + enemyStats.hp + " life points left.");
+          enemyStats.hp -= playerStats.attack;
+          this.combatLog.push("You hit for " + playerStats.attack + ". Enemy has " + enemyStats.hp + " life points left.");
       }
       if (enemyStats.hp > 0 && playerStats.hp > 0) {
-        playerStats.hp -= enemyStats.attack;
-        this.combatLog.push("Enemy hits you for " + enemyStats.attack + ". You have " + playerStats.hp + " life points left.");
+          playerStats.hp -= enemyStats.attack;
+          this.combatLog.push("Enemy hits you for " + enemyStats.attack + ". You have " + playerStats.hp + " life points left.");
       }
       if (enemyStats.hp <= 0) {
         this.combatLog.push("You won!");
@@ -54,11 +63,43 @@ export class PvpComponent implements OnInit {
         this.combatLog.push("You lost!");
       }
     }
+  }*/
+
+  fight(enemy: Player) {
+    this.enemyPlayer = enemy;
+    this.fightMode = true;
+    let playerStats = this.playerSelf.stats;
+    let enemyTurn = false;
+    this.enemyStats = Object.assign({}, enemy.stats);
+    Observable.interval(1000)
+      .takeWhile(() => enemy.stats.hp > 0 && playerStats.hp > 0)
+      .subscribe(i => {
+        if (!enemyTurn) {
+          enemy.stats.hp -= playerStats.attack;
+          this.combatLogSelf.unshift("You hit for " + playerStats.attack + ". Enemy has " + enemy.stats.hp + " life points left.");
+          this.playerHpBar = (playerStats.hp / this.playerStats.hp) * 100;
+          enemyTurn = !enemyTurn;
+        } else {
+          playerStats.hp -= enemy.stats.attack;
+          this.combatLogEnemy.unshift("Enemy hits you for " + enemy.stats.attack + ". You have " + playerStats.hp + " life points left.");
+          this.enemyHpBar = (enemy.stats.hp / this.enemyStats.hp) * 100;
+          enemyTurn = !enemyTurn;
+        }
+        if (enemy.stats.hp <= 0) {
+          this.combatLogSelf.unshift("You won!");
+          this.enemyHpBar = 0;
+        } else if (playerStats.hp <= 0) {
+          this.combatLogEnemy.unshift("Enemy won.");
+          this.playerHpBar = 0;
+        }
+      }
+    )
   }
 
   endFightMode() {
     this.fightMode = false;
-    this.combatLog = [];
+    this.combatLogSelf = [];
+    this.combatLogEnemy = [];    
   }
 
 }

@@ -1,3 +1,5 @@
+
+
 <table *ngIf="!fightMode">
   <tr>
     <th>Name</th>
@@ -11,7 +13,40 @@
   </tr>
 </table>
 
+
 <div *ngIf="fightMode">
-  <p *ngFor="let logEntry of combatLog">{{logEntry}}</p>
-  <button mat-raised-button (click)="endFightMode()">Done</button>
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-progress-bar mode="determinate" [value]="playerHpBar"></mat-progress-bar>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        Battleground...
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-progress-bar mode="determinate" [value]="enemyHpBar"></mat-progress-bar>    
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>
+          <h3>Your log:</h3>
+          <p>{{combatLogSelf[0]}}</p>
+          <p>{{combatLogSelf[1]}}</p>
+          <p>{{combatLogSelf[2]}}</p>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <button mat-raised-button (click)="endFightMode()">Done</button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h3>Enemy log:</h3>
+          <p>{{combatLogEnemy[0]}}</p>
+          <p>{{combatLogEnemy[1]}}</p>
+          <p>{{combatLogEnemy[2]}}</p>
+        </div>       
+      </mat-grid-tile>
+  </mat-grid-list>
 </div>

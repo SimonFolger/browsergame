@@ -22,7 +22,8 @@ import {
   MatListModule,
   MatToolbarModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressBarModule
   } from '@angular/material';
 
 //Components
@@ -99,7 +100,8 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatProgressBarModule
   ],
   providers: [
     AuthService, 
