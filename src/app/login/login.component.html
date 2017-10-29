@@ -53,7 +53,7 @@
               <p class="class-chooser-header">{{chosenClass | firstUpperCase}}</p>
               <mat-grid-list cols="3">
                 <mat-grid-tile *ngFor="let class of classes | async" class="class-container">
-                    <img class="class-icon" [src]=getIconPath(class.name) [class.chosen-class]="chosenClass === class.name" (click)="selectClass(class.name)">
+                    <img class="class-icon" [src]=getIconPath(class.name) [class.chosen-class]="chosenClass === class.name" (click)="selectClass(class)">
                 </mat-grid-tile>
               </mat-grid-list>
             </div>

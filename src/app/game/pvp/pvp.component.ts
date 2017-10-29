@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from './../../core/services/player.service'
-import { Player } from './../../core/classes/player'
+import { PlayerService } from './../../core/services/player.service';
+import { Player } from './../../core/classes/player';
 import { Observable } from 'rxjs/Observable';
 import { GameComponent } from './../game.component';
-import { PvpService } from './../../core/services/pvp.service';
-import { HeroClass } from './../../core/classes/hero-class';
 
 @Component({
   selector: 'app-pvp',
@@ -14,33 +12,53 @@ import { HeroClass } from './../../core/classes/hero-class';
 export class PvpComponent implements OnInit {
 
   players: Observable<Player[]>;
-  player: Observable<Player>;
-  classes: any;
-  myClass: string;
-  enemyClass: any;
+  playerObs: Observable<Player>;
+  playerSelf: Player;
+  fightMode: boolean = false;
+  combatLog: string[] = [];
 
   constructor(
     private playerService: PlayerService,
     private gameComponent: GameComponent,
-    private pvpService: PvpService
   ) { }
 
   ngOnInit() {
     this.players = this.playerService.getPlayers();
-    this.player = this.gameComponent.player;
+    this.getPlayer();
   }
 
-  fight(player: Player) {
-    console.log(player);
-
-    this.classes = this.pvpService.getClasses();
-    this.player.subscribe(val => {
-      console.log(val);
-      this.myClass = val.class; 
+  getPlayer() {
+    this.gameComponent.getPlayer();
+    this.playerObs = this.gameComponent.player;
+    this.playerObs.subscribe(val => {
+      this.playerSelf = val;
     });
-    console.log(this.myClass)
-    this.enemyClass = player;
-    console.log(this.enemyClass)
+  }
+
+  fight(enemy: Player) {
+    this.fightMode = true;
+    let enemyStats = enemy.stats;
+    let playerStats = this.playerSelf.stats;
+    while (enemyStats.hp > 0 && playerStats.hp > 0) {
+      if (enemyStats.hp > 0 && playerStats.hp > 0) {
+        enemyStats.hp -= playerStats.attack;
+        this.combatLog.push("You hit for " + playerStats.attack + ". Enemy has " + enemyStats.hp + " life points left.");
+      }
+      if (enemyStats.hp > 0 && playerStats.hp > 0) {
+        playerStats.hp -= enemyStats.attack;
+        this.combatLog.push("Enemy hits you for " + enemyStats.attack + ". You have " + playerStats.hp + " life points left.");
+      }
+      if (enemyStats.hp <= 0) {
+        this.combatLog.push("You won!");
+      } else if (playerStats.hp <= 0) {
+        this.combatLog.push("You lost!");
+      }
+    }
+  }
+
+  endFightMode() {
+    this.fightMode = false;
+    this.combatLog = [];
   }
 
 }

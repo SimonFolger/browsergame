@@ -9,14 +9,14 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PvpService {
 
-  private classesCol : AngularFirestoreCollection<HeroClass[]>;
-  classes: any;
+  private classesCol : AngularFirestoreCollection<HeroClass>;
+  classes: Observable<HeroClass[]>;
   
 
   constructor(private afs: AngularFirestore) {   }
 
   getClasses() {
-    this.classesCol = this.afs.collection('classes');
+    this.classesCol = this.afs.collection<HeroClass>('classes');
     
     this.classes = this.classesCol.valueChanges();
 

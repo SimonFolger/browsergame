@@ -17,11 +17,12 @@ export class LoginComponent implements OnInit {
     name: '', 
     email: '',
     class: '',
-    level: null,
-    exp: null,
-    last: null,
-    gold: null,
-    silver: null,
+    level: 1,
+    exp: 0,
+    last: 0,
+    gold: 0,
+    silver: 0,
+    stats: null,
     offlinedata: null,
     dungeons: null
   }
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   heroClass : string = "";
   classes: Observable<HeroClass[]>;
   chosenClass: string = "choose a class";
+  chosenClassObject: HeroClass;
 
   hideLoginPw: boolean = true;
 
@@ -79,11 +81,14 @@ export class LoginComponent implements OnInit {
     return "../../assets/" + className + ".svg";
   }
 
-  selectClass(className: string) {
-    if(this.chosenClass == className) {
-      this.chosenClass = "Choose a class:"
+  selectClass(chosenClass: HeroClass) {
+    if(this.chosenClass == chosenClass.name) {
+      this.chosenClass = "Choose a class:";
+      this.chosenClassObject = null;
     } else {
-      this.chosenClass = className;
+      this.chosenClass = chosenClass.name;
+      this.chosenClassObject = chosenClass;
+      console.log(this.chosenClassObject);
     }
   }
 
@@ -94,6 +99,10 @@ export class LoginComponent implements OnInit {
 
   signupEmail() {
     this.newPlayer.class = this.chosenClass;
+    this.newPlayer.stats = {
+      'attack': this.chosenClassObject.baseAttack,
+      'hp': this.chosenClassObject.baseHp
+    };
     this.authService.emailSignup(this.newPlayer, this.pwdNew);
     //this.signUpError = this.authService.signUpError;
   }

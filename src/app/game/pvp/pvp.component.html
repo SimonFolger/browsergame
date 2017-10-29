@@ -1,5 +1,17 @@
-<!--<ul>
-  <li *ngFor="let player of players | async">
-    <span>{{player.data.name}}</span><button (click)="fight(player)">Fight</button>
-  </li>
-</ul>-->
+<table *ngIf="!fightMode">
+  <tr>
+    <th>Name</th>
+    <th>Level</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let player of players | async">
+    <td *ngIf="player != playerSelf">{{player.name}}</td>
+    <td *ngIf="player != playerSelf">{{player.level}}</td>
+    <td *ngIf="player != playerSelf"><button mat-raised-button color="primary" (click)="fight(player)">Attack</button></td>
+  </tr>
+</table>
+
+<div *ngIf="fightMode">
+  <p *ngFor="let logEntry of combatLog">{{logEntry}}</p>
+  <button mat-raised-button (click)="endFightMode()">Done</button>
+</div>

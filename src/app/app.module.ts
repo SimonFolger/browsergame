@@ -20,7 +20,9 @@ import {
   MatProgressSpinnerModule,
   MatSidenavModule,
   MatListModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule,
+  MatPaginatorModule
   } from '@angular/material';
 
 //Components
@@ -32,6 +34,7 @@ import { MissionComponent } from './game/mission/mission.component';
 import { GameComponent } from './game/game.component';
 import { PlunderComponent } from './game/plunder/plunder.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
+import { StatsComponent } from './game/stats/stats.component';
 
 //Services
 import { AuthService } from './core/services/auth.service';
@@ -56,6 +59,7 @@ const routes: Routes = [
         { path: 'mission',  component: MissionComponent },
         { path: 'pvp',  component: PvpComponent },
         { path: 'plunder', component: PlunderComponent },
+        { path: 'stats', component: StatsComponent },
         { path: 'dungeon', component: DungeonComponent }
       ] }
 ];
@@ -71,7 +75,8 @@ const routes: Routes = [
     GameComponent,
     PlunderComponent,
     DungeonComponent,
-    FirstUpperCasePipe
+    FirstUpperCasePipe,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +97,9 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthService, 

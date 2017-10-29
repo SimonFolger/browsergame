@@ -9,7 +9,7 @@
       </div>
       <mat-list>
         <mat-list-item routerLink="overview" (click)="setSelectedNav('Overview')" [class.nav-active]="selectedNav === 'Overview'">Overview</mat-list-item>
-        <mat-list-item (click)="setSelectedNav('Stats')" [class.nav-active]="selectedNav === 'Stats'">Stats</mat-list-item>
+        <mat-list-item routerLink="stats" (click)="setSelectedNav('Stats')" [class.nav-active]="selectedNav === 'Stats'">Stats</mat-list-item>
         <mat-list-item routerLink="mission" (click)="setSelectedNav('Missions')" [class.nav-active]="selectedNav === 'Missions'">Missions</mat-list-item>
         <mat-list-item routerLink="pvp" (click)="setSelectedNav('Pvp')" [class.nav-active]="selectedNav === 'Pvp'">PvP</mat-list-item>
         <mat-list-item routerLink="plunder" (click)="setSelectedNav('Plunder')" [class.nav-active]="selectedNav === 'Plunder'">Plunder</mat-list-item>

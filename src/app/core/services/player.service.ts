@@ -29,10 +29,10 @@ export class PlayerService {
         'email': playerObject.email,
         'name': playerObject.name, 
         'class': playerObject.class,
-        'level': 1,
-        'exp': 0, 
-        'gold': 100, 
-        'silver': 50, 
+        'level': playerObject.level,
+        'exp': playerObject.exp, 
+        'gold': playerObject.gold, 
+        'silver': playerObject.silver, 
         'last': playerObject.last,
         'dungeons': {
           'moltenCore': 0,
@@ -41,6 +41,7 @@ export class PlayerService {
           'trialOfValor': 0,
           'theEmeraldNightmare': 0
         },
+        'stats': playerObject.stats,
         'oflinedata': {
           'finishedquest': 0,
           'questrewardgold': 0,
@@ -62,7 +63,8 @@ export class PlayerService {
         'silver': playerObject.silver, 
         'last': playerObject.last,
         'offlinedata': playerObject.offlinedata,
-        'dungeons': playerObject.dungeons
+        'dungeons': playerObject.dungeons,
+        'stats': playerObject.stats
       }
     );
   }
