@@ -1,14 +1,27 @@
-
-
-<div class="dungeonfinder" *ngFor="let dungeon of dungeons | async">
-  <div class="dungeon">
-    <div class="dungeonlogo">
-      <img [src]=getImagePath(dungeon.name)>
-      {{dungeon.name}} | Chapter:{{dungeon.part}} 
-    </div>  
-    <div class="dungeonstart">
-      <img src="../../assets/dungeon/fightstart.jpg">
+<div class="chooseDungeon" *ngIf="chooseDungeonDisplay">
+  <div class="dungeonfinder" *ngFor="let dungeon of dungeons | async" >
+    <div class="dungeon">
+      <div class="dungeonlogo">
+        <img [src]=getImagePath(dungeon.name)>
+        {{dungeon.name}} | Chapter:{{playerData.dungeons[dungeon.name]}} | Bonus: {{dungeon.buff}}
+      </div>  
+      <div class="dungeonstart">
+        <img (click)="dungeonStart(dungeon)" src="../../assets/dungeon/fightstart.jpg" >
+      </div>
     </div>
   </div>
 </div>
- 
+
+<div class="choosenDungeon" *ngIf="choosenDungeonDisplay">
+  <div class="dungeonfinder">
+    <div class="dungeon">
+      <div class="dungeonlogo">
+        <img [src]=getImagePath(choosenDungeon.name)> 
+        {{choosenDungeon.name}} | Chapter:{{currentChapter}} | {{counter}} | 
+        <div class="dungeonstart">
+          <!--<mat-progress-spinner mode="determinate" [value]="circleDungeonProgress" color="primary"></mat-progress-spinner>    - Counter wird nicht mehr angezeigt.-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
