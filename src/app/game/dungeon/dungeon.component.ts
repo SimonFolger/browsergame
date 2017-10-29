@@ -7,8 +7,6 @@ import { GameComponent } from './../game.component';
 import { Observable } from 'rxjs/Observable';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
 
-
-
 @Component({
   selector: 'app-dungeon',
   templateUrl: './dungeon.component.html',
@@ -43,13 +41,11 @@ export class DungeonComponent implements OnInit {
   updatePlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
-    this.player.subscribe(val => {this.playerData = val; console.log(this.playerData)});
-    
+    this.player.subscribe(val => {this.playerData = val; console.log(this.playerData)}); 
   }
 
   updateDungeons() {
-    this.dungeons = this.dungeonService.getDungeons();
-    
+    this.dungeons = this.dungeonService.getDungeons();  
   }
 
   getImagePath(name:string) {
