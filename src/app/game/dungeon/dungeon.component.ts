@@ -41,7 +41,7 @@ export class DungeonComponent implements OnInit {
   updatePlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
-    this.player.subscribe(val => {this.playerData = val; console.log(this.playerData)}); 
+    this.player.subscribe(val => {this.playerData = val}); 
   }
 
   updateDungeons() {

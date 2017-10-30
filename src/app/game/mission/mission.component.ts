@@ -161,8 +161,8 @@ export class MissionComponent implements OnInit {
     this.circleProgress = (this.counter / circleTime) * 100;
   }
 
-  //Berechnet das Level anhand aktueller Erfahrungspunkte
-  raiseLevel () {
+  //Berechnet das Level anhand aktueller Erfahrungspunkte ALT!
+  /*raiseLevel () {
     this.totalLevelXP = 70*((this.playerData.level+1)*(this.playerData.level+1))+200*(this.playerData.level+1)
     this.currentLevel = this.playerData.exp - 70*((this.playerData.level)*(this.playerData.level))+200*(this.playerData.level)
     console.log(this.totalLevelXP);
@@ -171,7 +171,23 @@ export class MissionComponent implements OnInit {
       this.playerData.level += 1;
       this.raiseLevel();
     }
+  }*/
+
+  //Berechnet das Level anhand aktueller Erfahrungspunkte
+  raiseLevel () {
+    this.totalLevelXP = 70*((this.playerData.level+1)*(this.playerData.level+1))+200*(this.playerData.level+1)
+    console.log(this.totalLevelXP);
+    if (this.playerData.exp >= this.totalLevelXP) {
+      this.playerData.exp -= 70*((this.playerData.level)*(this.playerData.level))+200*(this.playerData.level);
+      console.log(this.playerData.exp);
+      this.playerData.level += 1;
+      this.raiseLevel();
+    }
   }
+
+
+
+
 }
 
 /*
@@ -184,16 +200,16 @@ Alte Stufe:
 
 
 	neue stufe		alte Stufe
-0	270		0
-1	680	410	270
-2	1230	550	680
-3	1920	690	1230
-4	2750	830	1920
-5	3720	970	2750
-6	4830	1110	3720
-7	6080	1250	4830
-8	7470	1390	6080
-9	9000	1530	7470
+0       	270	 	0
+1	  680 	410 	270
+2	  1230	550 	680
+3	  1920	690	  1230
+4	  2750	830	  1920
+5	  3720	970	  2750
+6	  4830	1110	3720
+7	  6080	1250	4830
+8	  7470	1390	6080
+9	  9000	1530	7470
 10	10670	1670	9000
 11	12480	1810	10670
 12	14430	1950	12480
