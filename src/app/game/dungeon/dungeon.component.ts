@@ -17,9 +17,7 @@ export class DungeonComponent implements OnInit {
   dungeons: Observable<Dungeon[]>;
   player: Observable<Player>;
   playerData: Player;
-  choosenDungeon: Dungeon;
-  chooseDungeonDisplay: boolean = true;
-  choosenDungeonDisplay: boolean = false;
+  chosenDungeon: Dungeon;
   countdown: any;
   counter: number;
   circleDungeonProgress: number;
@@ -34,17 +32,17 @@ export class DungeonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.updatePlayer();
-    this.updateDungeons();
+    this.getPlayer();
+    this.getDungeons();
   }
 
-  updatePlayer() {
+  getPlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
     this.player.subscribe(val => {this.playerData = val}); 
   }
 
-  updateDungeons() {
+  getDungeons() {
     this.dungeons = this.dungeonService.getDungeons();  
   }
 
@@ -52,33 +50,30 @@ export class DungeonComponent implements OnInit {
     return "../../../assets/dungeon/" + name + ".jpg";
   }
 
-  dungeonStart(dungeon: Dungeon) {
-    this.currentChapter = this.playerData.dungeons[dungeon.name];
-    this.choosenDungeon = dungeon;
-    this.chooseDungeonDisplay = false;
-    this.choosenDungeonDisplay = true;
+  startDungeon(dungeon: Dungeon) {
+    this.currentChapter = this.playerData.dungeonProgress[dungeon.name];
+    this.chosenDungeon = dungeon;
     let timer = TimerObservable.create(2000, 1000); // 2000, 1000
     this.countdown = timer.subscribe(t => {
       this.counter = t;
-      this.progressDungeonCircle(dungeon.time);
+      this.getProgress(dungeon.time);
       if (this.counter == dungeon.time) {
         this.countdown.unsubscribe();
-        this.playerData.dungeons[dungeon.name] += 1;
-        this.update(); 
+        this.playerData.dungeonProgress[dungeon.name] += 1;
+        this.updatePlayer(); 
       }
     })
   }
     
-  progressDungeonCircle(circleTime: number) {
+  getProgress(circleTime: number) {
     this.circleDungeonProgress = (this.counter / circleTime) * 100;
   }
 
-  update() {
-    while (this.playerData.silver >= 100) {
-      this.playerData.gold = this.playerData.gold + 1;
-      this.playerData.silver = this.playerData.silver - 100;
-    }
+  updatePlayer() {
     this.playerService.update(this.playerData);
   }
 
+  goBackToOverview() {
+    this.chosenDungeon = null;
+  }
 }

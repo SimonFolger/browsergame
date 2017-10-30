@@ -1,26 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import {TimerObservable} from "rxjs/observable/TimerObservable";
-import { Mission } from './../classes/mission';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
-
-import 'rxjs/add/operator/map';
+import { Mission } from './../classes/mission';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Injectable()
 export class MissionService {
 
-  private missionsCol : AngularFirestoreCollection<Mission[]>;
-  missions: any;
-  
+  private missionsCol : AngularFirestoreCollection<Mission>;
 
   constructor(private afs: AngularFirestore) {   }
 
   getMissions() {
-    this.missionsCol = this.afs.collection('missions');
-    this.missions = this.missionsCol.valueChanges();
-    return this.missions;
+    this.missionsCol = this.afs.collection<Mission>('missions');
+    return this.missionsCol.valueChanges();
   }
 }
-
-//Doc ist einziges
-//Col(Collection) sind mehrere

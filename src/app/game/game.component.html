@@ -12,7 +12,6 @@
         <mat-list-item routerLink="stats" (click)="setSelectedNav('Stats')" [class.nav-active]="selectedNav === 'Stats'">Stats</mat-list-item>
         <mat-list-item routerLink="mission" (click)="setSelectedNav('Missions')" [class.nav-active]="selectedNav === 'Missions'">Missions</mat-list-item>
         <mat-list-item routerLink="pvp" (click)="setSelectedNav('Pvp')" [class.nav-active]="selectedNav === 'Pvp'">PvP</mat-list-item>
-        <mat-list-item routerLink="plunder" (click)="setSelectedNav('Plunder')" [class.nav-active]="selectedNav === 'Plunder'">Plunder</mat-list-item>
         <mat-list-item routerLink="dungeon" (click)="setSelectedNav('Dungeon')" [class.nav-active]="selectedNav === 'Dungeon'">Dungeon</mat-list-item>
         <mat-list-item (click)="setSelectedNav('Rankings')" [class.nav-active]="selectedNav === 'Rankings'">Rankings</mat-list-item>
         <mat-list-item (click)="setSelectedNav('Shop')" [class.nav-active]="selectedNav === 'Shop'">Shop</mat-list-item>
@@ -27,11 +26,11 @@
       <img class="class-icon" src={{classIconPath}}>
       <span class="player-name">{{(player | async)?.name }}</span>
       <img class="level-icon" src="../../assets/level.svg">
-      <span class="player-level">Level: {{(player | async)?.level }}</span>
+      <span class="player-level">Level: {{(player | async)?.level.level }}</span>
       <img class="diamond-icon" src="../../assets/diamond.svg">
       <span class="player-diamond">0</span>
       <img class="gold-icon" src="../../assets/gold.svg">
-      <span class="player-gold">{{(player | async)?.gold }}</span>
+      <span class="player-gold">todo</span>
       <img class="silver-icon" src="../../assets/silver.svg">
       <span class="player-silver">{{(player | async)?.silver }}</span>
       <span class="toolbar-space"></span>

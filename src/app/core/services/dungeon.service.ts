@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFirestore, AngularFirestoreDocument,  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/map';
+import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Dungeon } from './../classes/dungeon';
 
 
@@ -10,13 +8,11 @@ import { Dungeon } from './../classes/dungeon';
 export class DungeonService {
 
   private dungeonsCol : AngularFirestoreCollection<Dungeon>;
-  
 
   constructor(private afs: AngularFirestore) {   }
 
   getDungeons() {
-    this.dungeonsCol = this.afs.collection('dungeons');
+    this.dungeonsCol = this.afs.collection<Dungeon>('dungeons');
     return this.dungeonsCol.valueChanges();
-    
   }
 }

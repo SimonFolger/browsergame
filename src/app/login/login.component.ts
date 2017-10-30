@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../core/services/auth.service';
-import { PvpService } from './../core/services/pvp.service';
-import { HeroClass } from './../core/classes/hero-class';
+import { ClassService } from './../core/services/class.service';
+import { BaseClass } from './../core/classes/base-class';
 import { Player } from './../core/classes/player';
 import { Observable } from 'rxjs/Observable';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,14 +17,11 @@ export class LoginComponent implements OnInit {
     name: '', 
     email: '',
     class: '',
-    level: 1,
-    exp: 0,
-    last: 0,
-    gold: 0,
     silver: 0,
+    level: null,
     stats: null,
-    offlinedata: null,
-    dungeons: null
+    missionProgress: null,
+    dungeonProgress: null
   }
 
   rFormLogin: FormGroup;
@@ -35,10 +32,9 @@ export class LoginComponent implements OnInit {
   pwdNew: string = "";
   pwdNewConfirm: string = "";
   heroName: string = "";
-  heroClass : string = "";
-  classes: Observable<HeroClass[]>;
+  classes: Observable<BaseClass[]>;
   chosenClass: string = "choose a class";
-  chosenClassObject: HeroClass;
+  chosenClassObject: BaseClass;
 
   hideLoginPw: boolean = true;
 
@@ -51,7 +47,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private pvpService: PvpService,
+    private classService: ClassService,
     private fb: FormBuilder
   ) { 
     this.rFormLogin = fb.group({
@@ -68,9 +64,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     //add this to automatically login
-    this.authService.emailLogin("s@s.de", "123456");
-
-    this.classes = this.pvpService.getClasses();
+    this.authService.emailLogin("simon@test.de", "123456");
+    
+    this.classes = this.classService.getClasses();
   }
 
   comparePasswords() {
@@ -81,7 +77,7 @@ export class LoginComponent implements OnInit {
     return "../../assets/" + className + ".svg";
   }
 
-  selectClass(chosenClass: HeroClass) {
+  selectClass(chosenClass: BaseClass) {
     if(this.chosenClass == chosenClass.name) {
       this.chosenClass = "Choose a class:";
       this.chosenClassObject = null;
@@ -100,8 +96,9 @@ export class LoginComponent implements OnInit {
   signupEmail() {
     this.newPlayer.class = this.chosenClass;
     this.newPlayer.stats = {
-      'attack': this.chosenClassObject.baseAttack,
-      'hp': this.chosenClassObject.baseHp
+      'power': this.chosenClassObject.basePower,
+      'health': this.chosenClassObject.baseHealth,
+      'crit': this.chosenClassObject.baseCrit
     };
     this.authService.emailSignup(this.newPlayer, this.pwdNew);
     //this.signUpError = this.authService.signUpError;

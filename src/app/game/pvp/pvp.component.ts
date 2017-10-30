@@ -72,23 +72,23 @@ export class PvpComponent implements OnInit {
     let enemyTurn = false;
     this.enemyStats = Object.assign({}, enemy.stats);
     Observable.interval(1000)
-      .takeWhile(() => enemy.stats.hp > 0 && playerStats.hp > 0)
+      .takeWhile(() => enemy.stats.health > 0 && playerStats.health > 0)
       .subscribe(i => {
         if (!enemyTurn) {
-          enemy.stats.hp -= playerStats.attack;
-          this.combatLogSelf.unshift("You hit for " + playerStats.attack + ". Enemy has " + enemy.stats.hp + " life points left.");
-          this.playerHpBar = (playerStats.hp / this.playerStats.hp) * 100;
+          enemy.stats.health -= playerStats.power;
+          this.combatLogSelf.unshift("You hit for " + playerStats.power + ". Enemy has " + enemy.stats.health + " life points left.");
+          this.playerHpBar = (playerStats.health / this.playerStats.health) * 100;
           enemyTurn = !enemyTurn;
         } else {
-          playerStats.hp -= enemy.stats.attack;
-          this.combatLogEnemy.unshift("Enemy hits you for " + enemy.stats.attack + ". You have " + playerStats.hp + " life points left.");
-          this.enemyHpBar = (enemy.stats.hp / this.enemyStats.hp) * 100;
+          playerStats.health -= enemy.stats.power;
+          this.combatLogEnemy.unshift("Enemy hits you for " + enemy.stats.power + ". You have " + playerStats.health + " life points left.");
+          this.enemyHpBar = (enemy.stats.health / this.enemyStats.health) * 100;
           enemyTurn = !enemyTurn;
         }
-        if (enemy.stats.hp <= 0) {
+        if (enemy.stats.health <= 0) {
           this.combatLogSelf.unshift("You won!");
           this.enemyHpBar = 0;
-        } else if (playerStats.hp <= 0) {
+        } else if (playerStats.health <= 0) {
           this.combatLogEnemy.unshift("Enemy won.");
           this.playerHpBar = 0;
         }

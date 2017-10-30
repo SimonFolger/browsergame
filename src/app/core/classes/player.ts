@@ -1,17 +1,15 @@
-import { Reward } from './reward';
-import { playerDungeon } from './playerDungeon'
-import { Stats } from './stats';
+import { PlayerMissionProgress } from './player-mission-progress';
+import { PlayerDungeonProgress } from './player-dungeon-progress';
+import { PlayerStats } from './player-stats';
+import { PlayerLevel } from './player-level';
 
 export class Player {
     email: string;
     name: string;
     class: string;
-    level: number;
-    exp: number;
-    gold: number;
     silver: number;
-    last: number;
-    offlinedata: Reward;
-    stats: Stats;
-    dungeons: playerDungeon;
+    missionProgress: PlayerMissionProgress;
+    stats: PlayerStats;
+    dungeonProgress: PlayerDungeonProgress;
+    level: PlayerLevel;
 }

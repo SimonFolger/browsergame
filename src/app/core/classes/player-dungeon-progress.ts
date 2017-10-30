@@ -1,7 +1,7 @@
-export class playerDungeon {
+export class PlayerDungeonProgress {
     moltenCore: number;
     shadowfangKeep: number;
     blackTemple: number;
     trialOfValor: number;
-    theEmeraldNightmare:number;
+    theEmeraldNightmare: number;
 }

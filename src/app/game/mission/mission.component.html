@@ -1,18 +1,20 @@
 <div class="missionsCollection">
 
-  <mat-grid-list cols="2" rowHeight="2:1" *ngIf="chooseQuestDisplay">
-    <mat-grid-tile  *ngFor="let mission of randomMissions">
-      <button class="button button-primary" (click)="missionStart(mission)">{{mission.nameq}}</button>
-      {{mission.textq}}
+  <mat-grid-list cols="2" rowHeight="2:1" *ngIf="chosenMission == null && randomMissions.length == 4">
+    <mat-grid-tile *ngFor="let mission of randomMissions">
+      <button class="button button-primary" (click)="missionStart(mission)">{{mission.name}}</button>
+      {{mission.description}}
     </mat-grid-tile>    
   </mat-grid-list>    
 
-  <mat-grid-list cols="1" rowHeight="2:1" *ngIf="choosenQuestDisplay">
+  <mat-grid-list cols="1" rowHeight="2:1" *ngIf="chosenMission != null">
     <mat-grid-tile>
-      <div>  {{ choosenQuest.nameq }}  </div>
+      <div>
+        {{ chosenMission.name }}  
+      </div>
       <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>{{counter}}
-      <h1 *ngIf="questSuccessful"> Reward: {{choosenQuest.goldq}}Gold, {{choosenQuest.silverq}}Silver, {{choosenQuest.expq}}Exp</h1>
-       <h1 *ngIf="questSuccessful">BonusReward: {{bonusGold}}Gold, {{bonusSilver}}Silver, {{bonusExp}}Exp</h1>
+      <h1 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward}}Silver, {{chosenMission.expReward}}Exp</h1>
+      <h1 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h1>
     </mat-grid-tile>
   </mat-grid-list>
 

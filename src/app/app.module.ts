@@ -33,7 +33,6 @@ import { OverviewComponent } from './game/overview/overview.component';
 import { PvpComponent } from './game/pvp/pvp.component';
 import { MissionComponent } from './game/mission/mission.component';
 import { GameComponent } from './game/game.component';
-import { PlunderComponent } from './game/plunder/plunder.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
 import { StatsComponent } from './game/stats/stats.component';
 
@@ -41,8 +40,7 @@ import { StatsComponent } from './game/stats/stats.component';
 import { AuthService } from './core/services/auth.service';
 import { PlayerService } from './core/services/player.service';
 import { MissionService } from './core/services/mission.service';
-import { LevelService } from './core/services/level.service';
-import { PvpService } from './core/services/pvp.service';
+import { ClassService } from './core/services/class.service';
 import { DungeonService } from './core/services/dungeon.service';
 
 //Pipes
@@ -59,7 +57,6 @@ const routes: Routes = [
         { path: 'overview',  component: OverviewComponent },
         { path: 'mission',  component: MissionComponent },
         { path: 'pvp',  component: PvpComponent },
-        { path: 'plunder', component: PlunderComponent },
         { path: 'stats', component: StatsComponent },
         { path: 'dungeon', component: DungeonComponent }
       ] }
@@ -74,7 +71,6 @@ const routes: Routes = [
     PvpComponent,
     MissionComponent,
     GameComponent,
-    PlunderComponent,
     DungeonComponent,
     FirstUpperCasePipe,
     StatsComponent
@@ -107,8 +103,7 @@ const routes: Routes = [
     AuthService, 
     PlayerService, 
     MissionService, 
-    PvpService, 
-    LevelService, 
+    ClassService,
     DungeonService
   ],
   bootstrap: [AppComponent]

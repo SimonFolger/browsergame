@@ -8,7 +8,7 @@
   </tr>
   <tr *ngFor="let player of players | async">
     <td *ngIf="player != playerSelf">{{player.name}}</td>
-    <td *ngIf="player != playerSelf">{{player.level}}</td>
+    <td *ngIf="player != playerSelf">{{player.level.level}}</td>
     <td *ngIf="player != playerSelf"><button mat-raised-button color="primary" (click)="fight(player)">Attack</button></td>
   </tr>
 </table>

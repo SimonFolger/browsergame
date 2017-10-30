@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService, User } from './../core/services/auth.service';
+import { AuthService } from './../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { PlayerService } from './../core/services/player.service';
 import { Player } from './../core/classes/player';
@@ -35,6 +35,7 @@ export class GameComponent implements OnInit {
     this.player.subscribe(val => {
       this.classIconPath = "../../assets/" + val.class + ".svg";
     })
+
   }
   
   setSelectedNav(clickedNav: string) {
@@ -44,5 +45,4 @@ export class GameComponent implements OnInit {
   logout() {
     this.authService.signOut();
   }
-
 }
