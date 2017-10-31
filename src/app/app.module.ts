@@ -45,6 +45,7 @@ import { DungeonService } from './core/services/dungeon.service';
 
 //Pipes
 import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
+import { SilverGoldStringPipe } from './core/pipes/silver-gold-string.pipe';
 
 
 //Routing
@@ -73,7 +74,8 @@ const routes: Routes = [
     GameComponent,
     DungeonComponent,
     FirstUpperCasePipe,
-    StatsComponent
+    StatsComponent,
+    SilverGoldStringPipe
   ],
   imports: [
     BrowserModule,
