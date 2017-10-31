@@ -16,7 +16,7 @@
         {{ chosenMission.name }}
       </div>
       <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>{{counter}}
-      <h1 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}}Silver, {{chosenMission.expReward}}Exp</h1>
+      <h1 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}} and {{chosenMission.expReward}}Exp</h1>
       <h1 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h1>
     </mat-grid-tile>
   </mat-grid-list>

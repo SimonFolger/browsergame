@@ -47,7 +47,8 @@ export class PlayerService {
         'stats': playerObject.stats,
         'missionProgress': {
           'completionTime': 0,
-          'silverReward': 0
+          'silverReward': 0,
+          'expReward': 0,
         }
       }
     );
