@@ -1,16 +1,19 @@
 <div class="missionsCollection">
 
-  <mat-grid-list cols="2" rowHeight="2:1" *ngIf="chosenMission == null && randomMissions.length == 4">
+  <mat-grid-list cols="2" rowHeight="400" *ngIf="chosenMission == null && randomMissions.length == 4">
     <mat-grid-tile *ngFor="let mission of randomMissions">
-      <button class="button button-primary" (click)="missionStart(mission)">{{mission.name}}</button>
-      {{mission.description}}
+      <div class="missionContainer">
+        <h2>{{mission.name}}</h2>
+        <p>{{mission.description}}</p>
+        <button mat-raised-button color="primary" (click)="missionStart(mission)">Start</button>
+      </div>
     </mat-grid-tile>    
   </mat-grid-list>    
 
-  <mat-grid-list cols="1" rowHeight="2:1" *ngIf="chosenMission != null">
+  <mat-grid-list cols="1" *ngIf="chosenMission != null">
     <mat-grid-tile>
       <div>
-        {{ chosenMission.name }}  
+        {{ chosenMission.name }}
       </div>
       <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>{{counter}}
       <h1 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward}}Silver, {{chosenMission.expReward}}Exp</h1>
