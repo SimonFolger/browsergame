@@ -49,6 +49,16 @@ export class PlayerService {
           'completionTime': 0,
           'silverReward': 0,
           'expReward': 0,
+        },
+        'equipment': {
+          'leftHand': 0,
+          'rightHand': 0,
+          'head': 0,
+          'chest': 0,
+          'hands': 0,
+          'legs': 0,
+          'feet': 0,
+          'ring': 0,
         }
       }
     );
@@ -63,6 +73,7 @@ export class PlayerService {
         'class': playerObject.class,
         'level': playerObject.level,
         'silver': playerObject.silver,
+        'equipment': playerObject.equipment,
         'missionProgress': playerObject.missionProgress,
         'dungeonProgress': playerObject.dungeonProgress,
         'stats': playerObject.stats

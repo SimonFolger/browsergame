@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     level: null,
     stats: null,
     missionProgress: null,
-    dungeonProgress: null
+    dungeonProgress: null,
+    equipment: null,
   }
 
   rFormLogin: FormGroup;

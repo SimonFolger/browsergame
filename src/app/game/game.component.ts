@@ -66,10 +66,8 @@ export class GameComponent implements OnInit {
 
   checkForLevelUp() {
     this.totalLevelXP = 70 * ((this.playerData.level.level + 1) * (this.playerData.level.level + 1)) + 200 * (this.playerData.level.level + 1);
-    console.log(this.totalLevelXP);
     if (this.playerData.level.exp >= this.totalLevelXP) {
       this.playerData.level.exp -= 70 * ((this.playerData.level.level) * (this.playerData.level.level)) + 200 * (this.playerData.level.level);
-      console.log(this.playerData.level.exp);
       this.playerData.level.level += 1;
       this.playerData.level.levelUps += 1;
       this.updatePlayer();

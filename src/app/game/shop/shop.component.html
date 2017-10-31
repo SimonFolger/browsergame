@@ -1,0 +1,21 @@
+<mat-grid-list cols="4" rowHeight="200">
+  <mat-grid-tile *ngFor="let cloth of clothes | async">
+    <div class="clothesContainer">
+      <h2>{{cloth.name}}</h2>
+      <p>{{cloth.description}}</p>
+      <button mat-raised-button color="primary" (click)="buyClothes">Kaufen</button>
+    </div>
+  </mat-grid-tile>    
+</mat-grid-list>  
+  
+<!--
+<mat-grid-list cols="4" rowHeight="200">
+  <mat-grid-tile *ngFor="let weapon of weapons">
+    <div class="weaponsContainer">
+      <h2>{{weapon.name}}</h2>
+      <p>{{weapon.description}}</p>
+      <button mat-raised-button color="primary" (click)="buyWeapons">Kaufen</button>
+    </div>
+  </mat-grid-tile>    
+</mat-grid-list>    
+-->

@@ -35,6 +35,7 @@ import { MissionComponent } from './game/mission/mission.component';
 import { GameComponent } from './game/game.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
 import { StatsComponent } from './game/stats/stats.component';
+import { ShopComponent } from './game/shop/shop.component';
 
 //Services
 import { AuthService } from './core/services/auth.service';
@@ -42,10 +43,13 @@ import { PlayerService } from './core/services/player.service';
 import { MissionService } from './core/services/mission.service';
 import { ClassService } from './core/services/class.service';
 import { DungeonService } from './core/services/dungeon.service';
+import { WeaponService } from './core/services/weapon.service';
+import { ClothesService } from './core/services/clothes.service';
 
 //Pipes
 import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
 import { SilverGoldStringPipe } from './core/pipes/silver-gold-string.pipe';
+
 
 
 //Routing
@@ -59,7 +63,8 @@ const routes: Routes = [
         { path: 'mission',  component: MissionComponent },
         { path: 'pvp',  component: PvpComponent },
         { path: 'stats', component: StatsComponent },
-        { path: 'dungeon', component: DungeonComponent }
+        { path: 'dungeon', component: DungeonComponent },
+        { path: 'shop', component: ShopComponent }
       ] }
 ];
 
@@ -75,7 +80,8 @@ const routes: Routes = [
     DungeonComponent,
     FirstUpperCasePipe,
     StatsComponent,
-    SilverGoldStringPipe
+    SilverGoldStringPipe,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +112,9 @@ const routes: Routes = [
     PlayerService, 
     MissionService, 
     ClassService,
-    DungeonService
+    DungeonService,
+    ClothesService,
+    WeaponService
   ],
   bootstrap: [AppComponent]
 })
