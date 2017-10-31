@@ -1,3 +1,37 @@
-<div>
-  <h1>Overview</h1>
+<div *ngIf="player != undefined">
+  <mat-grid-list cols="4" rowHeight="200">
+    <mat-grid-tile colspan="4">
+      <div>
+        <h1>{{player.name}}</h1>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <div>
+        <p>character</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <div>
+        <p>inventory</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="2">
+      <div>
+        <p>Skillpoints: {{player.level.levelUps}}</p>
+        <p>Power: {{player.stats.power}}<button mat-raised-button color="primary" (click)="levelUpStat('power')" [disabled]="player.level.levelUps == 0">+</button></p>
+        <p>Health: {{player.stats.health}}<button mat-raised-button color="primary" (click)="levelUpStat('health')" [disabled]="player.level.levelUps == 0">+</button></p>
+        <p>Crit: {{player.stats.crit}}<button mat-raised-button color="primary" (click)="levelUpStat('crit')" [disabled]="player.level.levelUps == 0">+</button></p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <div>
+        <p>pvp stats</p>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+        <div>
+          <p>dungeon stats</p>
+        </div>
+      </mat-grid-tile>
+  </mat-grid-list>
 </div>

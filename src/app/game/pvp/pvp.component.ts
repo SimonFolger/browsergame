@@ -45,27 +45,6 @@ export class PvpComponent implements OnInit {
     });
   }
 
-  /*fight(enemy: Player) {
-    this.fightMode = true;
-    let enemyStats = enemy.stats;
-    let playerStats = this.playerSelf.stats;
-    while (enemyStats.hp > 0 && playerStats.hp > 0) {
-      if (enemyStats.hp > 0 && playerStats.hp > 0) {
-          enemyStats.hp -= playerStats.attack;
-          this.combatLog.push("You hit for " + playerStats.attack + ". Enemy has " + enemyStats.hp + " life points left.");
-      }
-      if (enemyStats.hp > 0 && playerStats.hp > 0) {
-          playerStats.hp -= enemyStats.attack;
-          this.combatLog.push("Enemy hits you for " + enemyStats.attack + ". You have " + playerStats.hp + " life points left.");
-      }
-      if (enemyStats.hp <= 0) {
-        this.combatLog.push("You won!");
-      } else if (playerStats.hp <= 0) {
-        this.combatLog.push("You lost!");
-      }
-    }
-  }*/
-
   fight(enemy: Player) {
     this.enemyPlayer = enemy;
     this.fightMode = true;
@@ -103,7 +82,6 @@ export class PvpComponent implements OnInit {
   getDamage(stats: PlayerStats) {
     let random = Math.random();
     if (random < stats.crit) {
-      console.log("CRIIIIITT");
       return stats.power * 2;
     } else {
       return stats.power;

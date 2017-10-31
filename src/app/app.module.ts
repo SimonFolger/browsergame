@@ -34,7 +34,6 @@ import { PvpComponent } from './game/pvp/pvp.component';
 import { MissionComponent } from './game/mission/mission.component';
 import { GameComponent } from './game/game.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
-import { StatsComponent } from './game/stats/stats.component';
 import { ShopComponent } from './game/shop/shop.component';
 
 //Services
@@ -62,7 +61,6 @@ const routes: Routes = [
         { path: 'overview',  component: OverviewComponent },
         { path: 'mission',  component: MissionComponent },
         { path: 'pvp',  component: PvpComponent },
-        { path: 'stats', component: StatsComponent },
         { path: 'dungeon', component: DungeonComponent },
         { path: 'shop', component: ShopComponent }
       ] }
@@ -79,7 +77,6 @@ const routes: Routes = [
     GameComponent,
     DungeonComponent,
     FirstUpperCasePipe,
-    StatsComponent,
     SilverGoldStringPipe,
     ShopComponent
   ],

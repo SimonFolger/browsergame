@@ -10,14 +10,15 @@
     </mat-grid-tile>    
   </mat-grid-list>    
 
-  <mat-grid-list cols="1" *ngIf="chosenMission != null">
+  <mat-grid-list cols="1" rowHeight="500" *ngIf="chosenMission != null">
     <mat-grid-tile>
-      <div>
-        {{ chosenMission.name }}
+      <div class="missionContainer">
+        <h1>{{ chosenMission.name }}</h1>
+        <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>
+        <span>{{counter}}</span>
+        <h2 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}} and {{chosenMission.expReward}}Exp</h2>
+        <h2 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h2>
       </div>
-      <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>{{counter}}
-      <h1 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}} and {{chosenMission.expReward}}Exp</h1>
-      <h1 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h1>
     </mat-grid-tile>
   </mat-grid-list>
 
