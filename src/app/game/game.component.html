@@ -26,7 +26,8 @@
       <img class="class-icon" src={{classIconPath}}>
       <span class="player-name">{{(player | async)?.name }}</span>
       <img class="level-icon" src="../../assets/level.svg">
-      <span class="player-level">Level: {{(player | async)?.level.level }}</span>
+      <span class="player-level">Level: {{(player | async)?.level.level }} | {{levelPercent}}% </span>
+      <span class="player-levelProgress"><mat-progress-bar mode="determinate" [value]="playerLevelProgress" color='accent'> </mat-progress-bar></span>
       <img class="diamond-icon" src="../../assets/diamond.svg">
       <span class="player-diamond">0</span>
       <img class="gold-icon" src="../../assets/gold.svg">

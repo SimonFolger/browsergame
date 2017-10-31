@@ -3,6 +3,7 @@ import { AuthService } from './../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { PlayerService } from './../core/services/player.service';
 import { Player } from './../core/classes/player';
+import {MatProgressBarModule} from '@angular/material';
 
 @Component({
   selector: 'app-game',
@@ -14,6 +15,9 @@ export class GameComponent implements OnInit {
   players: Observable<Player[]>;
   player: Observable<Player>;
   selectedNav: string = "Overview";
+  playerLevelProgress: number;
+  playerData: Player;
+  levelPercent: number;
 
   email: string;
   classIconPath: string;
@@ -34,8 +38,10 @@ export class GameComponent implements OnInit {
     this.player = this.playerService.getPlayer(this.email);
     this.player.subscribe(val => {
       this.classIconPath = "../../assets/" + val.class + ".svg";
+      this.playerData = val;
+      this.getLevelProgress();
     })
-
+    
   }
   
   setSelectedNav(clickedNav: string) {
@@ -45,4 +51,10 @@ export class GameComponent implements OnInit {
   logout() {
     this.authService.signOut();
   }
+
+  getLevelProgress() {
+    this.playerLevelProgress = (this.playerData.level.exp / (70 * ((this.playerData.level.level + 1) * (this.playerData.level.level + 1)) + 200 * (this.playerData.level.level + 1))) * 100;
+    this.levelPercent = Math.round(this.playerLevelProgress);
+  }
+
 }

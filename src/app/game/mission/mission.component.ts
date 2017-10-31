@@ -72,7 +72,7 @@ export class MissionComponent implements OnInit {
     this.player.subscribe(val => {
       this.playerData = val;
       this.checkForFinishedQuests();
-      // Zugriff LevelDB ->Wird nicht bennötigt das Level über Algo.
+      // Zugriff LevelDB ->Wird nicht bennötigt da Level über Algo.
       // let maxExp = this.levelService.getLevel(this.playerData.level);
       // maxExp.subscribe( val => {
       //  this.maxExpData = val;
