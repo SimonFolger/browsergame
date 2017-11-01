@@ -3,6 +3,7 @@ import { PlayerDungeonProgress } from './player-dungeon-progress';
 import { PlayerStats } from './player-stats';
 import { PlayerLevel } from './player-level';
 import { PlayerEquipment } from './player-equipment';
+import { PlayerInventar } from './player-inventar';
 
 export class Player {
     email: string;
@@ -14,4 +15,5 @@ export class Player {
     dungeonProgress: PlayerDungeonProgress;
     level: PlayerLevel;
     equipment: PlayerEquipment;
+    inventar: PlayerInventar;
 }

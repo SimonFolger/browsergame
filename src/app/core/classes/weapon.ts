@@ -4,4 +4,5 @@ export class Weapon {
     name:string;
     description: string;
     price: number;
+    id: number;
 }

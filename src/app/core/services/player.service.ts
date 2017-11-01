@@ -59,6 +59,19 @@ export class PlayerService {
           'legs': 0,
           'feet': 0,
           'ring': 0,
+        },
+        'inventar': {
+          'slot': 0,
+          'slot1': 0,
+          'slot2': 0,
+          'slot3': 0,
+          'slot4': 0,
+          'slot5': 0,
+          'slot6': 0,
+          'slot7': 0,
+          'slot8': 0,
+          'slot9': 0,
+          'slot10': 0,
         }
       }
     );
@@ -76,7 +89,8 @@ export class PlayerService {
         'equipment': playerObject.equipment,
         'missionProgress': playerObject.missionProgress,
         'dungeonProgress': playerObject.dungeonProgress,
-        'stats': playerObject.stats
+        'stats': playerObject.stats,
+        'inventar': playerObject.inventar
       }
     );
   }

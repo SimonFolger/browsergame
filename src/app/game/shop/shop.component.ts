@@ -21,7 +21,10 @@ export class ShopComponent implements OnInit {
   playerData: Player;
   weapons: Observable<Weapon[]>;
   clothes: Observable<Clothes[]>;
-
+  weaponData: Weapon;
+  clothData: Clothes;
+  playerSlot: number = 1;
+  invSlot:number;
 
   constructor(
     private playerService: PlayerService, 
@@ -47,15 +50,40 @@ export class ShopComponent implements OnInit {
 
   getWeapons() {
     this.weapons = this.weaponService.getWeapons();
-        console.log(this.weapons);
   }
 
   getClothes() {
     this.clothes = this.clothesService.getClothes();
-    console.log(this.clothes);
   }
 
+  purchaseWeapon(weapon:Weapon) {
+    this.playerData.silver -= weapon.price;
+  }
 
-
-
+  purchaseClothes(cloth:Clothes) {
+    this.playerData.silver -= cloth.price;
+    if (this.playerData.inventar.slot[this.invSlot] < 1) {
+      this.playerData.inventar.slot1 = cloth.id;
+    } else if (this.playerData.inventar.slot2 < 1){
+      this.playerData.inventar.slot2 = cloth.id;
+    } else if (this.playerData.inventar.slot3 < 1) {
+      this.playerData.inventar.slot3 = cloth.id;
+    } else if (this.playerData.inventar.slot4 < 1) {
+      this.playerData.inventar.slot4 = cloth.id;
+    } else if (this.playerData.inventar.slot5 < 1) {
+      this.playerData.inventar.slot5 = cloth.id;
+    } else if (this.playerData.inventar.slot6 < 1) {
+      this.playerData.inventar.slot6 = cloth.id;
+    } else if (this.playerData.inventar.slot7 < 1) {
+      this.playerData.inventar.slot7 = cloth.id;
+    } else if (this.playerData.inventar.slot8 < 1) {
+      this.playerData.inventar.slot8 = cloth.id;
+    } else if (this.playerData.inventar.slot9 < 1) {
+      this.playerData.inventar.slot9 = cloth.id;
+    } else if (this.playerData.inventar.slot10 < 1) {
+      this.playerData.inventar.slot10 = cloth.id;
+    }
+    this.playerService.update(this.playerData);
+  } 
 }
+
