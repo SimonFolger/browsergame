@@ -23,8 +23,7 @@ export class ShopComponent implements OnInit {
   clothes: Observable<Clothes[]>;
   weaponData: Weapon;
   clothData: Clothes;
-  playerSlot: number = 1;
-  invSlot:number;
+  inventorySlot:number = 1;
 
   constructor(
     private playerService: PlayerService, 
@@ -56,34 +55,30 @@ export class ShopComponent implements OnInit {
     this.clothes = this.clothesService.getClothes();
   }
 
-  purchaseWeapon(weapon:Weapon) {
-    this.playerData.silver -= weapon.price;
+  purchaseClothes(cloth:Clothes) {
+    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10 ) {
+      if (this.playerData.silver >= cloth.price) {
+      this.playerData.inventar[this.inventorySlot] = cloth.id;
+      this.playerData.silver -= cloth.price;
+      }
+    } else {
+      this.inventorySlot +=1;
+      this.purchaseClothes(cloth);
+    }
+     this.playerService.update(this.playerData);
   }
 
-  purchaseClothes(cloth:Clothes) {
-    this.playerData.silver -= cloth.price;
-    if (this.playerData.inventar.slot[this.invSlot] < 1) {
-      this.playerData.inventar.slot1 = cloth.id;
-    } else if (this.playerData.inventar.slot2 < 1){
-      this.playerData.inventar.slot2 = cloth.id;
-    } else if (this.playerData.inventar.slot3 < 1) {
-      this.playerData.inventar.slot3 = cloth.id;
-    } else if (this.playerData.inventar.slot4 < 1) {
-      this.playerData.inventar.slot4 = cloth.id;
-    } else if (this.playerData.inventar.slot5 < 1) {
-      this.playerData.inventar.slot5 = cloth.id;
-    } else if (this.playerData.inventar.slot6 < 1) {
-      this.playerData.inventar.slot6 = cloth.id;
-    } else if (this.playerData.inventar.slot7 < 1) {
-      this.playerData.inventar.slot7 = cloth.id;
-    } else if (this.playerData.inventar.slot8 < 1) {
-      this.playerData.inventar.slot8 = cloth.id;
-    } else if (this.playerData.inventar.slot9 < 1) {
-      this.playerData.inventar.slot9 = cloth.id;
-    } else if (this.playerData.inventar.slot10 < 1) {
-      this.playerData.inventar.slot10 = cloth.id;
+  purchaseWeapon(weapon:Weapon) {
+    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10) {
+      if (this.playerData.silver >= weapon.price){
+      this.playerData.inventar[this.inventorySlot] = weapon.id;
+      this.playerData.silver -= weapon.price;
+      }
+    } else {
+      this.inventorySlot +=1;
+      this.purchaseWeapon(weapon);
     }
-    this.playerService.update(this.playerData);
-  } 
+     this.playerService.update(this.playerData);
+  }
 }
 
