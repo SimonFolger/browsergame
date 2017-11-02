@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AuthService, User } from './../../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { PlayerService } from './../../core/services/player.service';
@@ -9,6 +9,7 @@ import { ClothesService } from './../../core/services/clothes.service';
 import { Clothes } from './../../core/classes/clothes';
 import { WeaponService } from './../../core/services/weapon.service';
 import { Weapon } from './../../core/classes/weapon';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-shop',
@@ -24,13 +25,17 @@ export class ShopComponent implements OnInit {
   weaponData: Weapon;
   clothData: Clothes;
   inventorySlot:number = 1;
+  animal: string;
+  name: string;
 
   constructor(
     private playerService: PlayerService, 
     private gameComponent: GameComponent,
     private clothesService: ClothesService,
     private weaponService: WeaponService,
-  ) { } 
+    public snackBar: MatSnackBar    
+  ) {  } 
+
 
   ngOnInit() {
     this.getPlayer();
@@ -55,13 +60,18 @@ export class ShopComponent implements OnInit {
     this.clothes = this.clothesService.getClothes();
   }
 
+  //SnackBar funktioniert noch nicht richtig!! Öffnet sicher IMMER!
   purchaseClothes(cloth:Clothes) {
       for (let inventorySlot in this.playerData.inventar) {
       if (this.playerData.inventar[inventorySlot] == 0 && this.playerData.silver >= cloth.price) {
         this.playerData.inventar[inventorySlot] = cloth.id;
         this.playerData.silver -= cloth.price;
         this.playerService.update(this.playerData);
+        this.openSnackBarSuccessful();
         break;
+      } else {
+          this.openSnackBar();
+        
       }
     } 
   }
@@ -72,16 +82,26 @@ export class ShopComponent implements OnInit {
         this.playerData.inventar[inventorySlot] = weapon.id;
         this.playerData.silver -= weapon.price;
         this.playerService.update(this.playerData);
+        this.openSnackBarSuccessful();
         break;
+      } else {
+          this.openSnackBar(); 
       }
     } 
   }
-}
 
+  openSnackBar() {
+    this.snackBar.open("Not enough Silver | Space in Inventory", "", {extraClasses:['test'],
+      duration: 1000000,
+    });
+  }
 
-
-
-
+  openSnackBarSuccessful() {
+    this.snackBar.open("Successful purchase!", "", {
+      duration: 3000,
+    });
+  }
+ }
 
 
 

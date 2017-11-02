@@ -1,7 +1,7 @@
 //Basics like Angular, Firebase
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, Inject } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -23,8 +23,12 @@ import {
   MatToolbarModule,
   MatTableModule,
   MatPaginatorModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatSnackBarModule,
+  MatSnackBar,
+  MatSnackBarContainer
   } from '@angular/material';
+  
 
 //Components
 import { AppComponent } from './app.component';
@@ -102,7 +106,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatProgressBarModule
+    MatProgressBarModule, 
+    MatSnackBarModule
   ],
   providers: [
     AuthService, 
@@ -111,7 +116,8 @@ const routes: Routes = [
     ClassService,
     DungeonService,
     ClothesService,
-    WeaponService
+    WeaponService,  
+    MatSnackBar
   ],
   bootstrap: [AppComponent]
 })
