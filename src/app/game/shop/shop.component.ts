@@ -56,29 +56,77 @@ export class ShopComponent implements OnInit {
   }
 
   purchaseClothes(cloth:Clothes) {
-    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10 ) {
+      for (let inventorySlot in this.playerData.inventar) {
+      if (this.playerData.inventar[inventorySlot] == 0 && this.playerData.silver >= cloth.price) {
+        this.playerData.inventar[inventorySlot] = cloth.id;
+        this.playerData.silver -= cloth.price;
+        this.playerService.update(this.playerData);
+        break;
+      }
+    } 
+  }
+
+  purchaseWeapon(weapon:Weapon) {
+    for (let inventorySlot in this.playerData.inventar) {
+      if (this.playerData.inventar[inventorySlot] == 0 && this.playerData.silver >= weapon.price) {
+        this.playerData.inventar[inventorySlot] = weapon.id;
+        this.playerData.silver -= weapon.price;
+        this.playerService.update(this.playerData);
+        break;
+      }
+    } 
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
+  purchaseClothes(cloth:Clothes) {
+    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10 && this.playerData.silver >= cloth.price) {
       this.playerData.inventar[this.inventorySlot] = cloth.id;
       this.playerData.silver -= cloth.price;
     } else {
       if (this.inventorySlot < 10) {
         this.inventorySlot +=1;
         this.purchaseClothes(cloth);
-      } else {}
+      } 
     }
      this.playerService.update(this.playerData);
   }
 
   purchaseWeapon(weapon:Weapon) {
-    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10) {
+    if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10 && this.playerData.silver >= weapon.price) {
       this.playerData.inventar[this.inventorySlot] = weapon.id;
       this.playerData.silver -= weapon.price;
     } else {
       if (this.inventorySlot < 10){
         this.inventorySlot +=1;
         this.purchaseWeapon(weapon);
-      } else {}   
+      }  
     }
      this.playerService.update(this.playerData);
-  }
-}
+  }*/
 
