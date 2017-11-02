@@ -57,26 +57,26 @@ export class ShopComponent implements OnInit {
 
   purchaseClothes(cloth:Clothes) {
     if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10 ) {
-      if (this.playerData.silver >= cloth.price) {
       this.playerData.inventar[this.inventorySlot] = cloth.id;
       this.playerData.silver -= cloth.price;
-      }
     } else {
-      this.inventorySlot +=1;
-      this.purchaseClothes(cloth);
+      if (this.inventorySlot < 10) {
+        this.inventorySlot +=1;
+        this.purchaseClothes(cloth);
+      } else {}
     }
      this.playerService.update(this.playerData);
   }
 
   purchaseWeapon(weapon:Weapon) {
     if (this.playerData.inventar[this.inventorySlot] < 1 && this.inventorySlot <= 10) {
-      if (this.playerData.silver >= weapon.price){
       this.playerData.inventar[this.inventorySlot] = weapon.id;
       this.playerData.silver -= weapon.price;
-      }
     } else {
-      this.inventorySlot +=1;
-      this.purchaseWeapon(weapon);
+      if (this.inventorySlot < 10){
+        this.inventorySlot +=1;
+        this.purchaseWeapon(weapon);
+      } else {}   
     }
      this.playerService.update(this.playerData);
   }
