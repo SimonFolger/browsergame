@@ -11,8 +11,8 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
-      <div *ngFor>
-        <p>inventory: {{player.inventar}}</p>
+      <div *ngFor="let item of inventar">
+        <p>{{(item | async)?.name}} </p>
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">

@@ -52,6 +52,7 @@ import { ClothesService } from './core/services/clothes.service';
 //Pipes
 import { FirstUpperCasePipe } from './core/pipes/first-upper-case.pipe';
 import { SilverGoldStringPipe } from './core/pipes/silver-gold-string.pipe';
+import { ObjectToArrayPipe } from './core/pipes/object-to-array.pipe';
 
 
 
@@ -82,7 +83,8 @@ const routes: Routes = [
     DungeonComponent,
     FirstUpperCasePipe,
     SilverGoldStringPipe,
-    ShopComponent
+    ShopComponent,
+    ObjectToArrayPipe
   ],
   imports: [
     BrowserModule,

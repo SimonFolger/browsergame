@@ -61,16 +61,16 @@ export class PlayerService {
           'ring': 0,
         },
         'inventar': {
-          '1': 0,
-          '2': 0,
-          '3': 0,
-          '4': 0,
-          '5': 0,
-          '6': 0,
-          '7': 0,
-          '8': 0,
-          '9': 0,
-          '10': 0,
+          'slot1': 'empty',
+          'slot2': 'empty',
+          'slot3': 'empty',
+          'slot4': 'empty',
+          'slot5': 'empty',
+          'slot6': 'empty',
+          'slot7': 'empty',
+          'slot8': 'empty',
+          'slot9': 'empty',
+          'slot10': 'empty',
         }
       }
     );

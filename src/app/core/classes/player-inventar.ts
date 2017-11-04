@@ -1,12 +1,12 @@
 export class PlayerInventar {
-    1:number;
-    2:number;
-    3:number;
-    4:number;
-    5:number;
-    6:number;
-    7:number;
-    8:number;
-    9:number;
-    10:number;
+    slot1:string;
+    slot2:string;
+    slot3:string;
+    slot4:string;
+    slot5:string;
+    slot6:string;
+    slot7:string;
+    slot8:string;
+    slot9:string;
+    slot10:string;
 }

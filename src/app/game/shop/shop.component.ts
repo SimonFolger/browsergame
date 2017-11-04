@@ -25,8 +25,6 @@ export class ShopComponent implements OnInit {
   weaponData: Weapon;
   clothData: Clothes;
   inventorySlot:number = 1;
-  animal: string;
-  name: string;
 
   constructor(
     private playerService: PlayerService, 
@@ -92,7 +90,7 @@ export class ShopComponent implements OnInit {
 
   openSnackBar() {
     this.snackBar.open("Not enough Silver | Space in Inventory", "", {extraClasses:['test'],
-      duration: 1000000,
+      duration: 3000,
     });
   }
 
@@ -101,15 +99,7 @@ export class ShopComponent implements OnInit {
       duration: 3000,
     });
   }
- }
-
-
-
-
-
-
-
-
+}
 
 
 
