@@ -6,6 +6,9 @@ import { Player } from './../../core/classes/player';
 import { GameComponent } from './../game.component';
 import { Observable } from 'rxjs/Observable';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
+import { PlayerStats } from './../../core/classes/player-stats';
+import 'rxjs/add/observable/interval'; 
+import 'rxjs/add/operator/takeWhile';
 
 @Component({
   selector: 'app-dungeon',
@@ -24,6 +27,17 @@ export class DungeonComponent implements OnInit {
   playerDungeonPart: string;
   newDungeonData: string;
   currentChapter: number;
+  bossEnemy: Dungeon;
+  playerStats: any;
+  bossStats: any;
+
+  fightMode: boolean = false;
+  combatLogSelf: string[] = [];
+  combatLogEnemy: string[] = [];
+  bossHpBar: number = 100;
+  playerHpBar: number = 100;
+ 
+ 
 
   constructor(
     private dungeonService: DungeonService,
@@ -39,7 +53,10 @@ export class DungeonComponent implements OnInit {
   getPlayer() {
     this.gameComponent.getPlayer();
     this.player = this.gameComponent.player;
-    this.player.subscribe(val => {this.playerData = val}); 
+    this.player.subscribe(val => {
+      this.playerData = val;
+      this.playerStats = Object.assign({}, val.stats);
+    }); 
   }
 
   getDungeons() {
@@ -75,5 +92,92 @@ export class DungeonComponent implements OnInit {
 
   goBackToOverview() {
     this.chosenDungeon = null;
+  }
+/*
+  fight(enemy: Player) {
+    this.enemyPlayer = enemy;
+    this.fightMode = true;
+    let playerStats = this.playerSelf.stats;
+    let enemyTurn = false;
+    this.enemyStats = Object.assign({}, enemy.stats);
+    let damage: number;
+    Observable.interval(1000)
+      .takeWhile(() => enemy.stats.health > 0 && playerStats.health > 0)
+      .subscribe(i => {
+        if (!enemyTurn) {
+          damage = this.getDamage(playerStats);
+          enemy.stats.health -= damage;
+          this.combatLogSelf.unshift("You hit for " + damage + ". Enemy has " + enemy.stats.health + " life points left.");
+          this.playerHpBar = (playerStats.health / this.playerStats.health) * 100;
+          enemyTurn = !enemyTurn;
+        } else {
+          damage = this.getDamage(enemy.stats);
+          playerStats.health -= damage;
+          this.combatLogEnemy.unshift("Enemy hits you for " + damage + ". You have " + playerStats.health + " life points left.");
+          this.enemyHpBar = (enemy.stats.health / this.enemyStats.health) * 100;
+          enemyTurn = !enemyTurn;
+        }
+        if (enemy.stats.health <= 0) {
+          this.combatLogSelf.unshift("You won!");
+          this.enemyHpBar = 0;
+        } else if (playerStats.health <= 0) {
+          this.combatLogEnemy.unshift("Enemy won.");
+          this.playerHpBar = 0;
+        }
+      }
+    )
+  }
+*/
+  fight(boss:Dungeon) {
+    this.bossEnemy = boss;
+    this.fightMode = true;
+    let playerStats = this.playerData.stats;
+    let bossTurn = false;
+    this.bossStats =Object.assign({}, boss.stats);
+    let damage: number;
+    Observable.interval(1000)
+    .takeWhile(() => boss.stats.health > 0 && playerStats.health > 0)
+    .subscribe(i => {
+      if (!bossTurn) {
+        damage = this.getDamage(playerStats);
+        boss.stats.health -= damage;
+        this.combatLogSelf.unshift("You hit for" + damage + "." + boss.bossName + "has" + boss.stats.health + "life points left.");
+        this.playerHpBar = (playerStats.health / this.playerStats.health) * 100;
+        bossTurn = !bossTurn;
+      } else {
+        damage = this.getDamage(boss.stats);
+        playerStats.health -= damage;
+        this.combatLogEnemy.unshift(boss.bossName + " hits you for " + damage + ". You have" + playerStats.health + "life points left.");
+        this.bossHpBar = (boss.stats.health / this.bossStats.health) * 100;
+        bossTurn = !bossTurn;
+      }
+      if (boss.stats.health <= 0) {
+        this.combatLogSelf.unshift("You won!");
+        this.bossHpBar = 0;
+      } else if (playerStats.health <= 0) {
+        this.combatLogEnemy.unshift(boss.bossName + " won!");
+        this.playerHpBar = 0;
+      }
+    })
+  }
+
+
+
+  getDamage(stats: PlayerStats) {
+    let random = Math.random();
+    if (random < stats.crit) {
+      return stats.power * 2;
+    } else {
+      return stats.power;
+    }
+  }
+
+  endFightMode() {
+    this.fightMode = false;
+    this.combatLogSelf = [];
+    this.combatLogEnemy = [];
+    this.bossHpBar = 100;
+    this.playerHpBar = 100;
+    this.getPlayer();   
   }
 }

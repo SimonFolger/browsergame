@@ -1,17 +1,18 @@
-<div class="chooseDungeon" *ngIf="chosenDungeon == null">
+<div class="chooseDungeon" *ngIf="!fightMode">
   <div class="dungeonfinder" *ngFor="let dungeon of dungeons | async" >
     <div class="dungeon">
       <div class="dungeonlogo">
         <img [src]=getImagePath(dungeon.name)>
-        {{dungeon.name}} | Chapter:{{playerData.dungeonProgress[dungeon.name]}} | Bonus: {{dungeon.buff}}
+       {{dungeon.name}} | Chapter:{{playerData.dungeonProgress[dungeon.name]}} | Bonus: {{dungeon.buff}}
       </div>  
       <div class="dungeonstart">
-        <img (click)="startDungeon(dungeon)" src="../../assets/dungeon/fightstart.jpg" >
+        <img (click)="fight(dungeon)" src="../../assets/dungeon/fightstart.jpg" >
       </div>
     </div>
   </div>
 </div>
 
+<!--
 <div class="choosenDungeon" *ngIf="chosenDungeon != null">
   <div class="dungeonfinder">
     <div class="dungeon">
@@ -19,10 +20,48 @@
         <img [src]=getImagePath(chosenDungeon.name)> 
         {{chosenDungeon.name}} | Chapter:{{currentChapter}} | {{counter}} | 
         <div class="dungeonstart">
-          <!--<mat-progress-spinner mode="determinate" [value]="circleDungeonProgress" color="primary"></mat-progress-spinner>    - Counter wird nicht mehr angezeigt.-->
+          <mat-progress-spinner mode="determinate" [value]="circleDungeonProgress" color="primary"></mat-progress-spinner>    - Counter wird nicht mehr angezeigt.
         </div>
         <button mat-raised-button color="primary" (click)="goBackToOverview()">Back</button>
       </div>
     </div>
   </div>
+</div>
+-->
+
+<div *ngIf="fightMode">
+  <mat-grid-list cols="3" rowHeight="2:1">
+    <mat-grid-tile>
+        <mat-progress-bar mode="determinate" [value]="playerHpBar"></mat-progress-bar>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div>
+        Bossfight...
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-progress-bar mode="determinate" [value]="bossHpBar"></mat-progress-bar>    
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <div>
+          <h3>Your log:</h3>
+          <p>{{combatLogSelf[0]}}</p>
+          <p>{{combatLogSelf[1]}}</p>
+          <p>{{combatLogSelf[2]}}</p>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <button mat-raised-button (click)="endFightMode()">Done</button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <h3>Boss log:</h3>
+          <p>{{combatLogEnemy[0]}}</p>
+          <p>{{combatLogEnemy[1]}}</p>
+          <p>{{combatLogEnemy[2]}}</p>
+        </div>       
+      </mat-grid-tile>
+  </mat-grid-list>
 </div>

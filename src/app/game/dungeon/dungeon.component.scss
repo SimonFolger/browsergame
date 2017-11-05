@@ -6,7 +6,7 @@
 
    .dungeon {
         width: 60%;
-        height: 175px;
+        height: 172px;
         border: 3px solid #3d0814;
         border-top-right-radius: 20px;
         border-bottom-right-radius: 20px;
@@ -14,13 +14,13 @@
         margin-bottom: 15px;
         overflow: hidden;
         box-shadow: 5px 5px 10px #3d0814;
-        
+    
         .dungeonlogo {
             width: calc(75% - 10px);
             height: 100%;
             float: left;
             border-right: 3px solid #3d0814;         
-            
+
         }
 
         .dungeonstart {
