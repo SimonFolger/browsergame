@@ -32,6 +32,7 @@ export class PlayerService {
         'name': playerObject.name, 
         'class': playerObject.class,
         'silver': playerObject.silver,
+        'tickets': playerObject.tickets,
         'level': {
           'level': 1,
           'exp': 0,
@@ -71,6 +72,11 @@ export class PlayerService {
           'slot8': 'empty',
           'slot9': 'empty',
           'slot10': 'empty',
+        },
+        'dungeonTicket': {
+          'ticket1': 0,
+          'ticket2': 0,
+          'ticket3': 0,
         }
       }
     );
@@ -83,13 +89,15 @@ export class PlayerService {
         'email': playerObject.email,
         'name': playerObject.name,
         'class': playerObject.class,
+        'tickets': playerObject.tickets,
         'level': playerObject.level,
         'silver': playerObject.silver,
         'equipment': playerObject.equipment,
         'missionProgress': playerObject.missionProgress,
         'dungeonProgress': playerObject.dungeonProgress,
         'stats': playerObject.stats,
-        'inventar': playerObject.inventar
+        'inventar': playerObject.inventar,
+        'dungeonTicket': playerObject.dungeonTicket,
       }
     );
   }

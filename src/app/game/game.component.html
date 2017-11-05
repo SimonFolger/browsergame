@@ -33,6 +33,8 @@
       <span class="player-gold">todo</span>
       <img class="silver-icon" src="../../assets/silver.svg">
       <span class="player-silver">{{(player | async)?.silver }}</span>
+      <img class="player-ticket" src="../../assets/ticket.svg">
+      <span class="player-tickets"> {{ (player | async)?.tickets }} / 3</span>
       <span class="toolbar-space"></span>
       <button mat-raised-button color="accent" (click)="logout()">Logout</button>
   </mat-toolbar>

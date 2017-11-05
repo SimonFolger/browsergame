@@ -93,74 +93,54 @@ export class DungeonComponent implements OnInit {
   goBackToOverview() {
     this.chosenDungeon = null;
   }
-/*
-  fight(enemy: Player) {
-    this.enemyPlayer = enemy;
-    this.fightMode = true;
-    let playerStats = this.playerSelf.stats;
-    let enemyTurn = false;
-    this.enemyStats = Object.assign({}, enemy.stats);
-    let damage: number;
-    Observable.interval(1000)
-      .takeWhile(() => enemy.stats.health > 0 && playerStats.health > 0)
+
+  //Level-Path skalierung fehlt noch -> d.h je höher der Path dester stärker der Boss || Evt. Normal - Heroisch - Mysthisch einbauen?
+  fight(boss:Dungeon) {
+    this.playerData.tickets -= 1;
+    if (this.playerData.tickets !==-1 && this.playerData.tickets > -1){
+      if (this.playerData.dungeonTicket.ticket1 == 0) {
+        this.playerData.dungeonTicket.ticket1 = this.gameComponent.getCurrentTime();
+      } else if (this.playerData.dungeonTicket.ticket2 == 0) {
+        this.playerData.dungeonTicket.ticket2 = this.gameComponent.getCurrentTime();
+      } else if (this.playerData.dungeonTicket.ticket3 == 0) {
+        this.playerData.dungeonTicket.ticket3 = this.gameComponent.getCurrentTime();
+      } this.updatePlayer();
+      this.bossEnemy = boss;
+      this.fightMode = true;
+      let playerStats = this.playerData.stats;
+      let bossTurn = false;
+      this.bossStats =Object.assign({}, boss.stats);
+      let damage: number;
+      Observable.interval(1000)
+      .takeWhile(() => boss.stats.health > 0 && playerStats.health > 0)
       .subscribe(i => {
-        if (!enemyTurn) {
+        if (!bossTurn) {
           damage = this.getDamage(playerStats);
-          enemy.stats.health -= damage;
-          this.combatLogSelf.unshift("You hit for " + damage + ". Enemy has " + enemy.stats.health + " life points left.");
+          boss.stats.health -= damage;
+          this.combatLogSelf.unshift("You hit for " + damage + ". " + boss.bossName + " has " + boss.stats.health + " life points left.");
           this.playerHpBar = (playerStats.health / this.playerStats.health) * 100;
-          enemyTurn = !enemyTurn;
+          bossTurn = !bossTurn;
         } else {
-          damage = this.getDamage(enemy.stats);
+          damage = this.getDamage(boss.stats);
           playerStats.health -= damage;
-          this.combatLogEnemy.unshift("Enemy hits you for " + damage + ". You have " + playerStats.health + " life points left.");
-          this.enemyHpBar = (enemy.stats.health / this.enemyStats.health) * 100;
-          enemyTurn = !enemyTurn;
+          this.combatLogEnemy.unshift(boss.bossName + " hits you for " + damage + ". You have " + playerStats.health + " life points left.");
+          this.bossHpBar = (boss.stats.health / this.bossStats.health) * 100;
+          bossTurn = !bossTurn;
         }
-        if (enemy.stats.health <= 0) {
+        if (boss.stats.health <= 0) {
           this.combatLogSelf.unshift("You won!");
-          this.enemyHpBar = 0;
+          this.bossHpBar = 0;
+          this.playerData.dungeonProgress[boss.name] += 1;
+          this.playerData.silver += boss.silver;
+          this.playerData.level.exp += boss.exp;
+          this.updatePlayer(); 
         } else if (playerStats.health <= 0) {
-          this.combatLogEnemy.unshift("Enemy won.");
+          this.combatLogEnemy.unshift(boss.bossName + " won!");
           this.playerHpBar = 0;
         }
-      }
-    )
+      })
+    }
   }
-*/
-  fight(boss:Dungeon) {
-    this.bossEnemy = boss;
-    this.fightMode = true;
-    let playerStats = this.playerData.stats;
-    let bossTurn = false;
-    this.bossStats =Object.assign({}, boss.stats);
-    let damage: number;
-    Observable.interval(1000)
-    .takeWhile(() => boss.stats.health > 0 && playerStats.health > 0)
-    .subscribe(i => {
-      if (!bossTurn) {
-        damage = this.getDamage(playerStats);
-        boss.stats.health -= damage;
-        this.combatLogSelf.unshift("You hit for" + damage + "." + boss.bossName + "has" + boss.stats.health + "life points left.");
-        this.playerHpBar = (playerStats.health / this.playerStats.health) * 100;
-        bossTurn = !bossTurn;
-      } else {
-        damage = this.getDamage(boss.stats);
-        playerStats.health -= damage;
-        this.combatLogEnemy.unshift(boss.bossName + " hits you for " + damage + ". You have" + playerStats.health + "life points left.");
-        this.bossHpBar = (boss.stats.health / this.bossStats.health) * 100;
-        bossTurn = !bossTurn;
-      }
-      if (boss.stats.health <= 0) {
-        this.combatLogSelf.unshift("You won!");
-        this.bossHpBar = 0;
-      } else if (playerStats.health <= 0) {
-        this.combatLogEnemy.unshift(boss.bossName + " won!");
-        this.playerHpBar = 0;
-      }
-    })
-  }
-
 
 
   getDamage(stats: PlayerStats) {

@@ -18,12 +18,14 @@ export class LoginComponent implements OnInit {
     email: '',
     class: '',
     silver: 0,
+    tickets: 3,
     level: null,
     stats: null,
     missionProgress: null,
     dungeonProgress: null,
     equipment: null,
     inventar: null,
+    dungeonTicket: null,
   }
 
   rFormLogin: FormGroup;

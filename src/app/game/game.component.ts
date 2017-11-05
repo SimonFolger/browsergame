@@ -47,6 +47,7 @@ export class GameComponent implements OnInit {
       this.getLevelProgress();
       this.checkForFinishedQuests();
       this.checkForLevelUp();
+      this.checkForDungeonTicket();
     })
     
   }
@@ -90,8 +91,35 @@ export class GameComponent implements OnInit {
   updatePlayer() {
     this.playerService.update(this.playerData);
   }
-}
 
+  checkForDungeonTicket() {
+    let currentTime = this.getCurrentTime();
+    if ( this.playerData.dungeonTicket.ticket1 !== 0) {
+      let ticketTime1 = this.playerData.dungeonTicket.ticket1 + 10800000;
+      if (ticketTime1 <= currentTime) {
+        this.playerData.dungeonTicket.ticket1 = 0;
+        this.playerData.tickets += 1;
+        this.updatePlayer();
+      } 
+      if ( this.playerData.dungeonTicket.ticket2 !== 0) {
+        let ticketTime2 = this.playerData.dungeonTicket.ticket2 + 10800000;
+        if (ticketTime2 <= currentTime) {
+          this.playerData.dungeonTicket.ticket2 = 0;
+          this.playerData.tickets += 1;
+          this.updatePlayer();
+        } 
+      }
+      if ( this.playerData.dungeonTicket.ticket3 !== 0) {
+        let ticketTime3 = this.playerData.dungeonTicket.ticket3 + 10800000;
+        if (ticketTime3 <= currentTime) {
+          this.playerData.dungeonTicket.ticket3 = 0;
+          this.playerData.tickets += 1;
+          this.updatePlayer();
+        } 
+      }
+    }
+  }
+}
 
 /*
 Neue Stufe:
@@ -211,8 +239,4 @@ Alte Stufe:
 105	807720	14970	792750
 106	822830	15110	807720
 107	838080	15250	822830
-
-
 */
-
-

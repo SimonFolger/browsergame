@@ -6,5 +6,7 @@ export class Dungeon {
     name: string;
     buff: string;
     stats: BossStats;
+    exp: number;
+    silver: number;
     bossName: string;
 }

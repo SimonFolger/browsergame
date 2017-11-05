@@ -4,6 +4,7 @@ import { PlayerStats } from './player-stats';
 import { PlayerLevel } from './player-level';
 import { PlayerEquipment } from './player-equipment';
 import { PlayerInventar } from './player-inventar';
+import { DungeonTickets } from './player-ticket';
 
 export class Player {
     email: string;
@@ -16,4 +17,6 @@ export class Player {
     level: PlayerLevel;
     equipment: PlayerEquipment;
     inventar: PlayerInventar;
+    dungeonTicket: DungeonTickets;
+    tickets: number;
 }
