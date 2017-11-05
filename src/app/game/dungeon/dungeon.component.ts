@@ -94,7 +94,7 @@ export class DungeonComponent implements OnInit {
     this.chosenDungeon = null;
   }
 
-  //Level-Path skalierung fehlt noch -> d.h je höher der Path dester stärker der Boss || Evt. Normal - Heroisch - Mysthisch einbauen?
+  //Level-Path skalierung fehlt noch -> d.h je höher der Path dester stärker der Boss (Power ist drinnen)(health: dungeonPath+1 * 0,5*baseHealth)
   fight(boss:Dungeon) {
     this.playerData.tickets -= 1;
     if (this.playerData.tickets !==-1 && this.playerData.tickets > -1){
@@ -111,6 +111,7 @@ export class DungeonComponent implements OnInit {
       let bossTurn = false;
       this.bossStats =Object.assign({}, boss.stats);
       let damage: number;
+      let damageBoss: number;
       Observable.interval(1000)
       .takeWhile(() => boss.stats.health > 0 && playerStats.health > 0)
       .subscribe(i => {
@@ -122,8 +123,9 @@ export class DungeonComponent implements OnInit {
           bossTurn = !bossTurn;
         } else {
           damage = this.getDamage(boss.stats);
-          playerStats.health -= damage;
-          this.combatLogEnemy.unshift(boss.bossName + " hits you for " + damage + ". You have " + playerStats.health + " life points left.");
+          damageBoss = ((this.playerData.dungeonProgress[boss.name] +1) * (0.4 * damage));
+          playerStats.health -= damageBoss;
+          this.combatLogEnemy.unshift(boss.bossName + " hits you for " + damageBoss + ". You have " + playerStats.health + " life points left.");
           this.bossHpBar = (boss.stats.health / this.bossStats.health) * 100;
           bossTurn = !bossTurn;
         }
