@@ -1,18 +1,25 @@
+.overview {
+    width: 80%;
+    height: 700px;
+    margin-top: 50px;
+}
+
 .playerBox {
     width: 40%;
     height: 700px;
-    margin: auto;
     margin-top: 20px;
+    float: left;
+    margin-left: 300px;
 
     .playerUpside {
     width: 100%;
     height: 450px;
 
-        .inventoryLeft {
+        .equipmentLeft {
             width: 25%;
             height: 450px;
             float: left;
-            .playerInventory {
+            .playerEquipment {
                 width: 100%;
                 height: 150px;
                 border: solid 2px #3d0814;
@@ -21,11 +28,11 @@
             }
         }
     
-        .inventoryMiddle {
+        .equipmentMiddle {
             width: 47%;
             height: 450px;
             margin: auto;
-            padding-left: 10px;
+            padding-left: 8px;
             display: inline-block;
             
 
@@ -37,7 +44,7 @@
             }
 
             .playerWeapons1 {
-                width: 48%;
+                width: 47%;
                 height: 150px;
                 float: left;
                 border: solid 2px #3d0814;
@@ -48,7 +55,7 @@
                 
             }
             .playerWeapons2 {
-                width: 48%;
+                width: 47%;
                 height: 150px;
                 float:right;
                 border: solid 2px #3d0814;
@@ -60,11 +67,11 @@
         }
 
 
-        .inventoryRight{
+        .equipmentRight{
             width: 25%;
             height: 450px;
             float: right;
-            .playerInventory {
+            .playerEquipment {
                 width: 100%;
                 height: 150px;
                 border: solid 2px #3d0814;
@@ -94,5 +101,61 @@
 }
 
 .dungeonTime {
+    color: #3d0814;
+    font-size: 22px;
     text-align: center;
+    margin: auto;
+}
+
+.inventory {
+    width: 100%;
+    height: 450px;
+    .inventoryLeft {
+        width: 33%;
+        height: 390px;
+        float: left;
+        .slot {
+            height: 130px;
+            text-align: center;
+            border: solid 3px #3d0814;
+            border-radius: 20px;
+        }
+    }
+    .inventoryMiddle {
+        width: 33%;
+        height: 390px;
+        display: inline-block;
+        padding-left: 2px;
+        .slot {
+            height: 130px;
+            text-align: center;
+            border: solid 3px #3d0814;
+            border-radius: 20px;
+        }
+    }
+    .inventoryRight {
+        width: 33%;
+        height: 390px;
+        float: right;
+        .slot {
+            height: 130px;
+            text-align: center;
+            border: solid 3px #3d0814;
+            border-radius: 20px;
+        }
+    }
+}
+
+.inventoryContent {
+    width: 25%;
+    height: 550px;
+    float: right;
+    margin-top: 150px;
+    .inventoryHeader {
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        font-size: 18px;
+        color: #3d0814;
+    }
 }

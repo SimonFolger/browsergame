@@ -37,24 +37,26 @@
   </mat-grid-list>
 </div>
 -->
-<div *ngIf="player != undefined">
-  <div class="dungeonTime"> Next free DungeonTicket in {{dungeonTime}} minutes</div>
+<div class="dungeonTime"> Next free Dungeon-Ticket in {{dungeonTime}} minutes</div>
+
+<div class="overview" *ngIf="player != undefined">
+ 
   <div class="playerBox">
     <div class="playerUpside">
-      <div class="inventoryLeft">
-          <div class="playerInventory">Helmet</div>
-          <div class="playerInventory">Spaulders</div>
-          <div class="playerInventory">Chest</div>
+      <div class="equipmentLeft">
+          <div class="playerEquipment">Helmet</div>
+          <div class="playerEquipment">Spaulders</div>
+          <div class="playerEquipment">Chest</div>
       </div>
-      <div class="inventoryMiddle">
+      <div class="equipmentMiddle">
           <div class="player"></div>
           <div class="playerWeapons1">LeftHand</div>
           <div class="playerWeapons2">RightHand</div>
       </div>
-      <div class="inventoryRight">
-          <div class="playerInventory">Gauntlets</div>
-          <div class="playerInventory">Leggings</div>
-          <div class="playerInventory">Ring</div>
+      <div class="equipmentRight">
+          <div class="playerEquipment">Gauntlets</div>
+          <div class="playerEquipment">Leggings</div>
+          <div class="playerEquipment">Ring</div>
       </div>        
     </div>
     <div class="playerStatsDownside">
@@ -64,6 +66,28 @@
             <p>Health: {{player.stats.health}}<button mat-raised-button color="primary" (click)="levelUpStat('health')" [disabled]="player.level.levelUps == 0">+</button></p>
             <p>Crit: {{player.stats.crit}}<button mat-raised-button color="primary" (click)="levelUpStat('crit')" [disabled]="player.level.levelUps == 0">+</button></p>
           </div>
+    </div>
+  </div>
+
+
+<div class="inventoryContent">
+  <div class="inventoryHeader">Inventory:</div>
+  <div class="inventory">
+    <div class="inventoryLeft">
+      <div class="slot"></div>
+      <div class="slot"></div>
+      <div class="slot"></div>
+    </div>
+    <div class="inventoryMiddle">
+      <div class="slot"></div>
+      <div class="slot"></div>
+      <div class="slot"></div>
+    </div>
+
+    <div class="inventoryRight ">
+      <div class="slot"></div>
+      <div class="slot"></div>
+      <div class="slot"></div>
     </div>
   </div>
 </div>
