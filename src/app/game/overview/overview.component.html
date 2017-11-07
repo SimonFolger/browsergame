@@ -1,3 +1,4 @@
+<!--
 <div *ngIf="player != undefined">
   <mat-grid-list cols="4" rowHeight="200">
     <mat-grid-tile colspan="4">
@@ -34,4 +35,35 @@
         </div>
       </mat-grid-tile>
   </mat-grid-list>
+</div>
+-->
+<div *ngIf="player != undefined">
+  <div class="dungeonTime"> Next free DungeonTicket in {{dungeonTime}} minutes</div>
+  <div class="playerBox">
+    <div class="playerUpside">
+      <div class="inventoryLeft">
+          <div class="playerInventory">Helmet</div>
+          <div class="playerInventory">Spaulders</div>
+          <div class="playerInventory">Chest</div>
+      </div>
+      <div class="inventoryMiddle">
+          <div class="player"></div>
+          <div class="playerWeapons1">LeftHand</div>
+          <div class="playerWeapons2">RightHand</div>
+      </div>
+      <div class="inventoryRight">
+          <div class="playerInventory">Gauntlets</div>
+          <div class="playerInventory">Leggings</div>
+          <div class="playerInventory">Ring</div>
+      </div>        
+    </div>
+    <div class="playerStatsDownside">
+        <div class="skillPoints">
+            <p>Skillpoints: {{player.level.levelUps}}</p>
+            <p>Power: {{player.stats.power}}<button mat-raised-button color="primary" (click)="levelUpStat('power')" [disabled]="player.level.levelUps == 0">+</button></p>
+            <p>Health: {{player.stats.health}}<button mat-raised-button color="primary" (click)="levelUpStat('health')" [disabled]="player.level.levelUps == 0">+</button></p>
+            <p>Crit: {{player.stats.crit}}<button mat-raised-button color="primary" (click)="levelUpStat('crit')" [disabled]="player.level.levelUps == 0">+</button></p>
+          </div>
+    </div>
+  </div>
 </div>

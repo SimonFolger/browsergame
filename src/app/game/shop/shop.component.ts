@@ -31,7 +31,8 @@ export class ShopComponent implements OnInit {
     private gameComponent: GameComponent,
     private clothesService: ClothesService,
     private weaponService: WeaponService,
-    public snackBar: MatSnackBar    
+    public snackBar: MatSnackBar,
+     
   ) {  } 
 
 

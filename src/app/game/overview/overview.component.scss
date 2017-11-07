@@ -1,0 +1,98 @@
+.playerBox {
+    width: 40%;
+    height: 700px;
+    margin: auto;
+    margin-top: 20px;
+
+    .playerUpside {
+    width: 100%;
+    height: 450px;
+
+        .inventoryLeft {
+            width: 25%;
+            height: 450px;
+            float: left;
+            .playerInventory {
+                width: 100%;
+                height: 150px;
+                border: solid 2px #3d0814;
+                border-radius: 20px;
+                text-align: center;
+            }
+        }
+    
+        .inventoryMiddle {
+            width: 47%;
+            height: 450px;
+            margin: auto;
+            padding-left: 10px;
+            display: inline-block;
+            
+
+            .player {
+                width: 100%;
+                height: 300px;
+                border: solid 2px #3d0814;
+                border-radius: 20px;
+            }
+
+            .playerWeapons1 {
+                width: 48%;
+                height: 150px;
+                float: left;
+                border: solid 2px #3d0814;
+                border-radius: 20px;
+                margin-top: 5px;
+                padding-left: 3px;
+                text-align: center;
+                
+            }
+            .playerWeapons2 {
+                width: 48%;
+                height: 150px;
+                float:right;
+                border: solid 2px #3d0814;
+                border-radius: 20px;
+                margin-top: 5px;
+                text-align: center;
+            }
+
+        }
+
+
+        .inventoryRight{
+            width: 25%;
+            height: 450px;
+            float: right;
+            .playerInventory {
+                width: 100%;
+                height: 150px;
+                border: solid 2px #3d0814;
+                border-radius: 20px;   
+                text-align: center;             
+            }
+        }
+    }
+
+
+    .playerStatsDownside {
+        width: 100%;
+        height: 250px;
+    }
+
+    .skillPoints {
+        text-align: center;
+        border: solid 3px #3d0814;
+        border-radius: 20px;
+        margin-top: 15px;
+        button {
+            margin-left: 5px;
+        }
+
+    }
+
+}
+
+.dungeonTime {
+    text-align: center;
+}
