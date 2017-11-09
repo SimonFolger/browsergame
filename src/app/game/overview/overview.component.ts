@@ -90,19 +90,41 @@ export class OverviewComponent {
     let ticket1 = this.player.dungeonTicket.ticket1;
     let ticket2 = this.player.dungeonTicket.ticket2;
     let ticket3 = this.player.dungeonTicket.ticket3;
-    if (ticket1 < ticket2 && ticket1 < ticket3 ){
-     let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket1);
-     this.dungeonTime = Math.round(time / 60000);
-        } else if (ticket2 < ticket1 && ticket2 < ticket3) {
-          let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket2);
-          this.dungeonTime = Math.round(time / 60000);
-        }else if (ticket3 < ticket2 && ticket3 < ticket1) {
-          let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket3);
-          this.dungeonTime = Math.round(time / 60000);
-        }
-
+    if (ticket1 > 0 && ticket2 == 0 && ticket3 == 0) {
+      let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket1);
+      this.dungeonTime = Math.round(time / 60000);
+    } else if (ticket1 > 0 && ticket2 > 0 && ticket3 == 0)
+     { if (ticket1 < ticket2) {
+      let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket1);
+      this.dungeonTime = Math.round(time / 60000);
+     } else if (ticket1 > ticket2) {
+      let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket2);
+      this.dungeonTime = Math.round(time / 60000);
+     }
+      
+    }else if (ticket1 > 0 && ticket2 > 0 && ticket3 > 0) {
+      if (ticket1 <ticket2 && ticket1 < ticket3) {
+        let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket1);
+        this.dungeonTime = Math.round(time / 60000);
+      } else if (ticket2 < ticket1 && ticket2 < ticket3) {
+        let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket2);
+        this.dungeonTime = Math.round(time / 60000);
+      } else if (ticket3 <ticket2 && ticket3 < ticket1) {
+        let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket3);
+        this.dungeonTime = Math.round(time / 60000);
+      }
+      
+    } else if (ticket1 == 0 && ticket2 > 0 && ticket3 >0) {
+      if (ticket2 < ticket3) {
+        let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket2);
+        this.dungeonTime = Math.round(time / 60000);
+      } else if (ticket3 < ticket2) {
+        let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket3);
+        this.dungeonTime = Math.round(time / 60000);
+      } 
+    } else if (ticket1 == 0 && ticket2 == 0 && ticket3 > 0) {
+      let time = 10800000 - (this.gameComponent.getCurrentTime() - ticket3);
+      this.dungeonTime = Math.round(time / 60000);
+    }
   }
-
-
-
 }

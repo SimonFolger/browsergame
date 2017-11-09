@@ -9,6 +9,10 @@ import * as firebase from 'firebase/app';
 import { environment } from "./../environments/environment";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AccordionModule} from 'primeng/primeng';     //accordion and accordion tab
+import {MenuItem} from 'primeng/primeng'; 
+import {DragDropModule} from 'primeng/primeng';
+import {PickListModule} from 'primeng/primeng';
 import { 
   MatGridListModule,
   MatTabsModule,
@@ -39,6 +43,7 @@ import { MissionComponent } from './game/mission/mission.component';
 import { GameComponent } from './game/game.component';
 import { DungeonComponent } from './game/dungeon/dungeon.component';
 import { ShopComponent } from './game/shop/shop.component';
+import { RankingComponent } from './game/ranking/ranking.component';
 
 //Services
 import { AuthService } from './core/services/auth.service';
@@ -56,6 +61,7 @@ import { ObjectToArrayPipe } from './core/pipes/object-to-array.pipe';
 
 
 
+
 //Routing
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -67,6 +73,7 @@ const routes: Routes = [
         { path: 'mission',  component: MissionComponent },
         { path: 'pvp',  component: PvpComponent },
         { path: 'dungeon', component: DungeonComponent },
+        { path: 'ranking', component: RankingComponent },
         { path: 'shop', component: ShopComponent }
       ] }
 ];
@@ -84,7 +91,8 @@ const routes: Routes = [
     FirstUpperCasePipe,
     SilverGoldStringPipe,
     ShopComponent,
-    ObjectToArrayPipe
+    ObjectToArrayPipe,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
