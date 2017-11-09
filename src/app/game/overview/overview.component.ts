@@ -19,12 +19,15 @@ export class OverviewComponent {
   player: Player;
   weapons: Observable<Weapon[]>;
   clothes: Observable<Clothes[]>;
+  cloth: Observable<Clothes>
   weaponData: Weapon[];
   clothesData: Clothes[];
+  clothData: Clothes;
   inventarIds: number[] = [];
   inventar: any[] = [];
   dungeonTime: number;
-
+  qwer = 'wildstalkerChestguard';
+  classIconPath1: string;
 
   constructor(
     private playerService: PlayerService,
@@ -35,7 +38,7 @@ export class OverviewComponent {
 
   ngOnInit() {
     this.getPlayer();
-    console.log(this.dungeonTime);
+    
   }
 
   getPlayer() {
@@ -44,17 +47,12 @@ export class OverviewComponent {
     this.playerObs.subscribe(val => {
       this.player = val; 
       this.getNextDungeonTicket();   
-      for (let item in this.player.inventar) {
-        //this.inventarIds.push(this.player.inventar[item]);
-        //this.getClothes();
-        //this.getWeapons();
-        this.inventar.push(this.weaponService.getWeapon(this.player.inventar[item]));
-        
-      }
-    });
+      this.getClothes();
+      this.getWeapons();
+      });
   }
 
-  /*
+  
   getWeapons() {
     this.weapons = this.weaponService.getWeapons();
     this.weapons.subscribe(val => {
@@ -66,9 +64,11 @@ export class OverviewComponent {
     this.clothes = this.clothesService.getClothes();
     this.clothes.subscribe(val => {
       this.clothesData = val;
+      let inventoryIcon1 = this.player.inventar.slot1
+      this.classIconPath1 = "../../../assets/equipment/" + inventoryIcon1 + ".jpg";
     })
   }
-  */
+  
 
   levelUpStat(stat: string) {
     if (stat == "power"){
