@@ -62,8 +62,8 @@ export class ShopComponent implements OnInit {
   //SnackBar funktioniert noch nicht richtig!! Öffnet sicher IMMER!
   purchaseClothes(cloth:Clothes) {
       for (let inventorySlot in this.playerData.inventar) {
-      if (this.playerData.inventar[inventorySlot] == 0 && this.playerData.silver >= cloth.price) {
-        this.playerData.inventar[inventorySlot] = cloth.id;
+      if (this.playerData.inventar[inventorySlot] == 'empty' && this.playerData.silver >= cloth.price) {
+        this.playerData.inventar[inventorySlot] = cloth.invName;
         this.playerData.silver -= cloth.price;
         this.playerService.update(this.playerData);
         this.openSnackBarSuccessful();
@@ -77,7 +77,7 @@ export class ShopComponent implements OnInit {
 
   purchaseWeapon(weapon:Weapon) {
     for (let inventorySlot in this.playerData.inventar) {
-      if (this.playerData.inventar[inventorySlot] == 0 && this.playerData.silver >= weapon.price) {
+      if (this.playerData.inventar[inventorySlot] == 'empty' && this.playerData.silver >= weapon.price) {
         this.playerData.inventar[inventorySlot] = weapon.id;
         this.playerData.silver -= weapon.price;
         this.playerService.update(this.playerData);

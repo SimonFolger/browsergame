@@ -4,4 +4,5 @@ export class Clothes {
     name: string;
     description: string;
     id:number;
+    invName: string;
 }

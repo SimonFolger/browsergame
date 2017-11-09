@@ -35,19 +35,21 @@ export class OverviewComponent {
 
   ngOnInit() {
     this.getPlayer();
+    console.log(this.dungeonTime);
   }
 
   getPlayer() {
     this.gameComponent.getPlayer();
     this.playerObs = this.gameComponent.player;
     this.playerObs.subscribe(val => {
-      this.player = val;    
+      this.player = val; 
+      this.getNextDungeonTicket();   
       for (let item in this.player.inventar) {
         //this.inventarIds.push(this.player.inventar[item]);
         //this.getClothes();
         //this.getWeapons();
         this.inventar.push(this.weaponService.getWeapon(this.player.inventar[item]));
-        this.getNextDungeonTicket();
+        
       }
     });
   }
@@ -85,7 +87,7 @@ export class OverviewComponent {
     
 
   } 
-
+// funktioniert nur wenn alle drei tickets ausgefühlt sind!
   getNextDungeonTicket() {
     let ticket1 = this.player.dungeonTicket.ticket1;
     let ticket2 = this.player.dungeonTicket.ticket2;
