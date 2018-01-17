@@ -42,11 +42,12 @@
         }
     }
     .game-content {
-        overflow: auto;
+        overflow: hidden;
         height: 100%;
-        padding: 30px;
+       
       }
   }
+
   
   .example-fab.mat-mini-fab {
     position: absolute;

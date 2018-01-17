@@ -25,6 +25,7 @@
                 border: solid 2px #3d0814;
                 border-radius: 20px;
                 text-align: center;
+                background-color: #252526;
             }
         }
     
@@ -52,6 +53,7 @@
                 margin-top: 5px;
                 padding-left: 3px;
                 text-align: center;
+                background-color: #252526;
                 
             }
             .playerWeapons2 {
@@ -62,6 +64,7 @@
                 border-radius: 20px;
                 margin-top: 5px;
                 text-align: center;
+                background-color: #252526;
             }
 
         }
@@ -76,7 +79,8 @@
                 height: 150px;
                 border: solid 2px #3d0814;
                 border-radius: 20px;   
-                text-align: center;             
+                text-align: center;       
+                background-color: #252526;      
             }
         }
     }
@@ -92,6 +96,7 @@
         border: solid 3px #3d0814;
         border-radius: 20px;
         margin-top: 15px;
+        background-color: #252526;
         button {
             margin-left: 5px;
         }
@@ -119,6 +124,7 @@
             text-align: center;
             border: solid 3px #3d0814;
             border-radius: 20px;
+            background-color: #252526;
         }
     }
     .inventoryMiddle {
@@ -131,6 +137,7 @@
             text-align: center;
             border: solid 3px #3d0814;
             border-radius: 20px;
+            background-color: #252526;
         }
     }
     .inventoryRight {
@@ -142,6 +149,7 @@
             text-align: center;
             border: solid 3px #3d0814;
             border-radius: 20px;
+            background-color: #252526;
         }
     }
 }
@@ -163,4 +171,13 @@
 .inventoryIcon {
     width: 90px;
     height: 90px;
+}
+
+.background {
+    background-image: url("../../../assets/overview/home.jpg");
+    background-size: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    overflow:hidden;
+
 }

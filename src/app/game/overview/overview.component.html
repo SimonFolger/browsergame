@@ -37,60 +37,62 @@
   </mat-grid-list>
 </div>
 -->
-<div  *ngIf="player != undefined">
-<div class="dungeonTime"> Next free Dungeon-Ticket in {{dungeonTime}} minutes</div>
+<div class="background">
+  <div  *ngIf="player != undefined">
+  <div class="dungeonTime"> Next free Dungeon-Ticket in {{dungeonTime}} minutes</div>
 
-<div class="overview">
- 
-  <div class="playerBox">
-    <div class="playerUpside">
-      <div class="equipmentLeft">
-          <div class="playerEquipment">Helmet</div>
-          <div class="playerEquipment">Spaulders</div>
-          <div class="playerEquipment">Chest</div>
+  <div class="overview">
+  
+    <div class="playerBox">
+      <div class="playerUpside">
+        <div class="equipmentLeft">
+            <div class="playerEquipment">Helmet</div>
+            <div class="playerEquipment">Spaulders</div>
+            <div class="playerEquipment">Chest</div>
+        </div>
+        <div class="equipmentMiddle">
+            <div class="player"></div>
+            <div class="playerWeapons1">LeftHand</div>
+            <div class="playerWeapons2">RightHand</div>
+        </div>
+        <div class="equipmentRight">
+            <div class="playerEquipment">Gauntlets</div>
+            <div class="playerEquipment">Leggings</div>
+            <div class="playerEquipment">Ring</div>
+        </div>        
       </div>
-      <div class="equipmentMiddle">
-          <div class="player"></div>
-          <div class="playerWeapons1">LeftHand</div>
-          <div class="playerWeapons2">RightHand</div>
+      <div class="playerStatsDownside">
+          <div class="skillPoints">
+              <p>Skillpoints: {{player.level.levelUps}}</p>
+              <p>Power: {{player.stats.power}}<button mat-raised-button color="primary" (click)="levelUpStat('power')" [disabled]="player.level.levelUps == 0">+</button></p>
+              <p>Health: {{player.stats.health}}<button mat-raised-button color="primary" (click)="levelUpStat('health')" [disabled]="player.level.levelUps == 0">+</button></p>
+              <p>Crit: {{player.stats.crit}}<button mat-raised-button color="primary" (click)="levelUpStat('crit')" [disabled]="player.level.levelUps == 0">+</button></p>
+            </div>
       </div>
-      <div class="equipmentRight">
-          <div class="playerEquipment">Gauntlets</div>
-          <div class="playerEquipment">Leggings</div>
-          <div class="playerEquipment">Ring</div>
-      </div>        
     </div>
-    <div class="playerStatsDownside">
-        <div class="skillPoints">
-            <p>Skillpoints: {{player.level.levelUps}}</p>
-            <p>Power: {{player.stats.power}}<button mat-raised-button color="primary" (click)="levelUpStat('power')" [disabled]="player.level.levelUps == 0">+</button></p>
-            <p>Health: {{player.stats.health}}<button mat-raised-button color="primary" (click)="levelUpStat('health')" [disabled]="player.level.levelUps == 0">+</button></p>
-            <p>Crit: {{player.stats.crit}}<button mat-raised-button color="primary" (click)="levelUpStat('crit')" [disabled]="player.level.levelUps == 0">+</button></p>
-          </div>
+
+
+  <div class="inventoryContent">
+    <div class="inventoryHeader">Inventory:</div>
+    <div class="inventory">
+      <div class="inventoryLeft">
+        <div class="slot"><img class="inventoryIcon" src={{classIconPath1}}></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+      </div>
+      <div class="inventoryMiddle">
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+      </div>
+
+      <div class="inventoryRight ">
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+      </div>
     </div>
   </div>
 
-
-<div class="inventoryContent">
-  <div class="inventoryHeader">Inventory:</div>
-  <div class="inventory">
-    <div class="inventoryLeft">
-      <div class="slot"><img class="inventoryIcon" src={{classIconPath1}}></div>
-      <div class="slot"></div>
-      <div class="slot"></div>
-    </div>
-    <div class="inventoryMiddle">
-      <div class="slot"></div>
-      <div class="slot"></div>
-      <div class="slot"></div>
-    </div>
-
-    <div class="inventoryRight ">
-      <div class="slot"></div>
-      <div class="slot"></div>
-      <div class="slot"></div>
-    </div>
   </div>
-</div>
-
-</div>
+  </div>

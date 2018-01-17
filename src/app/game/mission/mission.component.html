@@ -1,25 +1,27 @@
-<div class="missionsCollection"z>
+<div class="background">
+  <div class="missionsCollection"z>
 
-  <mat-grid-list cols="2" rowHeight="400" *ngIf="chosenMission == null && randomMissions.length == 4">
-    <mat-grid-tile *ngFor="let mission of randomMissions">
-      <div class="missionContainer">
-        <h2>{{mission.name}}</h2>
-        <p>{{mission.description}}</p>
-        <button mat-raised-button color="primary" (click)="missionStart(mission)">Start</button>
-      </div>
-    </mat-grid-tile>    
-  </mat-grid-list>    
+    <mat-grid-list cols="2" rowHeight="400" *ngIf="chosenMission == null && randomMissions.length == 4">
+      <mat-grid-tile *ngFor="let mission of randomMissions">
+        <div class="missionContainer">
+          <h2>{{mission.name}}</h2>
+          <p>{{mission.description}}</p>
+          <button mat-raised-button color="primary" (click)="missionStart(mission)">Start</button>
+        </div>
+      </mat-grid-tile>    
+    </mat-grid-list>    
 
-  <mat-grid-list cols="1" rowHeight="500" *ngIf="chosenMission != null">
-    <mat-grid-tile>
-      <div class="missionContainer">
-        <h1>{{ chosenMission.name }}</h1>
-        <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>
-        <span>{{counter}}</span>
-        <h2 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}} and {{chosenMission.expReward}}Exp</h2>
-        <h2 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h2>
-      </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+    <mat-grid-list cols="1" rowHeight="500" *ngIf="chosenMission != null">
+      <mat-grid-tile>
+        <div class="missionContainer">
+          <h1>{{ chosenMission.name }}</h1>
+          <mat-progress-spinner mode="determinate" [value]="circleProgress" color="primary"></mat-progress-spinner>
+          <span>{{counter}}</span>
+          <h2 *ngIf="missionCompleted"> Reward: {{chosenMission.silverReward | silverGoldString}} and {{chosenMission.expReward}}Exp</h2>
+          <h2 *ngIf="missionCompleted">BonusReward: {{bonusSilver}}Silver, {{bonusExp}}Exp</h2>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
 
+  </div>
 </div>

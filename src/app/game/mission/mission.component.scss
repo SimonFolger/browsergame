@@ -1,6 +1,6 @@
 .missionContainer {
-    width: 95%;
-    height: 95%;
+    width: 90%;
+    height: 90%;
     border: 3px solid #3d0814;
     text-align: center;
     p {
@@ -9,4 +9,11 @@
     mat-progress-spinner {
         margin: 0 auto;
     }
+}
+.background {
+    background-image: url("../../../assets/missions/background.jpg");
+    background-size: 100%;
+    height: 100%;
+        background-attachment: fixed;
+        overflow:hidden;
 }
